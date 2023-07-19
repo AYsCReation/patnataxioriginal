@@ -1,0 +1,292 @@
+/* *{
+  font-family:'Poppins', sans-serif;
+} */
+.hero img{
+    background-size: cover;
+    max-width: 100%;
+    /* margin-top: -22%; */
+    filter: blur(2px);
+    max-height: 30vh;
+    z-index: 1;
+}
+.hero{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    
+}
+.hero-title{
+    position: absolute;
+   z-index: 1;
+   font-family: 'Poppins', sans-serif;
+    font-size: 3rem;
+    font-weight: 600;
+    color: #E8E4B4;
+    display: flex;
+    width: 100%;
+
+}
+.hero-title p{
+   width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+.menu-trip {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+
+  .menu-contents-trip{
+    margin-top: 1rem;
+    width: 100%;
+    color: #000000;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+  .menu-trip{
+    width: 100%;
+    /* margin-bottom: -0.6rem; */
+  }
+
+  .menu-item-trip.active {
+    background-color:#20A8D9;
+    color: rgb(255, 255, 255);
+    border: 1px solid #393737;
+    font-weight: 700;
+  }
+  .menu-item1.active {
+    background-color:#20A8D9;
+    color: black;
+    border: 1px solid #888383;
+  }/* ... Your existing CSS code ... */
+
+  .form-container {
+    width: 80%;
+    /* height: 260px;   */
+    /* max-width: 500px; */
+    margin: 20px auto; /* Add margin from top and bottom */
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 120px;
+    box-shadow:   1px 4px 41px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the form horizontally */
+    position: absolute;
+    z-index: 100;
+    left: 10rem;
+    top: 8rem;
+
+  }
+  
+  .trip-options {
+    width: 70%;
+    margin-bottom: 0.5rem;
+    /* display: flex; */
+    justify-content: center; /* Center the menu items */
+    box-sizing: border-box;
+    overflow: auto;
+  }
+  
+  .menu-trip {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+    border-radius: 5px;
+    /* display: flex; */
+    
+  }
+  .menu-item-trip {
+    cursor: pointer;
+    padding: 10px;
+    /* background-color: var(--main-color); */
+    height: 30px;
+    text-transform: uppercase;
+    /* border-radius: 12px; */
+    font-size: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: rgb(171, 166, 166);
+    width: 100%;
+    border-right: 1px solid black;
+    /* margin-right: 1rem; */
+    /* border: 1px solid var(--second-color); */
+    display: flex;
+    justify-content: center; /* Center the text horizontally */
+    align-items: center; /* Center the text vertically */
+  }
+ .menu-item-trip:last-of-type {
+   border-right: none;
+}
+
+  
+  /* ... Your existing CSS code ... */
+  
+  .menu-trip-out {
+    
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    margin-bottom: 1rem;
+    /* justify-content: center;  */
+    margin-top: 0.5rem; /* Add some margin between the main menu and additional options */
+  }
+  
+  .menu-trip-out li {
+  
+    cursor: pointer;
+    /* padding: 10px; */
+    /* background-color: var(--main-color); */
+    height: 30px;
+   
+    font-size: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: rgb(171, 166, 166);
+    width: 150px;
+    /* margin-right: 1rem; */
+    border-right: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* text-decoration: none; */
+  }
+  .booking-form{
+    width: 100%;
+    display: flex;
+    justify-content:space-around;
+    align-items: center;
+  }
+  .form-group{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  .form-group label{
+    margin-bottom: 1rem;
+  }
+  input{
+    border-bottom: 1px solid black;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    padding: 2px;
+  }
+  .form-button button{
+    margin-top: 0.5rem;
+    padding: 10px;
+    width: 150px;
+    background: #20A8D9;
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 750;
+    transition: all 0.3s ease;
+  }
+  .form-button button:hover{
+    background: var(--main-color);
+    transform: scale(1.1);
+    
+  }
+  .phoneMain{
+    display: flex;
+    
+  }
+  #phoneCode{
+    margin-right: 5px;
+    background-color: #F6F6F6;
+    padding: 6px;
+    border-radius: 6px;
+    font-weight: 100;
+  }
+  #custom-time,
+  #package{
+    /* width: 110px; */
+    border-left: none;
+    border-top: none;
+    border-right: none;
+  }
+  .map{
+    margin-top: 6rem;
+  }
+@media (max-width: 900px) {
+    .hero img {
+    display: none;
+     
+    }
+  .map{
+    margin-top: 0rem;
+  }
+  .hero-title p{
+    font-size: 2rem;
+    margin: 0.8rem;
+  }
+  .hero-title{
+    background: black;
+    border-radius: 0 0 15% 15%;
+    
+  }
+  .booking-form{
+    flex-direction: column;
+    width: 100%;
+  }
+  .form-group{
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    /* font-size: 1rem; */
+    margin-bottom: 1.3rem;
+  }
+  .form-container {
+    width: 93%;
+    margin-top: 7rem;
+    z-index: 100;
+    position: unset;
+    border-radius: 12px;
+  }
+  .menu-trip {
+    width: 100%;
+  }
+  .trip-options{
+    width: 104%;
+  }
+  input{
+    /* font-size: 1rem; */
+    width: 200px;
+  }
+  .form-group label{
+    margin-top: 0.5rem;
+  }
+  .form-button button{
+    font-size: 1rem;
+  }
+  #custom-time{
+  width: 200px;
+}
+#package{
+  width: 200px;
+}
+#phoneCode{
+  margin-right: 0px;
+  background: none;
+  padding-top: 12px;
+  border-bottom: 1px solid black;
+  border-radius: 0px;
+  font-weight: 100;
+}
+#phone{
+  width: 160px;
+}
+  }
