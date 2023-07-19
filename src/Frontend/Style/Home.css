@@ -173,6 +173,11 @@
     flex-direction: column;
     margin-bottom: 1rem;
   }
+  .form-group #days{
+    border-left: none ;
+    border-right: none ;
+    border-top: none ;
+  }
   .form-group label{
     margin-bottom: 1rem;
   }
@@ -226,17 +231,21 @@
     display: none;
      
     }
+   
   .map{
     margin-top: 0rem;
   }
   .hero-title p{
     font-size: 2rem;
     margin: 0.8rem;
+    
   }
   .hero-title{
-    background: black;
+   background-image: url(../Assets/phone-bg.webp);
     border-radius: 0 0 15% 15%;
-    
+    background-position: center;
+    color: #ffffff;
+   
   }
   .booking-form{
     flex-direction: column;
@@ -288,5 +297,8 @@
 }
 #phone{
   width: 160px;
+}
+ #days{
+  width: 200px;
 }
   }
