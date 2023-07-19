@@ -237,4 +237,8 @@ footer {
         margin-bottom: 30px;
         flex-direction: column !important;
     }
+    .whatsapp-float img{
+      right: 20px;
+      bottom: 25px;
+    }
   }
