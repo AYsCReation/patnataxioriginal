@@ -1,0 +1,99 @@
+.servicecardmain{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    height: 500px;
+}
+.cardservice {
+    /* width: 190px; */
+    width: 20%;
+   margin: 1rem;
+   height: 100%;
+    /* height: 254px; */
+    padding: .8em;
+    background: #f5f5f5;
+    /* position: relative; */
+    overflow: visible;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  
+   }
+   
+   .cardservice-img img{
+  
+    height: 40%;
+    width: 100%;
+    border-radius: .5rem;
+    transition: .5s ease;
+   }
+   
+   
+   
+   svg {
+    width: 20px;
+    height: 20px;
+   }
+   
+   .cardservice-footer {
+    width: 100%;
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    background-color: rgb(175, 235, 215);
+    
+   }
+   .headingservice{
+    text-align: center;
+    font-size:2rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    color: #474fa0;
+   }
+   /*Text*/
+   .text-title {
+    font-weight: 600;
+    font-size: 1.2em;
+    line-height: 1.5;
+   }
+   
+   .text-body {
+    font-size: .9em;
+    padding-bottom: 10px;
+   }
+   
+   /*Button*/
+   .cardservice-button {
+    border: 1px solid #252525;
+    display: flex;
+    padding: .3em;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: .5s ease-in-out;
+   }
+   
+   /*Hover*/
+   .cardservice-img img:hover {
+    transform: translateY(-25%);
+    box-shadow: rgba(226, 196, 63, 0.25) 0px 13px 47px -5px, rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
+   }
+   
+   .cardservice-button:hover {
+    border: 1px solid #ffcaa6;
+    background-color: #ffcaa6;
+   }
+   @media (max-width:900px) {
+    .servicecardmain{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+    }
+    .cardservice {
+        width: 100%;
+        height: 500px;
+        margin: 0;
+    }
+   }
