@@ -4,6 +4,22 @@ import Home from './Frontend/Home';
 import { BrowserRouter, Link, Routes, Route } from 'react-router-dom';
 import Footer from './Frontend/Footer';
 import AboutUs from './Frontend/AboutUs';
+
+
+
+// All useStates Variables
+
+
+
+
+
+
+
+
+
+
+
+
 function App() {
   return (
     <>

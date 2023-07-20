@@ -21,11 +21,12 @@ const Navbar = () => {
   </div>
   
   <div className="nav-links">
-    <a href="#" target="">Github</a>
-    <a href="#" target="">Stackoverflow</a>
-    <a href="#" target="">LinkedIn</a>
-    <a href="#" target="">Codepen</a>
-    <a href="#" target="">JsFiddle</a>
+  <a href="#" target="">Home</a>
+    <a href="#" target="">About Us</a>
+    <a href="#" target="">Contact Us</a>
+    <a href="#" target="">Our Services</a>
+    <a href="#" target="">Blogs</a>
+    
   </div>
 </div>
     </>

@@ -12,7 +12,7 @@ import car1 from '../Frontend/Assets/car1.png';
 import car2 from '../Frontend/Assets/car2.png';
 import car3 from '../Frontend/Assets/car3.png';
 
-const ChooseCategory = ({setCarType}) => {
+const ChooseCategory = ({setCarType, setShowModal, showModal,setShowSummary}) => {
   const sliderSettings = {
     dots: false, // Remove the dots
     infinite: true,
@@ -38,7 +38,7 @@ const ChooseCategory = ({setCarType}) => {
       sliderRef.current.slickPrev();
     }
   };
-
+console.log(showModal);
   return (
     <div   className='categoryMain' >
       <h2 className='carCategoryText'>Choose Your Car Category</h2>
@@ -47,21 +47,22 @@ const ChooseCategory = ({setCarType}) => {
         <div className="slider-item-phone">
         <h2 className='slider-item-phone-p'>Chhoti Sawari (Mini Car)</h2>
           <img src={car1} alt="" />
-          <button className="BookNow-btn-phone" onClick={()=> {setCarType("Mini")} }>Book Now</button>
+          <button className="BookNow-btn-phone" onClick={()=> {setCarType("Mini"); setShowSummary(true) } }>Book Now</button>
         </div>
         <div className="slider-item-phone">
         <h2 className='slider-item-phone-p'>Badi Sawari (Sedan Car) </h2>
         <img src={car2} alt="" />
-        <button className="BookNow-btn-phone" onClick={()=> {setCarType("Mini")} }>Book Now</button>
+        <button className="BookNow-btn-phone" onClick={()=> {setCarType("Mini"); setShowSummary(true) } }>Book Now</button>
         </div>
         <div className="slider-item-phone">
         <h2 className='slider-item-phone-p'>Family Sawari (SUV Car) </h2>
         <img src={car3} alt="" />
-        <button className="BookNow-btn-phone" onClick={()=> {setCarType("Mini")} }>Book Now</button>
+        <button className="BookNow-btn-phone" onClick={()=> {setCarType("Mini"); setShowSummary(true)  } }>Book Now</button>
         </div>
         
         {/* Add more slider items as needed */}
       </Slider>
+
     </div>
   );
 };

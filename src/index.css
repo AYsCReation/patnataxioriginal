@@ -17,3 +17,23 @@ code {
   --text-color:#444;
   --gradient:linear-gradient(#ECDE3C,#201D0D);
 }
+/* Custom scrollbar styles */
+body::-webkit-scrollbar {
+  width: 6px; /* Width of the scrollbar */
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background color of the track */
+}
+
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: #68666665; /* Color of the handle */
+  border-radius: 6px; /* Rounded corners of the handle */
+}
+
+/* Handle on hover */
+body::-webkit-scrollbar-thumb:hover {
+  background: #000000; /* Color of the handle on hover */
+}
