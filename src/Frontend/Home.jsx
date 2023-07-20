@@ -10,6 +10,9 @@ import ChooseCategory from "./ChooseCategory";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Modal from "./Modal";
+import AboutUs from "./AboutUs";
+import { Banner } from "./Banner";
+import Ourservices from "./Ourservices";
 
 const Home = () => {
     const [activeMenu, setActiveMenu] = useState('menu1');
@@ -60,18 +63,31 @@ const Home = () => {
     const closeModal = () => {
         setShowModal(false);
     };
-
+   
     const handleCustomTimeChange = (event) => {
 
         setTime(event.target.value);
 
 
     };
-
+    const inputDescriptions = {
+        from: "Enter your starting location",
+        to: "Enter your destination",
+        date: "Select the date of your trip",
+        time: "Select the time of your trip",
+        phone: "Enter your phone number",
+        city: "Enter your city",
+        tourpackage: "Select a tour package",
+        returndate: "Select the return date",
+        days: "Select the number of days",
+      };
+    
     const renderCustomTimeSelect = () => {
         return (
             <div className="form-group">
-                <label htmlFor="custom-time">Time:</label>
+                <label htmlFor="custom-time">Time: <div class="help-tip">
+    <p>{inputDescriptions.time}</p>
+</div> </label>
                 {/* Use the select element with generated time options and add onChange handler */}
                 <select id="custom-time" onChange={handleCustomTimeChange}>
                     {generateTimeOptions()}
@@ -121,6 +137,8 @@ const Home = () => {
                 break;
         }
     };
+
+    
     console.log(phone);
     const handleMenuClick = (menu) => {
         setActiveMenu(menu);
@@ -133,7 +151,9 @@ const Home = () => {
             return <div className='menu-contents-trip'>
                 <form className="booking-form">
                     <div className="form-group">
-                        <label htmlFor="city">City</label>
+                        <label htmlFor="city">City <div class="help-tip">
+    <p>{inputDescriptions.city}</p>
+</div></label>
                         <input
                             type="city"
                             id="city"
@@ -144,7 +164,9 @@ const Home = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="package">Package</label>
+                        <label htmlFor="package">Package <div class="help-tip">
+    <p>{inputDescriptions.tourpackage}</p>
+</div></label>
                         <select
                             id="package"
                             name="package"
@@ -160,7 +182,9 @@ const Home = () => {
                         </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="date">Date</label>
+                        <label htmlFor="date">Date <div class="help-tip">
+    <p>{inputDescriptions.date}</p>
+</div></label>
                         <input
                             type="date"
                             id="date"
@@ -171,12 +195,14 @@ const Home = () => {
                         />
                     </div>
                     <div className="form-group ">
-                        <label htmlFor="phone">Phone</label>
+                        <label htmlFor="phone">Phone <div class="help-tip">
+    <p>{inputDescriptions.phone}</p>
+</div></label>
                         <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
                             type="tel"
                             id="phone"
                             name="phone"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter your number"
                             value={phone}
                             onChange={handleInputChange}
                         />
@@ -190,7 +216,9 @@ const Home = () => {
             return <div className='menu-contents-trip'>
                 <form className="booking-form">
                     <div className="form-group">
-                        <label htmlFor="city">City</label>
+                        <label htmlFor="city">City <div class="help-tip">
+    <p>{inputDescriptions.city}</p>
+</div></label>
                         <input
                             type="city"
                             id="city"
@@ -201,7 +229,9 @@ const Home = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="date">Date</label>
+                        <label htmlFor="date">Date <div class="help-tip">
+    <p>{inputDescriptions.date}</p>
+</div></label>
                         <input
                             type="date"
                             id="date"
@@ -212,7 +242,9 @@ const Home = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="days">Days</label>
+                        <label htmlFor="days">Days <div class="help-tip">
+    <p>{inputDescriptions.days}</p>
+</div></label>
                         <select
                             id="days"
                             name="days"
@@ -228,7 +260,9 @@ const Home = () => {
                         </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="redate">Return Date</label>
+                        <label htmlFor="redate">Return Date<div class="help-tip">
+    <p>{inputDescriptions.returndate}</p>
+</div></label>
                         <input
                             type="date"
                             id="date"
@@ -239,12 +273,14 @@ const Home = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="phone">Phone</label>
+                        <label htmlFor="phone">Phone<div class="help-tip">
+    <p>{inputDescriptions.phone}</p>
+</div></label>
                         <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
                             type="tel"
                             id="phone"
                             name="phone"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter your number"
                             value={phone}
                             onChange={handleInputChange}
                         />
@@ -258,7 +294,9 @@ const Home = () => {
             return <div className='menu-contents-trip'>
                 <form className="booking-form">
                     <div className="form-group">
-                        <label htmlFor="from">From</label>
+                        <label htmlFor="from">From <div class="help-tip">
+    <p>{inputDescriptions.from}</p>
+</div> </label>
                         <Autocomplete
                             apiKey="AIzaSyD5BMc9ScpaPKkEOyBFxUuUjWaGqDpMgu0" onChange={(e) => setFromLocation(e.target.value)}
                             onPlaceSelected={(place) => setFromLocation(place.formatted_address)}
@@ -269,7 +307,9 @@ const Home = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="to">To</label>
+                        <label htmlFor="to">To <div class="help-tip">
+    <p>{inputDescriptions.to}</p>
+</div> </label>
                         <Autocomplete
                             apiKey="AIzaSyD5BMc9ScpaPKkEOyBFxUuUjWaGqDpMgu0" onChange={(e) => setToLocation(e.target.value)}
                             onPlaceSelected={(place) => setToLocation(place.formatted_address)}
@@ -280,7 +320,9 @@ const Home = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="date">Date</label>
+                        <label htmlFor="date">Date <div class="help-tip">
+    <p>{inputDescriptions.date}</p>
+</div> </label>
                         <input
                             type="date"
                             id="date"
@@ -291,12 +333,13 @@ const Home = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="time"></label>
+                   
                         {renderCustomTimeSelect()}
-                    </div>
+                   
                     <div className="form-group">
-                        <label htmlFor="date">Return Date</label>
+                        <label htmlFor="date">Return Date<div class="help-tip">
+    <p>{inputDescriptions.returndate}</p>
+</div> </label>
                         <input
                             type="date"
                             id="date"
@@ -307,12 +350,14 @@ const Home = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="phone">Phone</label>
+                        <label htmlFor="phone">Phone<div class="help-tip">
+    <p>{inputDescriptions.phone}</p>
+</div> </label>
                         <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
                             type="tel"
                             id="phone"
                             name="phone"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter your number"
                             value={phone}
                             onChange={handleInputChange}
                         />
@@ -326,7 +371,9 @@ const Home = () => {
             return <div className='menu-contents-trip'>
                 <form className="booking-form">
                     <div className="form-group">
-                        <label htmlFor="from">From</label>
+                        <label htmlFor="from">From <div class="help-tip">
+    <p>{inputDescriptions.from}</p>
+</div> </label>
                         <Autocomplete
                             apiKey="AIzaSyD5BMc9ScpaPKkEOyBFxUuUjWaGqDpMgu0" onChange={(e) => setFromLocation(e.target.value)}
                             onPlaceSelected={(place) => setFromLocation(place.formatted_address)}
@@ -337,7 +384,9 @@ const Home = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="to">To</label>
+                        <label htmlFor="to">To <div class="help-tip">
+    <p>{inputDescriptions.to}</p>
+</div></label>
                         <Autocomplete
                             apiKey="AIzaSyD5BMc9ScpaPKkEOyBFxUuUjWaGqDpMgu0" onChange={(e) => setToLocation(e.target.value)}
                             onPlaceSelected={(place) => setToLocation(place.formatted_address)}
@@ -348,7 +397,9 @@ const Home = () => {
                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="date">Date</label>
+                        <label htmlFor="date">Date <div class="help-tip">
+    <p>{inputDescriptions.date}</p>
+</div></label>
                         <input
                             type="date"
                             id="date"
@@ -359,18 +410,19 @@ const Home = () => {
                         />
                     </div>
 
-                    <div className="form-group">
-                        <label htmlFor="time"></label>
+                
                         {renderCustomTimeSelect()}
-                    </div>
+             
 
                     <div className="form-group">
-                        <label htmlFor="phone">Phone</label>
+                        <label htmlFor="phone">Phone <div class="help-tip">
+    <p>{inputDescriptions.phone}</p>
+</div></label>
                         <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
                             type="tel"
                             id="phone"
                             name="phone"
-                            placeholder="Enter your phone number"
+                            placeholder="Enter your number"
                             value={phone}
                             onChange={handleInputChange}
                         />
@@ -460,6 +512,9 @@ const Home = () => {
             {/* {showModal && <ChooseCategory setShowModal={setShowModal} />       } */}
             { showModal && <Modal setShowModal={setShowModal} carType={carType} setCarType={setCarType} />  }
             { isMobileView && <ChooseCategory setCarType={setCarType} /> }
+       <Banner />
+       <Ourservices />
+          <AboutUs />
             <Footer />
         </>
     )

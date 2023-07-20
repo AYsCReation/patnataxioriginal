@@ -1,0 +1,83 @@
+
+:root {
+    --banner-width: 24em;
+    --banner-height: 5em;
+}
+.bannerMain{
+display: flex;
+width: 90%;
+margin: auto;
+
+}
+.headingbanner{
+    text-align: center;
+    font-size:2rem;
+    font-weight: 600;
+    padding: 1rem;
+    text-transform: uppercase;
+   color: #474fa0 ;
+}
+.servicepara{
+    text-align: center;
+    width: 90%;
+    margin: auto;
+    padding-bottom: 1.5rem;
+    
+}
+.banner {
+    
+    /* width: var(--banner-width); */
+    background: #c3c5f7;
+    height: var(--banner-height);
+    overflow: hidden;
+    display: flex;
+    justify-content: flex-start;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    cursor: pointer;
+    border-radius: .3em;
+}
+
+.banner:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px 10px rgba(0, 0, 0, 0.1);
+}
+
+.shopping-image {
+    height: auto;
+    width: calc(var(--banner-width) / 2);
+}
+
+.shopping-image > img {
+    height: var(--banner-height);
+    width: calc(var(--banner-width) / 2);
+    object-fit: cover;
+    border-radius: 0 2em 2em 0 / 0 3em 3em 0;
+    box-shadow: 3px 5px 1px 3px rgba(128, 0, 0, 0.8);
+}
+
+.text {
+    height: var(--banner-height);
+    width: calc(var(--banner-width) / 2);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.text > * {
+    font-size: 15px;
+    text-align: center;
+}
+
+a {
+    color: #fff;
+}
+@media(max-width : 900px) {
+    .bannerMain{
+        display: flex;
+        flex-direction: column;
+
+        }
+        .banner{
+            margin-bottom: 1rem;
+        }
+}
