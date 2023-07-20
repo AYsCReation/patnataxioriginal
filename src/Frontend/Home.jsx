@@ -10,9 +10,14 @@ import ChooseCategory from "./ChooseCategory";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Modal from "./Modal";
+
+import TripSummary from "./TripSummary";
+import SuccessBooking from "./SuccessBooking";
+
 import AboutUs from "./AboutUs";
 import { Banner } from "./Banner";
 import Ourservices from "./Ourservices";
+
 
 const Home = () => {
     const [activeMenu, setActiveMenu] = useState('menu1');
@@ -28,6 +33,9 @@ const Home = () => {
     const [showModal, setShowModal] = useState(false);
     const [isMobileView, setIsMobileView] = useState(false);
     const [carType, setCarType] = useState('');
+    const [showSummary, setShowSummary] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    console.log(isSubmitted);
     const generateTimeOptions = () => {
         const timeOptions = [];
         for (let h = 0; h < 24; h++) {
@@ -138,8 +146,6 @@ const Home = () => {
         }
     };
 
-    
-    console.log(phone);
     const handleMenuClick = (menu) => {
         setActiveMenu(menu);
     };
@@ -268,7 +274,7 @@ const Home = () => {
                             id="date"
                             name="returndate"
                             min={getCurrentDate()}
-                            value={getCurrentDate()}
+                            value={returnDate}
                         // onChange={handleInputChange}
                         />
                     </div>
@@ -345,7 +351,7 @@ const Home = () => {
                             id="date"
                             name="date"
                             min={getCurrentDate()}
-                            value={date}
+                            value={returnDate}
                             onChange={handleInputChange}
                         />
                     </div>
@@ -510,11 +516,17 @@ const Home = () => {
 
 
             {/* {showModal && <ChooseCategory setShowModal={setShowModal} />       } */}
+
+            { showModal && <Modal showModal={showModal} setShowModal={setShowModal} carType={carType} setCarType={setCarType} setShowSummary={setShowSummary} showSummary={showSummary} />  }
+            { isMobileView && <ChooseCategory setCarType={setCarType} setShowSummary={setShowSummary}  /> }
+            { showSummary && <TripSummary  showSummary={showSummary} setShowSummary={setShowSummary} fromLocation={fromLocation} toLocation={toLocation} date={date} city={city} returnDate={returnDate} carType={carType} activeMenu={activeMenu} tourPackage={tourPackage} phone={phone} days={days} time={time} isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />  }
+            {isSubmitted && <SuccessBooking/> }
             { showModal && <Modal setShowModal={setShowModal} carType={carType} setCarType={setCarType} />  }
             { isMobileView && <ChooseCategory setCarType={setCarType} /> }
        <Banner />
        <Ourservices />
           <AboutUs />
+
             <Footer />
         </>
     )
