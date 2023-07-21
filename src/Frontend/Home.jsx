@@ -56,9 +56,9 @@ const Home = () => {
         const isMobile = window.innerWidth <= 900; // Adjust the breakpoint as per your mobile view design
         setIsMobileView(isMobile);
         if (isMobile) {
-            const totalHeight = document.documentElement.scrollHeight;
+            
             window.scrollTo({
-                top: totalHeight * (distance / 100),
+                top: 100vh * (distance / 100),
                 behavior: 'smooth', // Add smooth scrolling animation
             });
         }
@@ -502,7 +502,7 @@ const Home = () => {
 
                         {renderData()}
                         <div className="form-button">
-                            <button type="submit" onClick={() => handleBookTaxi(20)}>Book Taxi</button>
+                            <button type="submit" onClick={() => handleBookTaxi(200)}>Book Taxi</button>
                         </div>
                     </div>
 
