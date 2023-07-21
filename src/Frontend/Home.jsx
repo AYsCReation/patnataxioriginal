@@ -521,7 +521,7 @@ const Home = () => {
             { isMobileView && <ChooseCategory setCarType={setCarType} setShowSummary={setShowSummary}  /> }
             { showSummary && <TripSummary  showSummary={showSummary} setShowSummary={setShowSummary} fromLocation={fromLocation} toLocation={toLocation} date={date} city={city} returnDate={returnDate} carType={carType} activeMenu={activeMenu} tourPackage={tourPackage} phone={phone} days={days} time={time} isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />  }
             {isSubmitted && <SuccessBooking/> }
-            { showModal && <Modal setShowModal={setShowModal} carType={carType} setCarType={setCarType} />  }
+         
            
        <Banner />
        <Ourservices />
