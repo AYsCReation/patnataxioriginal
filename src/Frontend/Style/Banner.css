@@ -68,9 +68,9 @@ margin: auto;
     text-align: center;
 }
 
-a {
+/* a {
     color: #fff;
-}
+} */
 @media(max-width : 900px) {
     .bannerMain{
         display: flex;

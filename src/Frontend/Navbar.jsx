@@ -1,7 +1,7 @@
 import React from 'react'
 import "../Frontend/Style/Navbar.css"
 import logo from "../Frontend/Assets/logo.png"
-
+import { Link } from 'react-router-dom'
 const Navbar = () => {
   return (
     <>
@@ -21,10 +21,10 @@ const Navbar = () => {
   </div>
   
   <div className="nav-links">
-  <a href="#" target="">Home</a>
-    <a href="#" target="">About Us</a>
-    <a href="#" target="">Contact Us</a>
-    <a href="#" target="">Our Services</a>
+  <Link to="/"><a href="#" target="">Home</a></Link>
+   <Link to="/AboutUsPage"><a href="#" target="">About Us</a></Link> 
+   <Link to="/ContactUs"><a href="#" target="">Contact Us</a></Link> 
+   <Link to="/OurServicesPage"><a href="#" target="">Our Services</a></Link> 
     <a href="#" target="">Blogs</a>
     
   </div>
