@@ -1,36 +1,45 @@
 .heading {
     text-align: center;
 }
-
+.about{
+    background-color: #20262b;
+}
 .about-container{
     display: grid;
     grid-template-columns: repeat(2,1fr);
-    margin-top: 2rem;
+    width: 90%;
+    margin: auto;
     align-items: center;
     gap: 1rem;
-    margin-top: 1rem;
+    
+    
 }
 .about-img img{
-    width: 100%;
+    margin-top: 2rem;
+    width: 80%;
 }
 
 .about-text span{
     font-weight: 600;
-    color: #474fa0;
+    color: var(--main-color);
     text-transform: uppercase;
     font-size: 2rem;
+   
 }
 .about-text p{
     margin: 0.5rem 0 1.4rem;
+    color: #d1c9c9;
 }
 .about-text .btn{
     padding: 10px 20px;
     background: #474fa0;
     color: #fff;
     border-radius: 0.5rem;
+  
 }
+
 .about-text .btn:hover{
-    background: var(--second-color);
+    background: var(--main-color);
 }
 @media(max-width : 900px) {
     .about-container{
@@ -40,5 +49,8 @@
     .about-img{
         padding: 1rem;
         order: 2;
+    }
+    .about-text {
+        margin-top: 2rem;
     }
 }
