@@ -7,6 +7,7 @@ const TripSummary = ({ setIsSubmitted, isSubmitted , setShowSummary, showSummary
         setShowSummary(false);
     }
     const handleSubmitSummary=()=>{
+        window.scrollTo(0, 0);
         setIsSubmitted(true);
         setShowSummary(false);
        
