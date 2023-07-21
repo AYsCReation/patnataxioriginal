@@ -35,7 +35,90 @@ const Home = () => {
     const [carType, setCarType] = useState('');
     const [showSummary, setShowSummary] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    console.log(isSubmitted);
+
+// Form Validation
+
+const formValidation = ()=>{
+    if(activeMenu == 'menu2'){
+        if(city == ""){
+            alert("City is required!");
+        }
+        else if(tourPackage == ""){
+            alert("Package is required!");
+        }
+        else if(date == ""){
+            alert("date is required!");
+        }
+        else if(phone == "" || phone.length < 10 ){
+            alert("A valid Phone Number is required!");
+        }
+        else {
+            handleBookTaxi();
+        }
+    }
+    else if(activeMenu == 'round'){
+        if(fromLocation == ""){
+            alert("Source Location is required!");
+        }
+        else if(toLocation == ""){
+            alert("Destination is required!");
+        }
+        else if(date == ""){
+            alert("date is required!");
+        }
+        else if(time == ""){
+            alert("Time is required!");
+        }
+        else if(returnDate == ""){
+            alert("Return Date is required!");
+        }
+        else if(phone == "" || phone.length < 10 ){
+            alert("A valid Phone Number is required!");
+        }
+        else {
+            handleBookTaxi();
+        }
+
+    }
+    else if(activeMenu == 'oneway'){
+        if(fromLocation == ""){
+            alert("Source Location is required!");
+        }
+        else if(toLocation == ""){
+            alert("Destination is required!");
+        }
+        else if(date == ""){
+            alert("date is required!");
+        }
+        else if(time == ""){
+            alert("Time is required!");
+        }
+        else if(phone == "" || phone.length < 10 ){
+            alert("A valid Phone Number is required!");
+        }
+        else {
+            handleBookTaxi();
+        }
+    }
+    else if(activeMenu == 'menu3') {
+        if(city == ""){
+            alert("City is required!");
+        }
+        else if(days == ""){
+            alert("Days is required!");
+        }
+        else if(date == ""){
+            alert("date is required!");
+        }
+        else if(phone == "" || phone.length < 10 ){
+            alert("A valid Phone Number is required!");
+        }
+        else {
+            handleBookTaxi();
+        }
+    }
+}
+
     const generateTimeOptions = () => {
         const timeOptions = [];
         for (let h = 0; h < 24; h++) {
@@ -53,6 +136,7 @@ const Home = () => {
         return timeOptions;
     };
     const handleBookTaxi = () => {
+      
         const isMobile = window.innerWidth <= 900; // Adjust the breakpoint as per your mobile view design
         setIsMobileView(isMobile);
         if (isMobile) {
@@ -63,6 +147,7 @@ const Home = () => {
             });
         }
         else setShowModal(true);
+
     };
     const openModal = () => {
         setShowModal(true);
@@ -167,6 +252,7 @@ const Home = () => {
                             placeholder="Enter your city"
                             value={city}
                             onChange={handleInputChange}
+                           
                         />
                     </div>
                     <div className="form-group">
@@ -175,7 +261,7 @@ const Home = () => {
 </div></label>
                         <select
                             id="package"
-                            name="package"
+                            name="tourpackage"
                             value={tourPackage}
                             onChange={handleInputChange}
                         >
@@ -198,6 +284,7 @@ const Home = () => {
                             min={getCurrentDate()}
                             value={date}
                             onChange={handleInputChange}
+                           
                         />
                     </div>
                     <div className="form-group ">
@@ -275,7 +362,7 @@ const Home = () => {
                             name="returndate"
                             min={getCurrentDate()}
                             value={returnDate}
-                        // onChange={handleInputChange}
+                        onChange={handleInputChange}
                         />
                     </div>
                     <div className="form-group">
@@ -349,7 +436,7 @@ const Home = () => {
                         <input
                             type="date"
                             id="date"
-                            name="date"
+                            name="returndate"
                             min={getCurrentDate()}
                             value={returnDate}
                             onChange={handleInputChange}
@@ -502,7 +589,7 @@ const Home = () => {
 
                         {renderData()}
                         <div className="form-button">
-                            <button type="submit" onClick={() => handleBookTaxi()}>Book Taxi</button>
+                            <button type="submit" onClick={() => formValidation()}>Book Taxi</button>
                         </div>
                     </div>
 
