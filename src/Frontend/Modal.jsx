@@ -41,17 +41,17 @@ const Modal = ({ setShowModal,  children, setCarType, carType, showSummary, setS
         <div className="slider-item">
         <h1 className='slider-item-p'>Chhoti Sawari (Mini Car)</h1>
           <img src={car1} alt="" />
-          <button className="BookNow-btn" onClick={()=> {setCarType("Mini");  setShowSummary(true)} }>Book Now</button>
+          <button className="BookNow-btn" onClick={()=> {setCarType("Mini"); setShowModal(false); setShowSummary(true)} }>Book Now</button>
         </div>
         <div className="slider-item">
         <h1 className='slider-item-p'>Badi Sawari (Sedan Car) </h1>
         <img src={car2} alt="" />
-        <button className="BookNow-btn" onClick={()=> {setCarType("Sedan"); setShowSummary(true)} }>Book Now</button>
+        <button className="BookNow-btn" onClick={()=> {setCarType("Sedan"); setShowModal(false); setShowSummary(true)} }>Book Now</button>
         </div>
         <div className="slider-item">
         <h1 className='slider-item-p'>Family Sawari (SUV Car) </h1>
         <img src={car3} alt="" />
-        <button className="BookNow-btn" onClick={()=> {setCarType("SUV"); setShowSummary(true)} }>Book Now</button>
+        <button className="BookNow-btn" onClick={()=> {setCarType("SUV"); setShowModal(false);  setShowSummary(true)} }>Book Now</button>
         </div>
        
         {/* Add more slider items as needed */}
