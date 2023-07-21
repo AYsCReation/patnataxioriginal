@@ -2,9 +2,11 @@ import React from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import "../Frontend/Style/OurServicesPage.css"
+import ScrollToTop from './ScrollToTop'
 const OurServicesPage = () => {
   return (
    <>
+   <ScrollToTop />
      <div className='mainSer'>
       <Navbar />
 

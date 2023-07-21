@@ -1,6 +1,7 @@
 import React from 'react'
 import '../Frontend/Style/Partner.css'
 import car from '../Frontend/Assets/partnercar.png'
+import { Link } from 'react-router-dom'
 const Partner = () => {
   return (
     <div className='mainpartner'>
@@ -16,7 +17,7 @@ const Partner = () => {
         We understand the value of our partners. For others, you are the driver of your cab, but for us you are the driver of our business. Join hands with us and convert the cost into investment. You have all the skills and expertise to manage your vehicle. Just use this platform to ensure regular earning with less investment. It’s the right place for you to find decent & professional customers with less efforts.
         </p>
         <div className="partner-button">
-                            <button type="submit" >Lets Handshake</button>
+                           <Link to="/ContactUs" > <button type="submit" >Lets Handshake</button></Link>
                         </div>
     </div>
     <div className='img-partner'>

@@ -1,6 +1,7 @@
 import React from 'react'
 import carmain from '../Frontend/Assets/carmain.png'
 import '../Frontend/Style/Aboutus.css'
+import { Link } from 'react-router-dom'
 const AboutUs = () => {
   return (
     <section class="about" id="about">
@@ -15,7 +16,7 @@ const AboutUs = () => {
                 rerum mollitia libero quam necessitatibus commodi, obcaecati laborum optio quaerat facilis!
                 Blanditiis dolores earum officiis veniam.</p>
           
-                <a href="#" class="btn">Learn More</a>
+               <Link to="/AboutUsPage" >  <a href="#" class="btn">Learn More</a></Link>
         </div>
     </div>
 </section>

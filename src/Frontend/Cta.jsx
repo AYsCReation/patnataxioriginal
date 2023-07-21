@@ -2,6 +2,9 @@ import React from 'react';
 import '../Frontend/Style/Cta.css';
 
 const Cta = () => {
+  const handleBookNowCta = ()=>{
+    window.scrollTo(0,0)
+  }
   return (
     <>
       <div className="ctamain">
@@ -15,7 +18,7 @@ const Cta = () => {
 
               <div className="text-lg-right">
                 <a className="btn btn-purple" href="#">+91 8877665544</a>
-                <a className="btn btn-light btn-glowing" href="#">Book Now</a>
+                <button className="btn btn-light btn-glowing" onClick={handleBookNowCta} >Book Now</button>
               </div>
             </div>
           </div>

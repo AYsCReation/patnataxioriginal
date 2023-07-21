@@ -6,7 +6,7 @@ import Footer from './Frontend/Footer';
 import AboutUsPage from './Frontend/AboutUsPage';
 import ContactUs from './Frontend/ContactUs';
 import OurServicesPage from './Frontend/OurServicesPage';
-
+import ScrollToTop from './Frontend/ScrollToTop';
 
 
 // All useStates Variables
@@ -27,6 +27,7 @@ function App() {
     <>
     <BrowserRouter>
     <Routes>
+    
      <Route path="/Navbar" element = {<Navbar/>}/>
      <Route  path="/" element = {<Home/>}/>
      <Route  path="/AboutUsPage" element = {<AboutUsPage/>}/>
