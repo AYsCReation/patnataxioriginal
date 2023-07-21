@@ -19,6 +19,7 @@ import { Banner } from "./Banner";
 import Ourservices from "./Ourservices";
 import Cta from "./Cta";
 import Majorcity from "./Majorcity";
+import Partner from "./Partner";
 
 
 const Home = () => {
@@ -615,9 +616,10 @@ const formValidation = ()=>{
        <Banner />
        <Ourservices />
        <Cta />
+       <AboutUs />
        <Majorcity />
-          <AboutUs />
-
+         
+         <Partner />
             <Footer />
         </>
     )
