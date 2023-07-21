@@ -1,0 +1,49 @@
+.majorcitymain{
+    display: flex;
+    max-width: 100%;
+}
+.majorcitycard {
+    padding: 20px;
+    margin: 2rem;
+    min-height: 370px;
+    border-radius: 20px;
+    background: #e8e8e8;
+    box-shadow: 5px 5px 6px #dadada,
+                 -5px -5px 6px #f6f6f6;
+    transition: 0.4s;
+  }
+  
+  .majorcitycard:hover {
+    translate: 0 -10px;
+  }
+  
+  .majorcitycard-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2e54a7;
+    margin: 15px 0 0 10px;
+  }
+  
+  .majorcitycard-image img{
+    min-height: 170px;
+    background-color: #c9c9c9;
+    border-radius: 15px;
+    box-shadow: inset 8px 8px 10px #c3c3c3,
+              inset -8px -8px 10px #cfcfcf;
+  }
+  
+  .majorcitycard-body {
+    margin: 13px 0 0 10px;
+    color: rgb(31, 31, 31);
+    font-size: 15px;
+  }
+  
+ 
+  .by-name {
+    font-weight: 700;
+  }
+  @media (max-width : 900px) {
+    .majorcitymain{
+        flex-direction: column;
+    }
+  }

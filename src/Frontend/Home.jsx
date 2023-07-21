@@ -17,6 +17,8 @@ import SuccessBooking from "./SuccessBooking";
 import AboutUs from "./AboutUs";
 import { Banner } from "./Banner";
 import Ourservices from "./Ourservices";
+import Cta from "./Cta";
+import Majorcity from "./Majorcity";
 
 
 const Home = () => {
@@ -525,6 +527,8 @@ const Home = () => {
            
        <Banner />
        <Ourservices />
+       <Cta />
+       <Majorcity />
           <AboutUs />
 
             <Footer />

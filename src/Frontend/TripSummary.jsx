@@ -20,8 +20,8 @@ const TripSummary = ({ setIsSubmitted, isSubmitted , setShowSummary, showSummary
         showSummary && (<div className='modal-overlay-summary'>
             
         <div className="modal-summary-content">
-        <button onClick={toggleModal} className='button-close-summary' > X </button>
-            <h2 className='modal-summary-heading' >Your Trip Summary</h2>
+    <div>    <button onClick={toggleModal} className='button-close-summary' > X </button></div>
+            <h2 className='modal-summary-heading' >Trip Summary</h2>
             {  activeMenu &&   <p> <strong>Tour Type:  </strong> {activeMenu === 'menu2' ? 'Local' : activeMenu === 'menu3' ? 'Car Package' : activeMenu === 'round' ? 'Round Trip' : activeMenu === 'oneway' ? 'One Way Trip' : ''}</p>  } 
             
             {  fromLocation &&   <p> <strong>From: </strong>  {fromLocation}</p>  } 
