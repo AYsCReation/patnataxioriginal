@@ -5,7 +5,7 @@ import car2 from "../Frontend/Assets/car2.png"
 import car3 from "../Frontend/Assets/car3.png"
 const CarOptions = () => {
     return (
-        <>
+        <div className='caropion-main'>
             <h1 className='catheading'>Available Car Options</h1>
             <p className='catpara' >Choose from our wide range of fleets that will suit your travel needs. <br /> Your Everyday travel partner - AC Cabs for point to point </p>
             <div className="categoryCardContainer">
@@ -55,7 +55,7 @@ const CarOptions = () => {
 
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

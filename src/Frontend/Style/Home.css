@@ -284,11 +284,12 @@ position: absolute;
     margin-bottom: 1rem;
   }
   input{
-    border-bottom: 1px solid black;
-    border-top: none;
-    border-left: none;
-    border-right: none;
-    padding: 2px;
+    border-bottom: 1px solid black !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    padding: 2px !important;
+    border-radius: 0 !important;
   }
   .form-button button{
     margin-top: 0.5rem;
@@ -396,6 +397,7 @@ position: absolute;
   border-bottom: 1px solid black;
   border-radius: 0px;
   font-weight: 100;
+  margin-bottom: 3px;
 }
 #phone{
   width: 160px;
