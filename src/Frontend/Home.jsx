@@ -52,13 +52,13 @@ const Home = () => {
         }
         return timeOptions;
     };
-    const handleBookTaxi = (distance) => {
+    const handleBookTaxi = () => {
         const isMobile = window.innerWidth <= 900; // Adjust the breakpoint as per your mobile view design
         setIsMobileView(isMobile);
         if (isMobile) {
             
             window.scrollTo({
-                top: 100vh * (distance / 100),
+                top: window.innerHeight,
                 behavior: 'smooth', // Add smooth scrolling animation
             });
         }
@@ -502,7 +502,7 @@ const Home = () => {
 
                         {renderData()}
                         <div className="form-button">
-                            <button type="submit" onClick={() => handleBookTaxi(150)}>Book Taxi</button>
+                            <button type="submit" onClick={() => handleBookTaxi()}>Book Taxi</button>
                         </div>
                     </div>
 
