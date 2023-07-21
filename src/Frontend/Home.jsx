@@ -502,7 +502,7 @@ const Home = () => {
 
                         {renderData()}
                         <div className="form-button">
-                            <button type="submit" onClick={() => handleBookTaxi(35)}>Book Taxi</button>
+                            <button type="submit" onClick={() => handleBookTaxi(20)}>Book Taxi</button>
                         </div>
                     </div>
 
