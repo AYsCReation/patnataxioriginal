@@ -1,11 +1,13 @@
 import React from 'react'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import ScrollToTop from './ScrollToTop'
 import "../Frontend/Style/AboutUsPage.css"
 const AboutUsPage = () => {
   return (
     <>
     <div>
+    <ScrollToTop />
         <Navbar/>
       <div className="responsive-container-block bigContainer">
   <div className="responsive-container-block Container bottomContainer">

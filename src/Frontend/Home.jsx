@@ -534,7 +534,7 @@ const formValidation = ()=>{
     return (
         <>
             <Navbar />
-            <div className="home-container">
+            <div className="home-container" id="hero">
                 <div className="hero">
                     <img src={hero} alt="" />
                     <div className="hero-title">

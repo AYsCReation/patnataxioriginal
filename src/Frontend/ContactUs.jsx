@@ -4,9 +4,12 @@ import { AiFillInstagram } from "react-icons/ai";
 import Navbar from './Navbar';
 import Footer from './Footer';
 import "../Frontend/Style/ContactUs.css"
+
+import ScrollToTop from './ScrollToTop';
 const ContactUs = () => {
   return (
     <>
+    <ScrollToTop />
     <Navbar />
       <section className="footer_get_touch_outer">
         <div className="container-contact">
