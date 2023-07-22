@@ -35,7 +35,7 @@ const TripSummary = ({ setIsSubmitted, isSubmitted , setShowSummary, showSummary
             {  tourPackage &&   <p> <strong>Package Selected: </strong> {tourPackage}</p>  } 
             {  returnDate &&   <p> <strong>Return Date: </strong> {returnDate}</p>  }  
             {  city &&   <p> <strong>City: </strong> {city}</p>  } 
-            {  phone &&   <p> <strong>To: </strong> {phone}</p>  }
+            {  phone &&   <p> <strong>Phone Number: </strong> {phone}</p>  }
             {  time &&   <p> <strong>Time:  </strong> {time}</p>  }
             <button onClick={handleSubmitSummary} className='button-submit-summary' > Confirm Booking </button> 
         </div>

@@ -42,14 +42,14 @@ const Home = () => {
     const [directions, setDirections] = useState(null);
     const [distance, setDistance] = useState(null);
     const [travelTime, setTravelTime] = useState(null);
-
-let  isMobile = false;
+    const [isMobileViewMain, setIsMobileViewMain] = useState(false);
+let  isMobileMain = false;
     useEffect(() => {
         calculateDirections();
-        isMobile = window.innerWidth <= 900; // Adjust the breakpoint as per your mobile view design
-        setIsMobileView(isMobile);
+        isMobileMain = window.innerWidth <= 900; // Adjust the breakpoint as per your mobile view design
+        setIsMobileViewMain(isMobileMain);
 
-    }, [fromLocation, toLocation, isMobileView]);
+    }, [fromLocation, toLocation, isMobileViewMain]);
     console.log(travelTime)
     console.log(isMobileView)
     const calculateDirections = () => {
@@ -177,10 +177,11 @@ let  isMobile = false;
         return timeOptions;
     };
     const handleBookTaxi = () => {
-
+        const isMobile = window.innerWidth <= 900; // Adjust the breakpoint as per your mobile view design
+        setIsMobileView(isMobile);
    
         if (isMobile) {
-
+    
             window.scrollTo({
                 top: window.innerHeight,
                 behavior: 'smooth', // Add smooth scrolling animation
@@ -295,6 +296,20 @@ let  isMobile = false;
 
                         />
                     </div>
+                    <div className="form-group ">
+                        <label htmlFor="phone">Phone <div class="help-tip">
+                            <p>{inputDescriptions.phone}</p>
+                        </div></label>
+                        <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your number"
+                            value={phone}
+                            onChange={handleInputChange}
+                        />
+                        </div>
+                    </div>
                     <div className="form-group">
                         <label htmlFor="package">Package <div class="help-tip">
                             <p>{inputDescriptions.tourpackage}</p>
@@ -327,20 +342,7 @@ let  isMobile = false;
 
                         />
                     </div>
-                    <div className="form-group ">
-                        <label htmlFor="phone">Phone <div class="help-tip">
-                            <p>{inputDescriptions.phone}</p>
-                        </div></label>
-                        <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            placeholder="Enter your number"
-                            value={phone}
-                            onChange={handleInputChange}
-                        />
-                        </div>
-                    </div>
+                    
 
                 </form>
             </div>;
@@ -360,6 +362,20 @@ let  isMobile = false;
                             value={city}
                             onChange={handleInputChange}
                         />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="phone">Phone<div class="help-tip">
+                            <p>{inputDescriptions.phone}</p>
+                        </div></label>
+                        <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your number"
+                            value={phone}
+                            onChange={handleInputChange}
+                        />
+                        </div>
                     </div>
                     <div className="form-group">
                         <label htmlFor="date">Date <div class="help-tip">
@@ -405,20 +421,7 @@ let  isMobile = false;
                             onChange={handleInputChange}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone<div class="help-tip">
-                            <p>{inputDescriptions.phone}</p>
-                        </div></label>
-                        <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            placeholder="Enter your number"
-                            value={phone}
-                            onChange={handleInputChange}
-                        />
-                        </div>
-                    </div>
+                   
 
                 </form>
             </div>;
@@ -453,6 +456,20 @@ let  isMobile = false;
                         />
                     </div>
                     <div className="form-group">
+                        <label htmlFor="phone">Phone<div class="help-tip">
+                            <p>{inputDescriptions.phone}</p>
+                        </div> </label>
+                        <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your number"
+                            value={phone}
+                            onChange={handleInputChange}
+                        />
+                        </div>
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="date">Date <div class="help-tip">
                             <p>{inputDescriptions.date}</p>
                         </div> </label>
@@ -482,20 +499,7 @@ let  isMobile = false;
                             onChange={handleInputChange}
                         />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone<div class="help-tip">
-                            <p>{inputDescriptions.phone}</p>
-                        </div> </label>
-                        <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            placeholder="Enter your number"
-                            value={phone}
-                            onChange={handleInputChange}
-                        />
-                        </div>
-                    </div>
+                  
 
                 </form>
             </div>;
@@ -530,6 +534,20 @@ let  isMobile = false;
                         />
                     </div>
                     <div className="form-group">
+                        <label htmlFor="phone">Phone <div class="help-tip">
+                            <p>{inputDescriptions.phone}</p>
+                        </div></label>
+                        <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="Enter your number"
+                            value={phone}
+                            onChange={handleInputChange}
+                        />
+                        </div>
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="date">Date <div class="help-tip">
                             <p>{inputDescriptions.date}</p>
                         </div></label>
@@ -547,20 +565,7 @@ let  isMobile = false;
                     {renderCustomTimeSelect()}
 
 
-                    <div className="form-group">
-                        <label htmlFor="phone">Phone <div class="help-tip">
-                            <p>{inputDescriptions.phone}</p>
-                        </div></label>
-                        <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
-                            type="tel"
-                            id="phone"
-                            name="phone"
-                            placeholder="Enter your number"
-                            value={phone}
-                            onChange={handleInputChange}
-                        />
-                        </div>
-                    </div>
+                  
 
                 </form>
             </div>;
@@ -628,13 +633,16 @@ let  isMobile = false;
                         }
 
                         {renderData()}
-                        { !isMobileView &&   <div className="form-button">
-                            <label htmlFor="distance-calc">Distance : {distance}</label>
-                            <button type="submit" onClick={() => formValidation()}>Book Taxi</button><label htmlFor="distance-calc">Time : {travelTime}</label>
+                        { !isMobileViewMain &&   <div className="form-button">
+                          { (activeMenu=="round" || activeMenu=="oneway") &&  <label htmlFor="distance-calc">Distance : {distance}</label> }
+                            <button type="submit" onClick={() => formValidation()}>Book Taxi</button>
+                            
+                            { (activeMenu=="round" || activeMenu=="oneway") &&   <label htmlFor="distance-calc">Time : {travelTime}</label>}
                         </div>}
-                       { isMobileView && <div className="form-button">
-                            <div>  <label htmlFor="distance-calc">Distance : {distance}</label>
-                                <label htmlFor="distance-calc">Time : {travelTime}</label></div>
+                       { isMobileViewMain && <div className="form-button">
+                            <div>  { (activeMenu=="round" || activeMenu=="oneway") &&  <label htmlFor="distance-calc">Distance : {distance}</label> }
+                            { (activeMenu=="round" || activeMenu=="oneway") &&   <label htmlFor="distance-calc">Time : {travelTime}</label>}
+                                </div>
                             <button type="submit" onClick={() => formValidation()}>Book Taxi</button>
                         </div>}
                     </div>

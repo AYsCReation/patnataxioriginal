@@ -22,7 +22,7 @@ const OurServicesPage = () => {
             <div class="image1">
 
             </div>
-            <div class="content">
+            <div class="content-SERVICE">
               <a href="#">
                 <span class="title">
                   Book Outstation Cab with Driver in Patna
@@ -44,7 +44,7 @@ const OurServicesPage = () => {
           </div>
           <div class="card-services">
             <div class="image2"></div>
-            <div class="content">
+            <div class="content-SERVICE">
               <a href="#">
                 <span class="title">
                   Get online local car rental service
@@ -66,7 +66,7 @@ const OurServicesPage = () => {
           </div>
           <div class="card-services">
             <div class="image3"></div>
-            <div class="content">
+            <div class="content-SERVICE">
               <a href="#">
                 <span class="title">
                   One way Cab Services
