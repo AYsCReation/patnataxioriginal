@@ -1,6 +1,6 @@
 import hero from "../Frontend/Assets/hero.png"
 import React from 'react'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "../Frontend/Style/Home.css"
 import MapComponent from './MapComponent';
 import Autocomplete from 'react-google-autocomplete';
@@ -39,89 +39,126 @@ const Home = () => {
     const [carType, setCarType] = useState('');
     const [showSummary, setShowSummary] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [directions, setDirections] = useState(null);
+    const [distance, setDistance] = useState(null);
+    const [travelTime, setTravelTime] = useState(null);
 
-// Form Validation
+let  isMobile = false;
+    useEffect(() => {
+        calculateDirections();
+        isMobile = window.innerWidth <= 900; // Adjust the breakpoint as per your mobile view design
+        setIsMobileView(isMobile);
 
-const formValidation = ()=>{
-    if(activeMenu == 'menu2'){
-        if(city == ""){
-            alert("City is required!");
-        }
-        else if(tourPackage == ""){
-            alert("Package is required!");
-        }
-        else if(date == ""){
-            alert("date is required!");
-        }
-        else if(phone == "" || phone.length < 10 ){
-            alert("A valid Phone Number is required!");
-        }
-        else {
-            handleBookTaxi();
-        }
-    }
-    else if(activeMenu == 'round'){
-        if(fromLocation == ""){
-            alert("Source Location is required!");
-        }
-        else if(toLocation == ""){
-            alert("Destination is required!");
-        }
-        else if(date == ""){
-            alert("date is required!");
-        }
-        else if(time == ""){
-            alert("Time is required!");
-        }
-        else if(returnDate == ""){
-            alert("Return Date is required!");
-        }
-        else if(phone == "" || phone.length < 10 ){
-            alert("A valid Phone Number is required!");
-        }
-        else {
-            handleBookTaxi();
-        }
+    }, [fromLocation, toLocation, isMobileView]);
+    console.log(travelTime)
+    console.log(isMobileView)
+    const calculateDirections = () => {
+        const directionsService = new window.google.maps.DirectionsService();
+        const origin = fromLocation; // Replace with your origin address
+        const destination = toLocation; // Replace with your destination address
 
+        directionsService.route(
+            {
+                origin: origin,
+                destination: destination,
+                travelMode: window.google.maps.TravelMode.DRIVING,
+            },
+            (result, status) => {
+                if (status === window.google.maps.DirectionsStatus.OK) {
+                    setDirections(result);
+                    setDistance(result.routes[0].legs[0].distance.text);
+                    calculateTravelTime(result.routes[0].legs[0].duration.value);
+                }
+            }
+        );
+    };
+    const calculateTravelTime = duration => {
+        const hours = Math.floor(duration / 3600);
+        const minutes = Math.floor((duration % 3600) / 60);
+        const finalMin = Math.floor((100/60) * minutes)
+        const formattedTime = `${hours}.${finalMin} hours`;
+        setTravelTime(formattedTime);
+    };
+    const formValidation = () => {
+        if (activeMenu == 'menu2') {
+            if (city == "") {
+                alert("City is required!");
+            }
+            else if (tourPackage == "") {
+                alert("Package is required!");
+            }
+            else if (date == "") {
+                alert("date is required!");
+            }
+            else if (phone == "" || phone.length < 10) {
+                alert("A valid Phone Number is required!");
+            }
+            else {
+                handleBookTaxi();
+            }
+        }
+        else if (activeMenu == 'round') {
+            if (fromLocation == "") {
+                alert("Source Location is required!");
+            }
+            else if (toLocation == "") {
+                alert("Destination is required!");
+            }
+            else if (date == "") {
+                alert("date is required!");
+            }
+            else if (time == "") {
+                alert("Time is required!");
+            }
+            else if (returnDate == "") {
+                alert("Return Date is required!");
+            }
+            else if (phone == "" || phone.length < 10) {
+                alert("A valid Phone Number is required!");
+            }
+            else {
+                handleBookTaxi();
+            }
+
+        }
+        else if (activeMenu == 'oneway') {
+            if (fromLocation == "") {
+                alert("Source Location is required!");
+            }
+            else if (toLocation == "") {
+                alert("Destination is required!");
+            }
+            else if (date == "") {
+                alert("date is required!");
+            }
+            else if (time == "") {
+                alert("Time is required!");
+            }
+            else if (phone == "" || phone.length < 10) {
+                alert("A valid Phone Number is required!");
+            }
+            else {
+                handleBookTaxi();
+            }
+        }
+        else if (activeMenu == 'menu3') {
+            if (city == "") {
+                alert("City is required!");
+            }
+            else if (days == "") {
+                alert("Days is required!");
+            }
+            else if (date == "") {
+                alert("date is required!");
+            }
+            else if (phone == "" || phone.length < 10) {
+                alert("A valid Phone Number is required!");
+            }
+            else {
+                handleBookTaxi();
+            }
+        }
     }
-    else if(activeMenu == 'oneway'){
-        if(fromLocation == ""){
-            alert("Source Location is required!");
-        }
-        else if(toLocation == ""){
-            alert("Destination is required!");
-        }
-        else if(date == ""){
-            alert("date is required!");
-        }
-        else if(time == ""){
-            alert("Time is required!");
-        }
-        else if(phone == "" || phone.length < 10 ){
-            alert("A valid Phone Number is required!");
-        }
-        else {
-            handleBookTaxi();
-        }
-    }
-    else if(activeMenu == 'menu3') {
-        if(city == ""){
-            alert("City is required!");
-        }
-        else if(days == ""){
-            alert("Days is required!");
-        }
-        else if(date == ""){
-            alert("date is required!");
-        }
-        else if(phone == "" || phone.length < 10 ){
-            alert("A valid Phone Number is required!");
-        }
-        else {
-            handleBookTaxi();
-        }
-    }
-}
 
     const generateTimeOptions = () => {
         const timeOptions = [];
@@ -140,11 +177,10 @@ const formValidation = ()=>{
         return timeOptions;
     };
     const handleBookTaxi = () => {
-      
-        const isMobile = window.innerWidth <= 900; // Adjust the breakpoint as per your mobile view design
-        setIsMobileView(isMobile);
+
+   
         if (isMobile) {
-            
+
             window.scrollTo({
                 top: window.innerHeight,
                 behavior: 'smooth', // Add smooth scrolling animation
@@ -160,7 +196,7 @@ const formValidation = ()=>{
     const closeModal = () => {
         setShowModal(false);
     };
-   
+
     const handleCustomTimeChange = (event) => {
 
         setTime(event.target.value);
@@ -177,14 +213,14 @@ const formValidation = ()=>{
         tourpackage: "Select a tour package",
         returndate: "Select the return date",
         days: "Select the number of days",
-      };
-    
+    };
+
     const renderCustomTimeSelect = () => {
         return (
             <div className="form-group">
                 <label htmlFor="custom-time">Time: <div class="help-tip">
-    <p>{inputDescriptions.time}</p>
-</div> </label>
+                    <p>{inputDescriptions.time}</p>
+                </div> </label>
                 {/* Use the select element with generated time options and add onChange handler */}
                 <select id="custom-time" onChange={handleCustomTimeChange}>
                     {generateTimeOptions()}
@@ -247,8 +283,8 @@ const formValidation = ()=>{
                 <form className="booking-form">
                     <div className="form-group">
                         <label htmlFor="city">City <div class="help-tip">
-    <p>{inputDescriptions.city}</p>
-</div></label>
+                            <p>{inputDescriptions.city}</p>
+                        </div></label>
                         <input
                             type="city"
                             id="city"
@@ -256,13 +292,13 @@ const formValidation = ()=>{
                             placeholder="Enter your city"
                             value={city}
                             onChange={handleInputChange}
-                           
+
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="package">Package <div class="help-tip">
-    <p>{inputDescriptions.tourpackage}</p>
-</div></label>
+                            <p>{inputDescriptions.tourpackage}</p>
+                        </div></label>
                         <select
                             id="package"
                             name="tourpackage"
@@ -279,8 +315,8 @@ const formValidation = ()=>{
                     </div>
                     <div className="form-group">
                         <label htmlFor="date">Date <div class="help-tip">
-    <p>{inputDescriptions.date}</p>
-</div></label>
+                            <p>{inputDescriptions.date}</p>
+                        </div></label>
                         <input
                             type="date"
                             id="date"
@@ -288,13 +324,13 @@ const formValidation = ()=>{
                             min={getCurrentDate()}
                             value={date}
                             onChange={handleInputChange}
-                           
+
                         />
                     </div>
                     <div className="form-group ">
                         <label htmlFor="phone">Phone <div class="help-tip">
-    <p>{inputDescriptions.phone}</p>
-</div></label>
+                            <p>{inputDescriptions.phone}</p>
+                        </div></label>
                         <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
                             type="tel"
                             id="phone"
@@ -314,8 +350,8 @@ const formValidation = ()=>{
                 <form className="booking-form">
                     <div className="form-group">
                         <label htmlFor="city">City <div class="help-tip">
-    <p>{inputDescriptions.city}</p>
-</div></label>
+                            <p>{inputDescriptions.city}</p>
+                        </div></label>
                         <input
                             type="city"
                             id="city"
@@ -327,8 +363,8 @@ const formValidation = ()=>{
                     </div>
                     <div className="form-group">
                         <label htmlFor="date">Date <div class="help-tip">
-    <p>{inputDescriptions.date}</p>
-</div></label>
+                            <p>{inputDescriptions.date}</p>
+                        </div></label>
                         <input
                             type="date"
                             id="date"
@@ -340,8 +376,8 @@ const formValidation = ()=>{
                     </div>
                     <div className="form-group">
                         <label htmlFor="days">Days <div class="help-tip">
-    <p>{inputDescriptions.days}</p>
-</div></label>
+                            <p>{inputDescriptions.days}</p>
+                        </div></label>
                         <select
                             id="days"
                             name="days"
@@ -358,21 +394,21 @@ const formValidation = ()=>{
                     </div>
                     <div className="form-group">
                         <label htmlFor="redate">Return Date<div class="help-tip">
-    <p>{inputDescriptions.returndate}</p>
-</div></label>
+                            <p>{inputDescriptions.returndate}</p>
+                        </div></label>
                         <input
                             type="date"
                             id="date"
                             name="returndate"
                             min={getCurrentDate()}
                             value={returnDate}
-                        onChange={handleInputChange}
+                            onChange={handleInputChange}
                         />
                     </div>
                     <div className="form-group">
                         <label htmlFor="phone">Phone<div class="help-tip">
-    <p>{inputDescriptions.phone}</p>
-</div></label>
+                            <p>{inputDescriptions.phone}</p>
+                        </div></label>
                         <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
                             type="tel"
                             id="phone"
@@ -392,8 +428,8 @@ const formValidation = ()=>{
                 <form className="booking-form">
                     <div className="form-group">
                         <label htmlFor="from">From <div class="help-tip">
-    <p>{inputDescriptions.from}</p>
-</div> </label>
+                            <p>{inputDescriptions.from}</p>
+                        </div> </label>
                         <Autocomplete
                             apiKey="AIzaSyD5BMc9ScpaPKkEOyBFxUuUjWaGqDpMgu0" onChange={(e) => setFromLocation(e.target.value)}
                             onPlaceSelected={(place) => setFromLocation(place.formatted_address)}
@@ -405,8 +441,8 @@ const formValidation = ()=>{
                     </div>
                     <div className="form-group">
                         <label htmlFor="to">To <div class="help-tip">
-    <p>{inputDescriptions.to}</p>
-</div> </label>
+                            <p>{inputDescriptions.to}</p>
+                        </div> </label>
                         <Autocomplete
                             apiKey="AIzaSyD5BMc9ScpaPKkEOyBFxUuUjWaGqDpMgu0" onChange={(e) => setToLocation(e.target.value)}
                             onPlaceSelected={(place) => setToLocation(place.formatted_address)}
@@ -418,8 +454,8 @@ const formValidation = ()=>{
                     </div>
                     <div className="form-group">
                         <label htmlFor="date">Date <div class="help-tip">
-    <p>{inputDescriptions.date}</p>
-</div> </label>
+                            <p>{inputDescriptions.date}</p>
+                        </div> </label>
                         <input
                             type="date"
                             id="date"
@@ -430,13 +466,13 @@ const formValidation = ()=>{
                         />
                     </div>
 
-                   
-                        {renderCustomTimeSelect()}
-                   
+
+                    {renderCustomTimeSelect()}
+
                     <div className="form-group">
                         <label htmlFor="date">Return Date<div class="help-tip">
-    <p>{inputDescriptions.returndate}</p>
-</div> </label>
+                            <p>{inputDescriptions.returndate}</p>
+                        </div> </label>
                         <input
                             type="date"
                             id="date"
@@ -448,8 +484,8 @@ const formValidation = ()=>{
                     </div>
                     <div className="form-group">
                         <label htmlFor="phone">Phone<div class="help-tip">
-    <p>{inputDescriptions.phone}</p>
-</div> </label>
+                            <p>{inputDescriptions.phone}</p>
+                        </div> </label>
                         <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
                             type="tel"
                             id="phone"
@@ -469,8 +505,8 @@ const formValidation = ()=>{
                 <form className="booking-form">
                     <div className="form-group">
                         <label htmlFor="from">From <div class="help-tip">
-    <p>{inputDescriptions.from}</p>
-</div> </label>
+                            <p>{inputDescriptions.from}</p>
+                        </div> </label>
                         <Autocomplete
                             apiKey="AIzaSyD5BMc9ScpaPKkEOyBFxUuUjWaGqDpMgu0" onChange={(e) => setFromLocation(e.target.value)}
                             onPlaceSelected={(place) => setFromLocation(place.formatted_address)}
@@ -482,8 +518,8 @@ const formValidation = ()=>{
                     </div>
                     <div className="form-group">
                         <label htmlFor="to">To <div class="help-tip">
-    <p>{inputDescriptions.to}</p>
-</div></label>
+                            <p>{inputDescriptions.to}</p>
+                        </div></label>
                         <Autocomplete
                             apiKey="AIzaSyD5BMc9ScpaPKkEOyBFxUuUjWaGqDpMgu0" onChange={(e) => setToLocation(e.target.value)}
                             onPlaceSelected={(place) => setToLocation(place.formatted_address)}
@@ -495,8 +531,8 @@ const formValidation = ()=>{
                     </div>
                     <div className="form-group">
                         <label htmlFor="date">Date <div class="help-tip">
-    <p>{inputDescriptions.date}</p>
-</div></label>
+                            <p>{inputDescriptions.date}</p>
+                        </div></label>
                         <input
                             type="date"
                             id="date"
@@ -507,14 +543,14 @@ const formValidation = ()=>{
                         />
                     </div>
 
-                
-                        {renderCustomTimeSelect()}
-             
+
+                    {renderCustomTimeSelect()}
+
 
                     <div className="form-group">
                         <label htmlFor="phone">Phone <div class="help-tip">
-    <p>{inputDescriptions.phone}</p>
-</div></label>
+                            <p>{inputDescriptions.phone}</p>
+                        </div></label>
                         <div className="phoneMain"> <span id="phoneCode">+91</span>  <input
                             type="tel"
                             id="phone"
@@ -592,9 +628,15 @@ const formValidation = ()=>{
                         }
 
                         {renderData()}
-                        <div className="form-button">
+                        { !isMobileView &&   <div className="form-button">
+                            <label htmlFor="distance-calc">Distance : {distance}</label>
+                            <button type="submit" onClick={() => formValidation()}>Book Taxi</button><label htmlFor="distance-calc">Time : {travelTime}</label>
+                        </div>}
+                       { isMobileView && <div className="form-button">
+                            <div>  <label htmlFor="distance-calc">Distance : {distance}</label>
+                                <label htmlFor="distance-calc">Time : {travelTime}</label></div>
                             <button type="submit" onClick={() => formValidation()}>Book Taxi</button>
-                        </div>
+                        </div>}
                     </div>
 
                 </div>
@@ -608,20 +650,20 @@ const formValidation = ()=>{
 
             {/* {showModal && <ChooseCategory setShowModal={setShowModal} />       } */}
 
-            { showModal && <Modal showModal={showModal} setShowModal={setShowModal} carType={carType} setCarType={setCarType} setShowSummary={setShowSummary} showSummary={showSummary} />  }
-            { isMobileView && <ChooseCategory setCarType={setCarType} setShowSummary={setShowSummary}  /> }
-            { showSummary && <TripSummary  showSummary={showSummary} setShowSummary={setShowSummary} fromLocation={fromLocation} toLocation={toLocation} date={date} city={city} returnDate={returnDate} carType={carType} activeMenu={activeMenu} tourPackage={tourPackage} phone={phone} days={days} time={time} isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />  }
-            {isSubmitted && <SuccessBooking/> }
-         
-           
-       <Banner />
-       <Ourservices />
-       <Cta />
-       <CarOptions/>
-       <AboutUs />
-       <Majorcity />
-         
-         <Partner />
+            {showModal && <Modal showModal={showModal} setShowModal={setShowModal} carType={carType} setCarType={setCarType} setShowSummary={setShowSummary} showSummary={showSummary} />}
+            {isMobileView && <ChooseCategory setCarType={setCarType} setShowSummary={setShowSummary} />}
+            {showSummary && <TripSummary showSummary={showSummary} setShowSummary={setShowSummary} fromLocation={fromLocation} toLocation={toLocation} date={date} city={city} returnDate={returnDate} carType={carType} activeMenu={activeMenu} tourPackage={tourPackage} phone={phone} days={days} time={time} isSubmitted={isSubmitted} setIsSubmitted={setIsSubmitted} />}
+            {isSubmitted && <SuccessBooking />}
+
+
+            <Banner />
+            <Ourservices />
+            <Cta />
+            <CarOptions />
+            <AboutUs />
+            <Majorcity />
+
+            <Partner />
             <Footer />
         </>
     )

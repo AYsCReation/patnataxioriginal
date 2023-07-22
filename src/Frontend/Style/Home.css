@@ -133,6 +133,7 @@ position: absolute;
     text-align: center;
     justify-content: center;
     align-items: center;
+    margin-top: 0.9rem;
 }
 .menu-trip {
     display: flex;
@@ -184,7 +185,7 @@ position: absolute;
     position: absolute;
     z-index: 100;
     left: 10rem;
-    top: 8rem;
+    top: 4rem;
 
   }
   
@@ -291,6 +292,15 @@ position: absolute;
     padding: 2px !important;
     border-radius: 0 !important;
   }
+  .form-button{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  .form-button label{
+    font-weight: 600;
+  
+  }
   .form-button button{
     margin-top: 0.5rem;
     padding: 10px;
@@ -327,9 +337,19 @@ position: absolute;
     border-right: none;
   }
   .map{
-    margin-top: 6rem;
+    margin-top: 10rem;
   }
 @media (max-width: 900px) {
+  .form-button{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-button div{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
     .hero img {
     display: none;
      
