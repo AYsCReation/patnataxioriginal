@@ -7,6 +7,8 @@ import AboutUsPage from './Frontend/AboutUsPage';
 import ContactUs from './Frontend/ContactUs';
 import OurServicesPage from './Frontend/OurServicesPage';
 import ScrollToTop from './Frontend/ScrollToTop';
+import AdminDashboard from './Frontend/AdminDashboard'; // Replace with the correct path to your component
+
 
 
 // All useStates Variables
@@ -33,6 +35,7 @@ function App() {
      <Route  path="/AboutUsPage" element = {<AboutUsPage/>}/>
      <Route  path="/Footer" element = {<Footer/>}/>
      <Route path='/ContactUs' element={<ContactUs/> }/>
+     <Route path='/AdminDashboard' element={<AdminDashboard/> }/>
      <Route path='/OurServicesPage' element={ <OurServicesPage/> }/>
     </Routes>
     </BrowserRouter>

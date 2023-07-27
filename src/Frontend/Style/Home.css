@@ -324,6 +324,7 @@ position: absolute;
     
   }
   #phoneCode{
+    margin-top: 0;
     margin-right: 5px;
     background-color: #F6F6F6;
     padding: 6px;
