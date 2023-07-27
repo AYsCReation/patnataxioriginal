@@ -281,7 +281,7 @@ let  isMobileMain = false;
 
         } else if (activeMenu === 'menu2') {
             return <div className='menu-contents-trip'>
-                <form className="booking-form">
+                <form className="booking-form" >
                     <div className="form-group">
                         <label htmlFor="city">City <div class="help-tip">
                             <p>{inputDescriptions.city}</p>
@@ -343,7 +343,6 @@ let  isMobileMain = false;
                         />
                     </div>
                     
-
                 </form>
             </div>;
         }

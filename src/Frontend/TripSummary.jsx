@@ -1,12 +1,35 @@
 import React, {useState} from 'react'
 import "../Frontend/Style/TripSummary.css"
 import SuccessBooking from './SuccessBooking';
+import Axios from 'axios';
 const TripSummary = ({ setIsSubmitted, isSubmitted , setShowSummary, showSummary, fromLocation, toLocation, date, returnDate, tourPackage, city, carType, activeMenu , phone, days, time}) => {
     
     const toggleModal = ()=>{
         setShowSummary(false);
     }
-    const handleSubmitSummary=()=>{
+    const handleSubmitSummary=async()=>{
+  
+          try {
+            // Send POST request to backend API
+            Axios.post('http://localhost:4000/formdata', {
+                activeMenu,
+                fromLocation,
+                toLocation,
+                date,
+                time,
+                phone,
+                city,
+                tourPackage,
+                returnDate,
+                days,
+                carType
+      })
+            console.log('Form data saved successfully:');
+            // Add any additional logic or UI updates after successful form submission
+          } catch (error) {
+            console.error('Error saving form data:', error);
+            // Handle errors or display error messages to the user
+          }
         window.scrollTo(0, 0);
         setIsSubmitted(true);
         setShowSummary(false);
@@ -37,7 +60,8 @@ const TripSummary = ({ setIsSubmitted, isSubmitted , setShowSummary, showSummary
             {  city &&   <p> <strong>City: </strong> {city}</p>  } 
             {  phone &&   <p> <strong>Phone Number: </strong> {phone}</p>  }
             {  time &&   <p> <strong>Time:  </strong> {time}</p>  }
-            <button onClick={handleSubmitSummary} className='button-submit-summary' > Confirm Booking </button> 
+            <form action="" onSubmit={handleSubmitSummary}>
+            <button  className='button-submit-summary' > Confirm Booking </button></form> 
         </div>
         </div>)
     }
