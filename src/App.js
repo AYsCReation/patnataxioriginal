@@ -12,29 +12,13 @@ import Blog from './Frontend/Blog'
 import Login from './Frontend/Login';
 
 import AdminDashboard from './Frontend/AdminDashboard'; // Replace with the correct path to your component
-
-
-
-
-// All useStates Variables
-
-
-
-
-
-
-
-
-
-
-
+import Create from './Frontend/Create';
 
 function App() {
   return (
     <>
     <BrowserRouter>
     <Routes>
-    
      <Route path="/Navbar" element = {<Navbar/>}/>
      <Route  path="/" element = {<Home/>}/>
      <Route  path="/AboutUsPage" element = {<AboutUsPage/>}/>
@@ -44,6 +28,7 @@ function App() {
      <Route path='/OurServicesPage' element={ <OurServicesPage/> }/>
      <Route path='/Blog' element={ <Blog/> }/>
      <Route path='/Login' element={ <Login/> }/>
+     <Route path='/Create' element={ <Create/> }/>
     </Routes>
     </BrowserRouter>
     
