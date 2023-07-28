@@ -58,7 +58,7 @@ footer {
 	color: #bbbbbb;
 	display: block;
 	transition: all 0.3s ease;
-    margin-left: -2rem;
+   
 }
 .footer-col ul li a:hover{
 	color: #ffffff;
@@ -118,7 +118,7 @@ footer {
 }
   .menu-contents{
     color: #888383;
-    margin-left: -2rem;
+   
   }
   .menu-foot{
     width: 100%;

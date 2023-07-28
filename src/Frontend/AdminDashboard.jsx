@@ -9,7 +9,7 @@ const AdminDashboard = () => {
   const [sliderVisible, setSliderVisible] = useState(true);
   const [darkMode, setDarkMode] = useState(localStorage.getItem('mode') === 'dark');
   const [sidebarClosed, setSidebarClosed] = useState(false);
-
+  
   useEffect(() => {
     fetch('http://localhost:4000/api/data', {
       method: 'GET',
@@ -20,6 +20,40 @@ const AdminDashboard = () => {
         setData(data);
       });
   }, []);
+  // Step 1: Create state variables for today's and previous leads
+  const [todaysLeads, setTodaysLeads] = useState({ local: [], carpack: [], round: [], oneway: [] });
+  const [previousLeads, setPreviousLeads] = useState({ local: [], carpack: [], round: [], oneway: [] });
+
+  // Step 2: Filter the leads based on the current date
+  useEffect(() => {
+    const today = new Date().toLocaleDateString();
+    const formattedToday = formatDate(today); 
+    console.log(formattedToday)
+    const filteredLocalLeadsToday = data.local.filter((lead) => lead.currentdate === formattedToday);
+    const filteredCarpackLeadsToday = data.carpack.filter((lead) => lead.currentdate === formattedToday);
+    const filteredRoundLeadsToday = data.round.filter((lead) => lead.currentdate === formattedToday);
+    const filteredOnewayLeadsToday = data.oneway.filter((lead) => lead.currentdate === formattedToday);
+
+    setTodaysLeads({
+      local: filteredLocalLeadsToday,
+      carpack: filteredCarpackLeadsToday,
+      round: filteredRoundLeadsToday,
+      oneway: filteredOnewayLeadsToday,
+    });
+    
+    // Step 3: Filter the leads based on the previous date (not equal to today)
+    const filteredLocalLeadsPrevious = data.local.filter((lead) => lead.currentdate !== formattedToday);
+    const filteredCarpackLeadsPrevious = data.carpack.filter((lead) => lead.currentdate !== formattedToday);
+    const filteredRoundLeadsPrevious = data.round.filter((lead) => lead.currentdate !== formattedToday);
+    const filteredOnewayLeadsPrevious = data.oneway.filter((lead) => lead.currentdate !== formattedToday);
+
+    setPreviousLeads({
+      local: filteredLocalLeadsPrevious,
+      carpack: filteredCarpackLeadsPrevious,
+      round: filteredRoundLeadsPrevious,
+      oneway: filteredOnewayLeadsPrevious,
+    });
+  }, [data.local, data.carpack, data.round, data.oneway]);
 
   useEffect(() => {
     // Set the dark mode class on the body element
@@ -44,7 +78,13 @@ const AdminDashboard = () => {
   const handleSidebarToggle = () => {
     setSidebarClosed(prevStatus => !prevStatus);
   };
+  const formatDate = (dateString) => {
+    const parts = dateString.split("/");
+    const formattedDate = `${parts[2]}-${parts[1].padStart(2, "0")}-${parts[0].padStart(2, "0")}`;
+    return formattedDate;
+  };
 
+console.log(previousLeads , todaysLeads)
   return (
     <div className={`dashboard ${darkMode ? 'dark' : ''}`}>
       <nav className={`${sidebarClosed ? 'close' : ''}`}>
@@ -105,6 +145,7 @@ const AdminDashboard = () => {
             <div class="activity">
             <div class="box-wrap">
         <div class="table-wrap">
+          <h2>Today's Leads</h2>
         <table className={`data-table ${activeTab !== 'local' ? 'hidden' : ''}`}>
           <thead>
             <tr>
@@ -117,7 +158,7 @@ const AdminDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {data.local.map((i, index) => (
+            {todaysLeads.local.map((i, index) => (
               <tr key={index}>
                 <td>{index+1}</td>
                 <td>{i.date}</td>
@@ -142,7 +183,7 @@ const AdminDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {data.carpack.map((i, index) => (
+            {todaysLeads.carpack.map((i, index) => (
               <tr key={index}>
                 <td>{index+1}</td>
                 <td>{i.date}</td>
@@ -169,7 +210,7 @@ const AdminDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {data.round.map((i, index) => (
+            {todaysLeads.round.map((i, index) => (
               <tr key={index}>
                  <td>{index+1}</td>
                 <td>{i.fromLocation}</td>
@@ -196,7 +237,112 @@ const AdminDashboard = () => {
             </tr>
           </thead>
           <tbody>
-            {data.oneway.map((i, index) => (
+            {todaysLeads.oneway.map((i, index) => (
+              <tr key={index}>
+                 <td>{index+1}</td>
+                <td>{i.fromLocation}</td>
+                <td>{i.toLocation}</td>
+                <td>{i.date}</td>
+                <td>{i.time}</td>
+                <td>{i.phone}</td>
+                <td>{i.carType}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <h2>Previous Day's Leads</h2>
+        <table className={`data-table ${activeTab !== 'local' ? 'hidden' : ''}`}>
+          <thead>
+            <tr>
+              <th>SrNo.</th>
+              <th>date</th>
+              <th>phone</th>
+              <th>city</th>
+              <th>tourPackage</th>
+              <th>carType</th>
+            </tr>
+          </thead>
+          <tbody>
+            {previousLeads.local.map((i, index) => (
+              <tr key={index}>
+                <td>{index+1}</td>
+                <td>{i.date}</td>
+                <td>{i.phone}</td>
+                <td>{i.city}</td>
+                <td>{i.tourPackage}</td>
+                <td>{i.carType}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <table className={`data-table ${activeTab !== 'carpack' ? 'hidden' : ''}`}>
+          <thead>
+            <tr>
+            <th>SrNo.</th>
+              <th>date</th>
+              <th>phone</th>
+              <th>city</th>
+              <th>returnDate</th>
+              <th>days</th>
+              <th>carType</th>
+            </tr>
+          </thead>
+          <tbody>
+            {previousLeads.carpack.map((i, index) => (
+              <tr key={index}>
+                <td>{index+1}</td>
+                <td>{i.date}</td>
+                <td>{i.phone}</td>
+                <td>{i.city}</td>
+                <td>{i.returnDate}</td>
+                <td>{i.days}</td>
+                <td>{i.carType}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <table className={`data-table ${activeTab !== 'round' ? 'hidden' : ''}`}>
+          <thead>
+            <tr>
+            <th>SrNo.</th>
+              <th>fromLocation</th>
+              <th>toLocation</th>
+              <th>date</th>
+              <th>time</th>
+              <th>phone</th>
+              <th>returnDate</th>
+              <th>carType</th>
+            </tr>
+          </thead>
+          <tbody>
+            {previousLeads.round.map((i, index) => (
+              <tr key={index}>
+                 <td>{index+1}</td>
+                <td>{i.fromLocation}</td>
+                <td>{i.toLocation}</td>
+                <td>{i.date}</td>
+                <td>{i.time}</td>
+                <td>{i.phone}</td>
+                <td>{i.returnDate}</td>
+                <td>{i.carType}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <table className={`data-table ${activeTab !== 'oneway' ? 'hidden' : ''}`}>
+          <thead>
+            <tr>
+            <th>SrNo.</th>
+              <th>fromLocation</th>
+              <th>toLocation</th>
+              <th>date</th>
+              <th>time</th>
+              <th>phone</th>
+              <th>carType</th>
+            </tr>
+          </thead>
+          <tbody>
+            {previousLeads.oneway.map((i, index) => (
               <tr key={index}>
                  <td>{index+1}</td>
                 <td>{i.fromLocation}</td>

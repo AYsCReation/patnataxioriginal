@@ -10,6 +10,8 @@ const TripSummary = ({ setIsSubmitted, isSubmitted , setShowSummary, showSummary
     const handleSubmitSummary=async()=>{
   
           try {
+            const currentDate = new Date().toLocaleDateString(); // Format: "28/7/2023"
+            const formattedCurrentDate = formatDate(currentDate);
             // Send POST request to backend API
             Axios.post('http://localhost:4000/formdata', {
                 activeMenu,
@@ -22,7 +24,8 @@ const TripSummary = ({ setIsSubmitted, isSubmitted , setShowSummary, showSummary
                 tourPackage,
                 returnDate,
                 days,
-                carType
+                carType,
+                currentdate: formattedCurrentDate,
       })
             console.log('Form data saved successfully:');
             // Add any additional logic or UI updates after successful form submission
@@ -35,7 +38,11 @@ const TripSummary = ({ setIsSubmitted, isSubmitted , setShowSummary, showSummary
         setShowSummary(false);
        
     }
-    
+    const formatDate = (dateString) => {
+      const parts = dateString.split("/");
+      const formattedDate = `${parts[2]}-${parts[1].padStart(2, "0")}-${parts[0].padStart(2, "0")}`;
+      return formattedDate;
+    };
   return (
    <>
    <div className="modal-summary">
