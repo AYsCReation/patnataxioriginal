@@ -52,29 +52,26 @@ const AdminDashboard = () => {
           <div className="logo-image">
             <img src="images/logo.png" alt="" />
           </div>
-          <span className="logo_name">CodingLab</span>
+          <span className="logo_name">Dashboard</span>
         </div>
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="#">
-                    <i class="uil uil-estate"></i>
-                    <span class="link-name">Dashboard</span>
-                </a></li>
+                
                 <li><a href="#">
                     <i class="uil uil-files-landscapes"></i>
-                    <span class="link-name">Round Trip</span>
+                    <span class="link-name" onClick={() => handleTabClick('round')}>Round Trip</span>
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-chart"></i>
-                    <span class="link-name">Oneway Trip</span>
+                    <span class="link-name"  onClick={() => handleTabClick('oneway')}>Oneway Trip</span>
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-thumbs-up"></i>
-                    <span class="link-name">Local</span>
+                    <span class="link-name" onClick={() => handleTabClick('local')}>Local</span>
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-comments"></i>
-                    <span class="link-name">Car Package</span>
+                    <span class="link-name"onClick={() => handleTabClick('carpack')}>Car Package</span>
                 </a></li>
               
             </ul>
@@ -106,59 +103,117 @@ const AdminDashboard = () => {
         <div class="dash-content">
            
             <div class="activity">
+            <div class="box-wrap">
+        <div class="table-wrap">
+        <table className={`data-table ${activeTab !== 'local' ? 'hidden' : ''}`}>
+          <thead>
+            <tr>
+              <th>SrNo.</th>
+              <th>date</th>
+              <th>phone</th>
+              <th>city</th>
+              <th>tourPackage</th>
+              <th>carType</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.local.map((i, index) => (
+              <tr key={index}>
+                <td>{index+1}</td>
+                <td>{i.date}</td>
+                <td>{i.phone}</td>
+                <td>{i.city}</td>
+                <td>{i.tourPackage}</td>
+                <td>{i.carType}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <table className={`data-table ${activeTab !== 'carpack' ? 'hidden' : ''}`}>
+          <thead>
+            <tr>
+            <th>SrNo.</th>
+              <th>date</th>
+              <th>phone</th>
+              <th>city</th>
+              <th>returnDate</th>
+              <th>days</th>
+              <th>carType</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.carpack.map((i, index) => (
+              <tr key={index}>
+                <td>{index+1}</td>
+                <td>{i.date}</td>
+                <td>{i.phone}</td>
+                <td>{i.city}</td>
+                <td>{i.returnDate}</td>
+                <td>{i.days}</td>
+                <td>{i.carType}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <table className={`data-table ${activeTab !== 'round' ? 'hidden' : ''}`}>
+          <thead>
+            <tr>
+            <th>SrNo.</th>
+              <th>fromLocation</th>
+              <th>toLocation</th>
+              <th>date</th>
+              <th>time</th>
+              <th>phone</th>
+              <th>returnDate</th>
+              <th>carType</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.round.map((i, index) => (
+              <tr key={index}>
+                 <td>{index+1}</td>
+                <td>{i.fromLocation}</td>
+                <td>{i.toLocation}</td>
+                <td>{i.date}</td>
+                <td>{i.time}</td>
+                <td>{i.phone}</td>
+                <td>{i.returnDate}</td>
+                <td>{i.carType}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <table className={`data-table ${activeTab !== 'oneway' ? 'hidden' : ''}`}>
+          <thead>
+            <tr>
+            <th>SrNo.</th>
+              <th>fromLocation</th>
+              <th>toLocation</th>
+              <th>date</th>
+              <th>time</th>
+              <th>phone</th>
+              <th>carType</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.oneway.map((i, index) => (
+              <tr key={index}>
+                 <td>{index+1}</td>
+                <td>{i.fromLocation}</td>
+                <td>{i.toLocation}</td>
+                <td>{i.date}</td>
+                <td>{i.time}</td>
+                <td>{i.phone}</td>
+                <td>{i.carType}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        </div>
+
+      
+    </div> 
                 
-                <div class="activity-data">
-                    <div class="data names">
-                        <span class="data-title">Name</span>
-                        <span class="data-list">Prem Shahi</span>
-                        <span class="data-list">Deepa Chand</span>
-                        <span class="data-list">Manisha Chand</span>
-                        <span class="data-list">Pratima Shahi</span>
-                        <span class="data-list">Man Shahi</span>
-                        <span class="data-list">Ganesh Chand</span>
-                        <span class="data-list">Bikash Chand</span>
-                    </div>
-                    <div class="data email">
-                        <span class="data-title">Email</span>
-                        <span class="data-list">premshahi@gmail.com</span>
-                        <span class="data-list">deepachand@gmail.com</span>
-                        <span class="data-list">prakashhai@gmail.com</span>
-                        <span class="data-list">manishachand@gmail.com</span>
-                        <span class="data-list">pratimashhai@gmail.com</span>
-                        <span class="data-list">manshahi@gmail.com</span>
-                        <span class="data-list">ganeshchand@gmail.com</span>
-                    </div>
-                    <div class="data joined">
-                        <span class="data-title">Joined</span>
-                        <span class="data-list">2022-02-12</span>
-                        <span class="data-list">2022-02-12</span>
-                        <span class="data-list">2022-02-13</span>
-                        <span class="data-list">2022-02-13</span>
-                        <span class="data-list">2022-02-14</span>
-                        <span class="data-list">2022-02-14</span>
-                        <span class="data-list">2022-02-15</span>
-                    </div>
-                    <div class="data type">
-                        <span class="data-title">Type</span>
-                        <span class="data-list">New</span>
-                        <span class="data-list">Member</span>
-                        <span class="data-list">Member</span>
-                        <span class="data-list">New</span>
-                        <span class="data-list">Member</span>
-                        <span class="data-list">New</span>
-                        <span class="data-list">Member</span>
-                    </div>
-                    <div class="data status">
-                        <span class="data-title">Status</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                        <span class="data-list">Liked</span>
-                    </div>
-                </div>
             </div>
         </div>
       </section>
