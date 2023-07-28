@@ -52,14 +52,11 @@ const AdminDashboard = () => {
           <div className="logo-image">
             <img src="images/logo.png" alt="" />
           </div>
-          <span className="logo_name">CodingLab</span>
+          <span className="logo_name">Dashboard</span>
         </div>
         <div class="menu-items">
             <ul class="nav-links">
-                <li><a href="#">
-                    <i class="uil uil-estate"></i>
-                    <span class="link-name">Dashboard</span>
-                </a></li>
+                
                 <li><a href="#">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name" onClick={() => handleTabClick('round')}>Round Trip</span>
