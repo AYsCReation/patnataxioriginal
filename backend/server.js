@@ -53,6 +53,7 @@ const formDataSchema = new mongoose.Schema({
   directions: Object,
   distance: String,
   travelTime: String,
+  currentdate: String,
 });
 
 const FormData = mongoose.model('FormData', formDataSchema);
