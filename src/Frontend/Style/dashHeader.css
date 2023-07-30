@@ -434,6 +434,19 @@ nav.close ~ .dashboard .top{
   .hidden {
     display: none;
   }
+  .delete-opt{
+   margin-left: 1rem;
+   margin-right: 0;
+   color: rgb(230, 17, 17);
+   transition: all 0.5 ease;
+  }
+  .delete-opt:hover{
+    transform: scale(1.2);
+    color: darkred;
+  }
+  tbody tr td:first-child{
+    width: 25px;
+  }
 @media (max-width: 1000px) {
     nav{
         width: 73px;
