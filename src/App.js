@@ -7,7 +7,7 @@ import AboutUsPage from './Frontend/AboutUsPage';
 import ContactUs from './Frontend/ContactUs';
 import OurServicesPage from './Frontend/OurServicesPage';
 import ScrollToTop from './Frontend/ScrollToTop';
-
+import { useState } from "react"
 import Blog from './Frontend/Blog'
 import Login from './Frontend/Login';
 
@@ -20,15 +20,16 @@ import EditPostPage from './Frontend/EditPostPage';
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false);
+  const [message, setMessage] = useState('');
   return (
     <>
     <BrowserRouter>
     <Routes>
      <Route path="/Navbar" element = {<Navbar/>}/>
-     <Route  path="/" element = {<Home/>}/>
+     <Route  path="/" element = {<Home message={message} setMessage={setMessage}/>}/>
      <Route  path="/AboutUsPage" element = {<AboutUsPage/>}/>
      <Route  path="/Footer" element = {<Footer/>}/>
-     <Route path='/ContactUs' element={<ContactUs/> }/>
+     <Route path='/ContactUs' element={<ContactUs message={message} setMessage={setMessage}/> }/>
      <Route path='/AdminDashboard' element={<AdminDashboard/> }/>
      <Route path='/OurServicesPage' element={ <OurServicesPage/> }/>
      <Route path='/AllBlogs' element={ <AllBlogs/> }/>

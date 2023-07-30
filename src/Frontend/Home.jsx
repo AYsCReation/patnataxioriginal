@@ -25,7 +25,7 @@ import CarOptions from "./CarOptions";
 import Typed from 'typed.js'; // Make sure to install the 'typed.js' library using npm or yarn
 
 
-const Home = () => {
+const Home = ({message,setMessage}) => {
     const [activeMenu, setActiveMenu] = useState('menu1');
     const [fromLocation, setFromLocation] = useState('');
     const [toLocation, setToLocation] = useState('');
@@ -147,7 +147,7 @@ useEffect(() => {
             else if (date == "") {
                 alert("date is required!");
             }
-            else if (phone == "" || phone.length < 10) {
+            else if (phone == "" || phone.length !== 10) {
                 alert("A valid Phone Number is required!");
             }
             else {
@@ -170,7 +170,7 @@ useEffect(() => {
             else if (returnDate == "") {
                 alert("Return Date is required!");
             }
-            else if (phone == "" || phone.length < 10) {
+            else if (phone == "" || phone.length !== 10) {
                 alert("A valid Phone Number is required!");
             }
             else {
@@ -191,7 +191,7 @@ useEffect(() => {
             else if (time == "") {
                 alert("Time is required!");
             }
-            else if (phone == "" || phone.length < 10) {
+            else if (phone == "" || phone.length !== 10) {
                 alert("A valid Phone Number is required!");
             }
             else {
@@ -208,7 +208,7 @@ useEffect(() => {
             else if (date == "") {
                 alert("date is required!");
             }
-            else if (phone == "" || phone.length < 10) {
+            else if (phone == "" || phone.length !== 10) {
                 alert("A valid Phone Number is required!");
             }
             else {
@@ -727,7 +727,7 @@ useEffect(() => {
             <AboutUs />
             <Majorcity />
 
-            <Partner />
+            <Partner message={message} setMessage={setMessage}/>
             <Footer />
         </>
     )

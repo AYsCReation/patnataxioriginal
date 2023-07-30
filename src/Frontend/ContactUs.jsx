@@ -6,7 +6,8 @@ import Footer from './Footer';
 import "../Frontend/Style/ContactUs.css"
 
 import ScrollToTop from './ScrollToTop';
-const ContactUs = () => {
+const ContactUs = ({message,setMessage}) => {
+  console.log(message)
   return (
     <>
     <ScrollToTop />
@@ -27,7 +28,7 @@ const ContactUs = () => {
                     <input type="tel" placeholder="Phone/Skype" />
                   </div>
                   <div className="grid-full">
-                    <textarea placeholder="About Your Query" cols="30" rows="10"></textarea>
+                    <textarea placeholder="About Your Query" cols="30" rows="10" value={message}></textarea>
                     <input type="submit" value="Submit" />
                   </div>
                 </form>

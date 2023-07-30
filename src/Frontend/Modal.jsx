@@ -46,7 +46,7 @@ const Modal = ({ setShowModal, children, setCarType, carType, showSummary, setSh
                         <div className="para">
                             <img src={car2} alt="" />
                         </div>
-                        <button className="BookNow-btn" onClick={()=> {setCarType("Sedan"); setShowModal(false); setShowSummary(true)} }>Book Now</button>
+                        <button className="BookNow-btn" onClick={()=> {setCarType("Mini Car"); setShowModal(false); setShowSummary(true)} }>Book Now</button>
 
 
                     </div>
@@ -80,7 +80,7 @@ const Modal = ({ setShowModal, children, setCarType, carType, showSummary, setSh
                         <div className="para">
                             <img src={car3} alt="" />
                         </div>
-                        <button className="BookNow-btn" onClick={()=> {setCarType("Sedan"); setShowModal(false); setShowSummary(true)} }>Book Now</button>  
+                        <button className="BookNow-btn" onClick={()=> {setCarType("SUV"); setShowModal(false); setShowSummary(true)} }>Book Now</button>  
                     </div>
 
 
