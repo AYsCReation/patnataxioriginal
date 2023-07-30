@@ -1,72 +1,101 @@
-import React, { useState } from 'react'
-import "../Frontend/Style/Blog.css"
-import "../Frontend/Style/Create.css"
-import ReactQuill from "react-quill"
-import "react-quill/dist/quill.snow.css"
+import React, { useState } from 'react';
+import "../Frontend/Style/Blog.css";
+import "../Frontend/Style/Create.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import axios from 'axios';
+
 const modules = {
-    toolbar: [
-      [{ 'header': [1, 2, false] }],
-      ['bold', 'italic', 'underline','strike', 'blockquote'],
-      [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-      ['link', 'image'],
-      ['clean']
-    ],
-  };
-  const  formats = [
-    'header',
-    'bold', 'italic', 'underline', 'strike', 'blockquote',
-    'list', 'bullet', 'indent',
-    'link', 'image'
-  ];
+  toolbar: [
+    [{ 'header': [1, 2, false] }],
+    ['bold', 'italic', 'underline','strike', 'blockquote'],
+    [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+    ['link', 'image'],
+    ['clean']
+  ],
+};
+
+const formats = [
+  'header',
+  'bold', 'italic', 'underline', 'strike', 'blockquote',
+  'list', 'bullet', 'indent',
+  'link', 'image'
+];
+
 const Create = () => {
-    const [title, setTitle] = useState('');
-    const [summary, setSummary] = useState('');
-    const [content, setContent] = useState('');
-    const [files, setFiles] = useState('');
+  const [title, setTitle] = useState('');
+  const [summary, setSummary] = useState('');
+  const [content, setContent] = useState('');
+  const [file, setFiles] = useState(null); // Change 'files' to 'file
+  const [author, setAuthor] = useState('');
+  const createNewPost = async (e) => {
+    e.preventDefault();
 
-    const createNewPost=(e)=>{
-        const data = new FormData();
-        data.set('title',title);
-        data.set('summary',summary);
-        data.set('content',content);
-        data.set('file',files[0]);
+    try {
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('summary', summary);
+        formData.append('content', content);
+        formData.append('file', file);
+        formData.append('author', author);
+  
+        await axios.post('http://localhost:4000/api/posts', formData);
+  
+        // Optionally, you can handle success or navigate to a new page.
+        alert('Blog post created successfully');
+        window.location.reload();
+      } catch (error) {
+        // Handle errors if the request fails.
+        console.error('Error creating blog post:', error);
+      }
 
-        e.preventDefault();
-        fetch('http://localhost:4000/post'),{
-            method: 'POST',
-            body: data,
-        }
-    }
- 
+
+  };
+
   return (
     <div className='createContainer'>
-    <form className='createForm'>
-        <input 
-        type="title" 
-        placeholder={'Title'} 
-        className='createTitle'
-        value={title}
-        onChange={e=> setTitle(e.target.value)} />
+      <form className='createForm' onSubmit={createNewPost}>
+        <input
+          type="title"
+          placeholder={'Title'}
+          className='createTitle'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-        <input type="summary" 
-        placeholder={'Summary'} 
-        className='createSummary'
-        value={summary}
-        onChange={e=> setSummary(e.target.value)} />
-        
-        <input type="file" className='inputFile'
-        value={files} 
-        onChange={e => setFiles(e.target.files)}/>
-        
-        <ReactQuill value={content} 
-        modules={modules} formats={formats} 
-        className='createTextarea'
-        onChange={(newValue)=>setContent(newValue)} />
-        
+        <input
+          type="summary"
+          placeholder={'Summary'}
+          className='createSummary'
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+        />
+
+        <input
+          type="file"
+          className='inputFile'
+          onChange={(e) => setFiles(e.target.files[0])} // Update 'files' to 'file'
+        />
+        <input
+          type="summary"
+          placeholder={'Enter the name of Author'}
+          className='createSummary'
+          value={author}
+          onChange={(e) => setAuthor(e.target.value)}
+        />
+
+        <ReactQuill
+          value={content}
+          modules={modules}
+          formats={formats}
+          className='createTextarea'
+          onChange={(newValue) => setContent(newValue)}
+        />
+
         <button className='createPostBtn'>Create Post</button>
-    </form>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default Create
+export default Create;
