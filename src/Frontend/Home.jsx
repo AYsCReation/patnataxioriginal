@@ -22,6 +22,8 @@ import Majorcity from "./Majorcity";
 import Partner from "./Partner";
 import CarOptions from "./CarOptions";
 
+import Typed from 'typed.js'; // Make sure to install the 'typed.js' library using npm or yarn
+
 
 const Home = () => {
     const [activeMenu, setActiveMenu] = useState('menu1');
@@ -43,13 +45,67 @@ const Home = () => {
     const [distance, setDistance] = useState(null);
     const [travelTime, setTravelTime] = useState(null);
     const [isMobileViewMain, setIsMobileViewMain] = useState(false);
+    const [animatedText, setAnimatedText] = useState('Most Reliable');
+    const words = ['Most Reliable', 'Most Efficient', 'Cost Saving'];
+
 let  isMobileMain = false;
+useEffect(() => {
+    const options = {
+      strings: ["Top-Rated", " Affordable", "Most Reliable"],
+      // Optionally use an HTML element to grab strings from (must wrap each string in a <p>)
+      stringsElement: null,
+      // typing speed
+      typeSpeed: 30,
+      // time before typing starts
+      startDelay: 1200,
+      // backspacing speed
+      backSpeed: 20,
+      // time before backspacing
+      backDelay: 500,
+      // loop
+      loop: true,
+      // false = infinite
+      loopCount: 5,
+      // show cursor
+      showCursor: false,
+      // character for cursor
+      cursorChar: "|",
+      // attribute to type (null == text)
+      attr: null,
+      // either html or text
+      contentType: 'html',
+      // call when done callback function
+      callback: function () { },
+      // starting callback function before each string
+      preStringTyped: function () { },
+      //callback for every typed string
+      onStringTyped: function () { },
+      // callback for reset
+      resetCallback: function () { }
+    };
+
+    const typed = new Typed('.typed', options);
+
+    return () => {
+      typed.destroy(); // Destroy the Typed instance to prevent memory leaks
+    };
+  }, []);
     useEffect(() => {
         calculateDirections();
         isMobileMain = window.innerWidth <= 900; // Adjust the breakpoint as per your mobile view design
         setIsMobileViewMain(isMobileMain);
 
     }, [fromLocation, toLocation, isMobileViewMain]);
+    useEffect(() => {
+        let currentIndex = 0;
+    
+        const interval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % words.length;
+          setAnimatedText(words[currentIndex]);
+        }, 3000); // Change every 3 seconds
+    
+        return () => clearInterval(interval);
+      }, []);
     console.log(travelTime)
     console.log(isMobileView)
     const calculateDirections = () => {
@@ -577,12 +633,12 @@ let  isMobileMain = false;
             <Navbar />
             <div className="home-container" id="hero">
                 <div className="hero">
-                    <img src={hero} alt="" />
+                    {/* <img src={hero} alt="" /> */}
                     <div className="hero-title">
-                        <p>  Most Reliable Taxi Service in Patna </p>
-                    </div>
+                    <p> Your Taxi Service in Patna : <span className="typed" ></span></p>
+                    </div></div>
 
-
+                    <div className="content-container">
                     <div className="form-container">
                         <div className="trip-options">
                             <ul className="menu-trip">
@@ -646,12 +702,12 @@ let  isMobileMain = false;
                         </div>}
                     </div>
 
-                </div>
+               
                 <div className="map">
                     <MapComponent fromLocation={fromLocation} toLocation={toLocation} />
-                </div>
+                </div> </div> 
+           
             </div>
-
 
 
 

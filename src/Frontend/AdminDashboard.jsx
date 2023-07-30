@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import {AiOutlineMenu} from 'react-icons/ai';
+import {AiOutlineMenu,AiFillDelete} from 'react-icons/ai';
 import '../Frontend/Style/dashHeader.css';
 
 const AdminDashboard = () => {
@@ -11,15 +11,37 @@ const AdminDashboard = () => {
   const [sidebarClosed, setSidebarClosed] = useState(false);
   
   useEffect(() => {
+    fetchFormData();
+  }, []);
+
+  const fetchFormData = () => {
     fetch('http://localhost:4000/api/data', {
       method: 'GET',
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data, 'userdata');
-        setData(data);
+        setData(data); // Update the state with the fetched data
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
       });
-  }, []);
+  };
+
+  const handleDeleteField = (id) => {
+    // Make a DELETE request to the server to delete the field
+    fetch(`http://localhost:4000/formdata/${id}`, {
+      method: 'DELETE',
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.message); // Log the response message
+        fetchFormData(); // Fetch the updated data after successful deletion
+      })
+      .catch((error) => {
+        console.error('Error deleting field:', error);
+      });
+  };
+
   // Step 1: Create state variables for today's and previous leads
   const [todaysLeads, setTodaysLeads] = useState({ local: [], carpack: [], round: [], oneway: [] });
   const [previousLeads, setPreviousLeads] = useState({ local: [], carpack: [], round: [], oneway: [] });
@@ -160,7 +182,7 @@ console.log(previousLeads , todaysLeads)
           <tbody>
             {todaysLeads.local.map((i, index) => (
               <tr key={index}>
-                <td>{index+1}</td>
+                <td>{index+1}<AiFillDelete className='delete-opt' onClick={() => handleDeleteField(i._id)}/></td>
                 <td>{i.date}</td>
                 <td>{i.phone}</td>
                 <td>{i.city}</td>
@@ -185,7 +207,7 @@ console.log(previousLeads , todaysLeads)
           <tbody>
             {todaysLeads.carpack.map((i, index) => (
               <tr key={index}>
-                <td>{index+1}</td>
+                <td>{index+1}<AiFillDelete className='delete-opt' onClick={() => handleDeleteField(i._id)}/></td>
                 <td>{i.date}</td>
                 <td>{i.phone}</td>
                 <td>{i.city}</td>
@@ -212,7 +234,7 @@ console.log(previousLeads , todaysLeads)
           <tbody>
             {todaysLeads.round.map((i, index) => (
               <tr key={index}>
-                 <td>{index+1}</td>
+                 <td>{index+1}<AiFillDelete className='delete-opt' onClick={() => handleDeleteField(i._id)}/></td>
                 <td>{i.fromLocation}</td>
                 <td>{i.toLocation}</td>
                 <td>{i.date}</td>
@@ -239,7 +261,7 @@ console.log(previousLeads , todaysLeads)
           <tbody>
             {todaysLeads.oneway.map((i, index) => (
               <tr key={index}>
-                 <td>{index+1}</td>
+                 <td>{index+1}<AiFillDelete className='delete-opt' onClick={() => handleDeleteField(i._id)}/></td>
                 <td>{i.fromLocation}</td>
                 <td>{i.toLocation}</td>
                 <td>{i.date}</td>
@@ -265,7 +287,7 @@ console.log(previousLeads , todaysLeads)
           <tbody>
             {previousLeads.local.map((i, index) => (
               <tr key={index}>
-                <td>{index+1}</td>
+                <td>{index+1}<AiFillDelete className='delete-opt' onClick={() => handleDeleteField(i._id)}/></td>
                 <td>{i.date}</td>
                 <td>{i.phone}</td>
                 <td>{i.city}</td>
@@ -290,7 +312,7 @@ console.log(previousLeads , todaysLeads)
           <tbody>
             {previousLeads.carpack.map((i, index) => (
               <tr key={index}>
-                <td>{index+1}</td>
+                <td>{index+1}<AiFillDelete className='delete-opt' onClick={() => handleDeleteField(i._id)}/></td>
                 <td>{i.date}</td>
                 <td>{i.phone}</td>
                 <td>{i.city}</td>
@@ -317,7 +339,7 @@ console.log(previousLeads , todaysLeads)
           <tbody>
             {previousLeads.round.map((i, index) => (
               <tr key={index}>
-                 <td>{index+1}</td>
+                 <td>{index+1}<AiFillDelete className='delete-opt' onClick={() => handleDeleteField(i._id)}/></td>
                 <td>{i.fromLocation}</td>
                 <td>{i.toLocation}</td>
                 <td>{i.date}</td>
@@ -344,7 +366,7 @@ console.log(previousLeads , todaysLeads)
           <tbody>
             {previousLeads.oneway.map((i, index) => (
               <tr key={index}>
-                 <td>{index+1}</td>
+                 <td>{index+1}<AiFillDelete className='delete-opt' onClick={() => handleDeleteField(i._id)}/></td>
                 <td>{i.fromLocation}</td>
                 <td>{i.toLocation}</td>
                 <td>{i.date}</td>
