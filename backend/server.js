@@ -219,6 +219,62 @@ app.get('/post/:id', async (req, res)=>{
   const postDoc = await Post.findById(id);
   res.json(postDoc);
 })
+app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
+  let newPath = null;
+  if (req.file) {
+    const { originalname, path } = req.file;
+    const parts = originalname.split('.');
+    const ext = parts[parts.length - 1];
+    newPath = path + '.' + ext;
+    fs.renameSync(path, newPath);
+  }
+
+  const { id, title, summary, content, author } = req.body;
+  try {
+    const postDoc = await Post.findById(id);
+    console.log(postDoc);
+    console.log(id);
+
+    // Update the document properties
+    postDoc.title = title;
+    postDoc.summary = summary;
+    postDoc.content = content;
+    postDoc.author = author;
+    postDoc.cover = newPath || postDoc.cover; // If newPath is available, use it; otherwise, keep the existing cover value
+
+    // Save the updated document
+    await postDoc.save();
+
+    // Optionally, you can send a response back to the client indicating the successful update.
+    res.status(200).json({ message: 'Post updated successfully.' });
+  } catch (err) {
+    // Handle errors appropriately
+    console.error(err);
+    res.status(500).json({ error: 'An error occurred while updating the post.' });
+  }
+});
+// app.put('/post', uploadMiddleware.single('file'), async (req, res)=>{
+//   let newPath = null; 
+//   if(req.file){
+//     const {originalname, path} = req.file;
+// const parts = originalname.split('.');
+// const ext = parts[parts.length-1];
+// const newPath = path + '.' + ext;
+// fs.renameSync(path, newPath);
+//   }
+
+//   const{id, title, summary, content, author}= req.body;
+//   const postDoc = await Post.findById(id);
+//   console.log(postDoc);
+//   console.log(id);
+//   await postDoc.update({
+//     title,
+//     summary,
+//     content,
+//     author,
+//     cover: newPath ? newPath : postDoc.cover,
+//   });
+// });
 
 // Start the server
 app.listen(port, () => {

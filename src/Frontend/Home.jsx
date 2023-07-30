@@ -47,6 +47,7 @@ const Home = () => {
     const [isMobileViewMain, setIsMobileViewMain] = useState(false);
     const [animatedText, setAnimatedText] = useState('Most Reliable');
     const words = ['Most Reliable', 'Most Efficient', 'Cost Saving'];
+    
 
 let  isMobileMain = false;
 useEffect(() => {

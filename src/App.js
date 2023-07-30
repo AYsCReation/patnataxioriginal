@@ -15,8 +15,11 @@ import AdminDashboard from './Frontend/AdminDashboard'; // Replace with the corr
 import Create from './Frontend/Create';
 import AllBlogs from './Frontend/AllBlogs';
 import PostPage from './Frontend/PostPage';
+import { useState } from 'react';
+import EditPostPage from './Frontend/EditPostPage';
 
 function App() {
+  const [loginStatus, setLoginStatus] = useState(false);
   return (
     <>
     <BrowserRouter>
@@ -29,9 +32,10 @@ function App() {
      <Route path='/AdminDashboard' element={<AdminDashboard/> }/>
      <Route path='/OurServicesPage' element={ <OurServicesPage/> }/>
      <Route path='/AllBlogs' element={ <AllBlogs/> }/>
-     <Route path='/Login' element={ <Login/> }/>
-     <Route path='/Create' element={ <Create/> }/>
-     <Route path = '/post/:id' element={<PostPage/>}/>
+     <Route path='/Login' element={ <Login loginStatus={loginStatus} setLoginStatus={setLoginStatus} /> }/>
+     <Route path='/Create' element={ <Create /> }/>
+     <Route path='/edit/:id' element={ <EditPostPage /> }/>
+     <Route path = '/post/:id' element={<PostPage loginStatus={loginStatus}   />}/>
     </Routes>
     </BrowserRouter>
     

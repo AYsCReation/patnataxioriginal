@@ -3,11 +3,11 @@ import '../Frontend/Style/Login.css';
 import usersData from '../Frontend/LoginAccounts.json'; // Import the JSON data
 import {Link} from 'react-router-dom'
 import AdminDashboard from './AdminDashboard';
-const Login = () => {
+const Login = ({loginStatus,setLoginStatus}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loginStatus, setLoginStatus] = useState(false);
  
+  
   const handleLogin = (event) => {
     event.preventDefault();
 
@@ -17,6 +17,7 @@ const Login = () => {
     );
  
     if (user) {
+     
      setLoginStatus(true);
       
       // Perform the desired action after successful login, e.g., redirect to dashboard
