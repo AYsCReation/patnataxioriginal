@@ -12,22 +12,9 @@ import Blog from './Frontend/Blog'
 import Login from './Frontend/Login';
 
 import AdminDashboard from './Frontend/AdminDashboard'; // Replace with the correct path to your component
-
-
-
-
-// All useStates Variables
-
-
-
-
-
-
-
-
-
-
-
+import Create from './Frontend/Create';
+import AllBlogs from './Frontend/AllBlogs';
+import PostPage from './Frontend/PostPage';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -35,7 +22,6 @@ function App() {
     <>
     <BrowserRouter>
     <Routes>
-    
      <Route path="/Navbar" element = {<Navbar/>}/>
      <Route  path="/" element = {<Home message={message} setMessage={setMessage}/>}/>
      <Route  path="/AboutUsPage" element = {<AboutUsPage/>}/>
@@ -43,8 +29,10 @@ function App() {
      <Route path='/ContactUs' element={<ContactUs message={message} setMessage={setMessage}/> }/>
      <Route path='/AdminDashboard' element={<AdminDashboard/> }/>
      <Route path='/OurServicesPage' element={ <OurServicesPage/> }/>
-     <Route path='/Blog' element={ <Blog/> }/>
+     <Route path='/AllBlogs' element={ <AllBlogs/> }/>
      <Route path='/Login' element={ <Login/> }/>
+     <Route path='/Create' element={ <Create/> }/>
+     <Route path = '/post/:id' element={<PostPage/>}/>
     </Routes>
     </BrowserRouter>
     
