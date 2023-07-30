@@ -25,7 +25,7 @@ import CarOptions from "./CarOptions";
 import Typed from 'typed.js'; // Make sure to install the 'typed.js' library using npm or yarn
 
 
-const Home = () => {
+const Home = ({message,setMessage}) => {
     const [activeMenu, setActiveMenu] = useState('menu1');
     const [fromLocation, setFromLocation] = useState('');
     const [toLocation, setToLocation] = useState('');
@@ -726,7 +726,7 @@ useEffect(() => {
             <AboutUs />
             <Majorcity />
 
-            <Partner />
+            <Partner message={message} setMessage={setMessage}/>
             <Footer />
         </>
     )
