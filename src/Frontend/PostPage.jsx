@@ -6,6 +6,8 @@ import ReactTimeAgo from 'react-time-ago'
 import TimeAgo from 'javascript-time-ago'
 import en from 'javascript-time-ago/locale/en.json'
 import ru from 'javascript-time-ago/locale/ru.json'
+import Navbar from "../Frontend/Navbar"
+import Footer from "../Frontend/Footer"
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
 const PostPage = ({loginStatus}) => {
@@ -27,6 +29,7 @@ const PostPage = ({loginStatus}) => {
 console.log(loginStatus);
   return (
    <>
+   <Navbar/>
    <div className="post-page">
     <h1>{postInfo.title}</h1>
     { 
@@ -46,6 +49,7 @@ console.log(loginStatus);
     </div>
    <div dangerouslySetInnerHTML={{__html:postInfo.content}}/>  
    </div>
+   <Footer/>
    </>
   )
 }
