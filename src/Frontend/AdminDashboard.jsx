@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 import {AiOutlineMenu,AiFillDelete} from 'react-icons/ai';
 import '../Frontend/Style/dashHeader.css';
-
-const AdminDashboard = () => {
+import AllBlogs from './AllBlogs';
+import Create from './Create';
+const AdminDashboard = ({loginStatus}) => {
   const [activeTab, setActiveTab] = useState('local');
   const [data, setData] = useState({ local: [], carpack: [], round: [], oneway: [] });
   const [sliderVisible, setSliderVisible] = useState(true);
@@ -137,11 +138,11 @@ console.log(previousLeads , todaysLeads)
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-comments"></i>
-                    <span class="link-name"onClick={() => handleTabClick('carpack')}>All Blogs</span>
+                    <span class="link-name"onClick={() => handleTabClick('AllBlogs')}>All Blogs</span>
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-comments"></i>
-                    <span class="link-name"onClick={() => handleTabClick('carpack')}>Add Blogs</span>
+                    <span class="link-name"onClick={() => handleTabClick('CreateBlog')}>Add Blogs</span>
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-comments"></i>
@@ -183,7 +184,7 @@ console.log(previousLeads , todaysLeads)
             <div class="activity">
             <div class="box-wrap">
         <div class="table-wrap">
-          <h2>Today's Leads</h2>
+       { (activeTab !== 'AllBlogs' && activeTab !== 'CreateBlog') && <h2>Today's Leads</h2> }
         <table className={`data-table ${activeTab !== 'local' ? 'hidden' : ''}`}>
           <thead>
             <tr>
@@ -288,7 +289,7 @@ console.log(previousLeads , todaysLeads)
             ))}
           </tbody>
         </table>
-        <h2>Previous Day's Leads</h2>
+        { (activeTab !== 'AllBlogs' && activeTab !== 'CreateBlog')  && <h2>Previous Day's Leads</h2>}
         <table className={`data-table ${activeTab !== 'local' ? 'hidden' : ''}`}>
           <thead>
             <tr>
@@ -395,7 +396,8 @@ console.log(previousLeads , todaysLeads)
         </table>
         </div>
 
-      
+        {activeTab === 'AllBlogs' && <AllBlogs loginStatus={loginStatus} />} 
+              {activeTab === 'CreateBlog' && <Create />}
     </div> 
                 
             </div>

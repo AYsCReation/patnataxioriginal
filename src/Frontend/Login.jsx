@@ -6,7 +6,7 @@ import AdminDashboard from './AdminDashboard';
 const Login = ({loginStatus,setLoginStatus}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
- 
+
   
   const handleLogin = (event) => {
     event.preventDefault();
@@ -70,7 +70,7 @@ const Login = ({loginStatus,setLoginStatus}) => {
       </div>
     </div>
 }
-    {loginStatus && <AdminDashboard/>}
+    {loginStatus && <AdminDashboard loginStatus={loginStatus} />}
     </>
   );
 };
