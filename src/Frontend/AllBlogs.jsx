@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Blog from '../Frontend/Blog'
 import "../Frontend/Style/Blog.css"
+
+import Navbar from "../Frontend/Navbar"
+import Footer from "../Frontend/Footer"
 const AllBlogs = () => {
     const [posts, setPosts] = useState([]);
 
@@ -15,11 +18,17 @@ const AllBlogs = () => {
       }, []);
   return (
    <>
+   <Navbar/>
+   <h1 className="blogHeading">Blogs, News, Events & Client Reviews</h1>
+   <div className="DisplayBlog">
+    
    {
     posts.length > 0 && posts.map(post=>(
         <Blog {...post} />
     ))     
    }
+   </div>
+   <Footer/>
    </>
   )
 }
