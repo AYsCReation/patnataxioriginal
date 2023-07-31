@@ -136,6 +136,77 @@ const formDataSchema = new mongoose.Schema({
 
 const FormData = mongoose.model('FormData', formDataSchema);
 
+const citySchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  summary: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  file: {
+    type: String, // Store the file path for uploaded images.
+    default: '', // Default value is an empty string.
+  }
+});
+const CityData = mongoose.model('CityData', citySchema);
+const routeSchema = new mongoose.Schema({
+  from:{
+    type: String,
+    required: true,
+  },
+  to: {
+    type: String,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  summary: {
+    type: String,
+    required: true,
+  },
+  content: {
+    type: String,
+    required: true,
+  },
+  file: {
+    type: String, // Store the file path for uploaded images.
+    default: '', // Default value is an empty string.
+  }
+});
+const RoutesData = mongoose.model('RoutesData', citySchema);
+
+const FaqSchema = new mongoose.Schema({
+  faq1: {
+    que : String,
+    ans : String,
+  },
+  faq2: {
+    que : String,
+    ans : String,
+  },
+  faq3: {
+    que : String,
+    ans : String,
+  },
+  faq4: {
+    que : String,
+    ans : String,
+  },
+  faq5: {
+    que : String,
+    ans : String,
+  },
+});
+
+const Faq = mongoose.model('Faq', FaqSchema);
 // server.js
 app.get('/post', async (req, res) => {
   try {

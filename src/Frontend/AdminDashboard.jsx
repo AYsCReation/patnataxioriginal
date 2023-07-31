@@ -135,6 +135,22 @@ console.log(previousLeads , todaysLeads)
                     <i class="uil uil-comments"></i>
                     <span class="link-name"onClick={() => handleTabClick('carpack')}>Car Package</span>
                 </a></li>
+                <li><a href="#">
+                    <i class="uil uil-comments"></i>
+                    <span class="link-name"onClick={() => handleTabClick('carpack')}>All Blogs</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-comments"></i>
+                    <span class="link-name"onClick={() => handleTabClick('carpack')}>Add Blogs</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-comments"></i>
+                    <span class="link-name"onClick={() => handleTabClick('carpack')}>Add Routes</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-comments"></i>
+                    <span class="link-name"onClick={() => handleTabClick('carpack')}>Add Cities</span>
+                </a></li>
               
             </ul>
             
