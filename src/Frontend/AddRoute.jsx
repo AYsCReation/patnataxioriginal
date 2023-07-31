@@ -30,6 +30,20 @@ const AddRoute = () => {
     const [content, setContent] = useState('');
     const [toRoute, setToRoute] = useState(''); // Change 'files' to 'file
     // const [author, setAuthor] = useState('');
+    const [faq1Ques, setFaq1Ques] = useState('');
+    const [faq1Ans, setFaq1Ans] = useState('');
+
+    const [faq2Ques, setFaq2Ques] = useState('');
+    const [faq2Ans, setFaq2Ans] = useState('');
+
+    const [faq3Ques, setFaq3Ques] = useState('');
+    const [faq3Ans, setFaq3Ans] = useState('');
+
+    const [faq4Ques, setFaq4Ques] = useState('');
+    const [faq4Ans, setFaq4Ans] = useState('');
+
+    const [faq5Ques, setFaq5Ques] = useState('');
+    const [faq5Ans, setFaq5Ans] = useState('');
     const createNewPost = async (e) => {
       e.preventDefault();
   
@@ -38,11 +52,18 @@ const AddRoute = () => {
           title,
           FromRoute,
           content,
-          toRoute
+          toRoute,
+          faq1: { que: faq1Ques, ans: faq1Ans },
+          faq2: { que: faq2Ques, ans: faq2Ans },
+          faq3: { que: faq3Ques, ans: faq3Ans },
+          faq4: { que: faq4Ques, ans: faq4Ans },
+          faq5: { que: faq5Ques, ans: faq5Ans },
           };
         //   formData.append('author', author);
     
-          await axios.post('http://localhost:4000/api/routes', formData);
+          await axios.post('http://localhost:4000/api/routes', formData, {
+            headers: { 'Content-Type': 'application/json' },
+        });
     
           // Optionally, you can handle success or navigate to a new page.
           alert('Route post created successfully');
@@ -97,7 +118,82 @@ const AddRoute = () => {
           className='createTextarea'
           onChange={(newValue) => setContent(newValue)}
         />
+          <h1>FAQs</h1>
+                <input
+                    type="summary"
+                    className='createSummary'
+                    placeholder="FAQ1 Question"
+                    value={faq1Ques}
+                    onChange={(e) => setFaq1Ques(e.target.value)}
+                />
+                <input
+                    type="summary"
+                    className='createSummary'
+                    placeholder="FAQ1 Answer"
+                    value={faq1Ans}
+                    onChange={(e) => setFaq1Ans(e.target.value)}
+                />
 
+
+                <input
+                    type="summary"
+                    className='createSummary'
+                    placeholder="FAQ2 Question"
+                    value={faq2Ques}
+                    onChange={(e) => setFaq2Ques(e.target.value)}
+                />
+                <input
+                    type="summary"
+                    className='createSummary'
+                    placeholder="FAQ2 Answer"
+                    value={faq2Ans}
+                    onChange={(e) => setFaq2Ans(e.target.value)}
+                />
+
+                <input
+                    type="summary"
+                    className='createSummary'
+                    placeholder="FAQ3 Question"
+                    value={faq3Ques}
+                    onChange={(e) => setFaq3Ques(e.target.value)}
+                />
+                <input
+                    type="summary"
+                    className='createSummary'
+                    placeholder="FAQ3 Answer"
+                    value={faq3Ans}
+                    onChange={(e) => setFaq3Ans(e.target.value)}
+                />
+
+                <input
+                    type="summary"
+                    className='createSummary'
+                    placeholder="FAQ4 Question"
+                    value={faq4Ques}
+                    onChange={(e) => setFaq4Ques(e.target.value)}
+                />
+                <input
+                    type="summary"
+                    className='createSummary'
+                    placeholder="FAQ4 Answer"
+                    value={faq4Ans}
+                    onChange={(e) => setFaq4Ans(e.target.value)}
+                />
+
+                <input
+                    type="summary"
+                    className='createSummary'
+                    placeholder="FAQ5 Question"
+                    value={faq5Ques}
+                    onChange={(e) => setFaq5Ques(e.target.value)}
+                />
+                <input
+                    type="summary"
+                    className='createSummary'
+                    placeholder="FAQ5 Answer"
+                    value={faq5Ans}
+                    onChange={(e) => setFaq5Ans(e.target.value)}
+                />
         <button className='createPostBtn'>Create Post</button>
       </form>
     </div>

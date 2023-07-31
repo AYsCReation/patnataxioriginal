@@ -197,6 +197,15 @@ app.get('/citypage', async (req, res) => {
     res.status(500).json({ error: 'Could not fetch blog posts from the database' });
   }
 });
+app.get('/routepage', async (req, res) => {
+  try {
+    const data = await RoutePage.find({});
+    res.json({ status: 'ok', data });
+     // Return the data as a JSON response
+  } catch (error) {
+    res.status(500).json({ error: 'Could not fetch blog posts from the database' });
+  }
+});
 app.post('/formdata', async (req, res) => {
   try {
     const formData = new FormData(req.body);
@@ -274,6 +283,11 @@ app.get('/city/:id', async (req, res)=>{
   const postDoc = await CityData.findById(id);
   res.json(postDoc);
 })
+app.get('/routes/:id', async (req, res)=>{
+  const {id} = req.params;
+  const postDoc = await RoutePage.findById(id);
+  res.json(postDoc);
+})
 app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
   let newPath = null;
   if (req.file) {
@@ -312,14 +326,23 @@ app.post('/api/routes', async (req, res) => {
 
 
     try {
-      const { title, FromRoute, content, toRoute } = req.body;
+      const { title, FromRoute, content, toRoute, faq1,
+        faq2,
+        faq3,
+        faq4,
+        faq5 } = req.body;
   
       // Create a new blog post document
       const newPost = new RoutePage({
         title,
         FromRoute,
         content,
-        toRoute, 
+        toRoute,
+        faq1,
+        faq2,
+        faq3,
+        faq4,
+        faq5,
          
       });
   

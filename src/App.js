@@ -8,7 +8,6 @@ import ContactUs from './Frontend/ContactUs';
 import OurServicesPage from './Frontend/OurServicesPage';
 import ScrollToTop from './Frontend/ScrollToTop';
 import { useState } from 'react';
-import { useState } from "react"
 import Blog from './Frontend/Blog'
 import Login from './Frontend/Login';
 
@@ -20,6 +19,7 @@ import AddRoute from "./Frontend/AddRoute"
 import EditPostPage from './Frontend/EditPostPage';
 import CreateCity from './Frontend/CreateCity';
 import Citypage from './Frontend/Citypage';
+import Routepage from './Frontend/Routepage';
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false);
@@ -41,9 +41,10 @@ function App() {
      <Route path='/Create' element={ <Create /> }/>
      <Route path='/CreateCity' element={ <CreateCity/> }/>
      <Route path='/edit/:id' element={ <EditPostPage /> }/>
-     {/* <Route path='/AddRoute' element={ <AddRoute /> }/> */}
+     <Route path='/AddRoute' element={ <AddRoute /> }/>
      <Route path = '/post/:id' element={<PostPage loginStatus={loginStatus}   />}/>
      <Route path = '/city/:id' element={<Citypage loginStatus={loginStatus}   />}/>
+     <Route path = '/routes/:id' element={<Routepage loginStatus={loginStatus}   />}/>
     </Routes>
     </BrowserRouter>
     
