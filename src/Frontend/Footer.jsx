@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { instagram, facebookcircle, linkedin, whatsapp } from 'boxicons';
 import { Link } from 'react-router-dom';
 import "../Frontend/Style/Footer.css"
 import wicon from "../Frontend/Assets/whatsapp-icon.png"
 const Footer = () => {
     const [activeMenu, setActiveMenu] = useState('menu1');
+    const [citydata, setcitydata] = useState([]);
 
+    useEffect(() => {
+        fetch('http://localhost:4000/citypage')
+          .then((response) => response.json())
+          .then((data) => {
+           
+            setcitydata(data.data); // Assuming data is an object with a "data" property containing the posts array
+          })
+          .catch((error) => console.error(error));
+      }, []);
     const handleMenuClick = (menu) => {
         setActiveMenu(menu);
     };
@@ -108,8 +118,9 @@ const Footer = () => {
                     </div>
                     <div className='footer-col'>
 
-                        <h4>Popular Routes From</h4>
+                       
                         <div className="footer-col-foot">
+                        <h4>Popular Routes From</h4>
                             <ul className="menu-foot">
                                 <li
                                     className={`menu-item ${activeMenu === 'menu1' ? 'active' : ''}`}
@@ -134,6 +145,19 @@ const Footer = () => {
 
                         </div>
                         {renderData()}
+                        <div className="citydata">
+                        <h4>Popular Cities</h4>
+                       
+                             <div className='menu-contents'>
+                             <ul>
+                                
+                                 {citydata.map((i, index) => (
+                               <li>  <Link to={`/city/${i._id}`}> {i.footTitle} </Link> </li>
+                                 ))}
+                             </ul>
+                         </div>
+          
+                        </div>
                     </div>
                 </div>
                 <a

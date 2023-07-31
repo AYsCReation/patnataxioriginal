@@ -7,7 +7,7 @@ import AboutUsPage from './Frontend/AboutUsPage';
 import ContactUs from './Frontend/ContactUs';
 import OurServicesPage from './Frontend/OurServicesPage';
 import ScrollToTop from './Frontend/ScrollToTop';
-
+import { useState } from "react"
 import Blog from './Frontend/Blog'
 import Login from './Frontend/Login';
 
@@ -17,6 +17,8 @@ import AllBlogs from './Frontend/AllBlogs';
 import PostPage from './Frontend/PostPage';
 
 import EditPostPage from './Frontend/EditPostPage';
+import CreateCity from './Frontend/CreateCity';
+import Citypage from './Frontend/Citypage';
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false);
@@ -35,8 +37,10 @@ function App() {
      <Route path='/AllBlogs' element={ <AllBlogs/> }/>
      <Route path='/Login' element={ <Login loginStatus={loginStatus} setLoginStatus={setLoginStatus} /> }/>
      <Route path='/Create' element={ <Create /> }/>
+     <Route path='/CreateCity' element={ <CreateCity/> }/>
      <Route path='/edit/:id' element={ <EditPostPage /> }/>
      <Route path = '/post/:id' element={<PostPage loginStatus={loginStatus}   />}/>
+     <Route path = '/city/:id' element={<Citypage loginStatus={loginStatus}   />}/>
     </Routes>
     </BrowserRouter>
     

@@ -141,30 +141,7 @@ const citySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  summary: {
-    type: String,
-    required: true,
-  },
-  content: {
-    type: String,
-    required: true,
-  },
-  file: {
-    type: String, // Store the file path for uploaded images.
-    default: '', // Default value is an empty string.
-  }
-});
-const CityData = mongoose.model('CityData', citySchema);
-const routeSchema = new mongoose.Schema({
-  from:{
-    type: String,
-    required: true,
-  },
-  to: {
-    type: String,
-    required: true,
-  },
-  title: {
+  footTitle:{
     type: String,
     required: true,
   },
@@ -176,14 +153,6 @@ const routeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  file: {
-    type: String, // Store the file path for uploaded images.
-    default: '', // Default value is an empty string.
-  }
-});
-const RoutesData = mongoose.model('RoutesData', citySchema);
-
-const FaqSchema = new mongoose.Schema({
   faq1: {
     que : String,
     ans : String,
@@ -203,10 +172,10 @@ const FaqSchema = new mongoose.Schema({
   faq5: {
     que : String,
     ans : String,
-  },
+  }
 });
+const CityData = mongoose.model('CityData', citySchema);
 
-const Faq = mongoose.model('Faq', FaqSchema);
 // server.js
 app.get('/post', async (req, res) => {
   try {
@@ -217,7 +186,15 @@ app.get('/post', async (req, res) => {
     res.status(500).json({ error: 'Could not fetch blog posts from the database' });
   }
 });
-
+app.get('/citypage', async (req, res) => {
+  try {
+    const data = await CityData.find({});
+    res.json({ status: 'ok', data });
+     // Return the data as a JSON response
+  } catch (error) {
+    res.status(500).json({ error: 'Could not fetch blog posts from the database' });
+  }
+});
 app.post('/formdata', async (req, res) => {
   try {
     const formData = new FormData(req.body);
@@ -290,6 +267,11 @@ app.get('/post/:id', async (req, res)=>{
   const postDoc = await Post.findById(id);
   res.json(postDoc);
 })
+app.get('/city/:id', async (req, res)=>{
+  const {id} = req.params;
+  const postDoc = await CityData.findById(id);
+  res.json(postDoc);
+})
 app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
   let newPath = null;
   if (req.file) {
@@ -324,28 +306,46 @@ app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
     res.status(500).json({ error: 'An error occurred while updating the post.' });
   }
 });
-// app.put('/post', uploadMiddleware.single('file'), async (req, res)=>{
-//   let newPath = null; 
-//   if(req.file){
-//     const {originalname, path} = req.file;
-// const parts = originalname.split('.');
-// const ext = parts[parts.length-1];
-// const newPath = path + '.' + ext;
-// fs.renameSync(path, newPath);
-//   }
+app.post('/api/city', async (req, res) => {
+  const {
+    title,
+    footTitle,
+    summary,
+    content,
+    faq1,
+    faq2,
+    faq3,
+    faq4,
+    faq5,
+  } = req.body;
 
-//   const{id, title, summary, content, author}= req.body;
-//   const postDoc = await Post.findById(id);
-//   console.log(postDoc);
-//   console.log(id);
-//   await postDoc.update({
-//     title,
-//     summary,
-//     content,
-//     author,
-//     cover: newPath ? newPath : postDoc.cover,
-//   });
-// });
+  try {
+    // Create a new CityData document with the parsed JSON data
+    const cityData = new CityData({
+      title,
+      footTitle,
+      summary,
+      content,
+      faq1,
+      faq2,
+      faq3,
+      faq4,
+      faq5,
+    });
+
+    // Save the new CityData document to the database
+    await cityData.save(); 
+
+    // Respond with a success message
+    res.status(200).json({ message: 'Blog post created successfully' });
+  } catch (error) {
+    // If there's an error, respond with an error message
+    console.error('Error creating blog post:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 
 // Start the server
 app.listen(port, () => {
