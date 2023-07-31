@@ -24,39 +24,40 @@ const formats = [
   'list', 'bullet', 'indent',
   'link', 'image','table',
 ];
-
-const Create = () => {
-  const [title, setTitle] = useState('');
-  const [summary, setSummary] = useState('');
-  const [content, setContent] = useState('');
-  const [file, setFiles] = useState(null); // Change 'files' to 'file
-  const [author, setAuthor] = useState('');
-  const createNewPost = async (e) => {
-    e.preventDefault();
-
-    try {
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('summary', summary);
-        formData.append('content', content);
-        formData.append('file', file);
-        formData.append('author', author);
+const AddRoute = () => {
+    const [title, setTitle] = useState('');
+    const [FromRoute, setFormRoute] = useState('');
+    const [content, setContent] = useState('');
+    const [toRoute, setToRoute] = useState(''); // Change 'files' to 'file
+    // const [author, setAuthor] = useState('');
+    const createNewPost = async (e) => {
+      e.preventDefault();
   
-        await axios.post('http://localhost:4000/api/posts', formData);
+      try {
+          const formData ={
+          title,
+          FromRoute,
+          content,
+          toRoute
+          };
+        //   formData.append('author', author);
+    
+          await axios.post('http://localhost:4000/api/routes', formData);
+    
+          // Optionally, you can handle success or navigate to a new page.
+          alert('Route post created successfully');
+          
+          window.location.reload();
+        } catch (error) {
+          // Handle errors if the request fails.
+          console.error('Error creating blog post:', error);
+        }
   
-        // Optionally, you can handle success or navigate to a new page.
-        alert('Blog post created successfully');
-        window.location.reload();
-      } catch (error) {
-        // Handle errors if the request fails.
-        console.error('Error creating blog post:', error);
-      }
-
-
-  };
-
+  
+    };
   return (
-    <div className='createContainer'>
+<>
+<div className='createContainer'>
       <form className='createForm' onSubmit={createNewPost}>
         <input
           type="title"
@@ -68,24 +69,26 @@ const Create = () => {
 
         <input
           type="summary"
-          placeholder={'Summary'}
+          placeholder={'Input From Route'}
           className='createSummary'
-          value={summary}
-          onChange={(e) => setSummary(e.target.value)}
+          value={FromRoute}
+          onChange={(e) => setFormRoute(e.target.value)}
         />
 
         <input
-          type="file"
+          type="summary"
           className='inputFile'
-          onChange={(e) => setFiles(e.target.files[0])} // Update 'files' to 'file'
+          placeholder={'Input To Route'}
+          value={toRoute}
+          onChange={(e) => setToRoute(e.target.value)} // Update 'files' to 'file'
         />
-        <input
+        {/* <input
           type="summary"
           placeholder={'Enter the name of Author'}
           className='createSummary'
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
-        />
+        /> */}
 
         <ReactQuill
           value={content}
@@ -98,7 +101,7 @@ const Create = () => {
         <button className='createPostBtn'>Create Post</button>
       </form>
     </div>
-  );
-};
-
-export default Create;
+</>
+  )
+}
+export default AddRoute;

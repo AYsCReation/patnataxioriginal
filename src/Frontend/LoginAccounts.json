@@ -6,9 +6,14 @@
         "password": "adminpassword"
       },
       {
-        "role": "user",
-        "username": "regularuser",
-        "password": "regularpassword"
+        "role": "lead",
+        "username": "leaduserid",
+        "password": "leaduserpassword"
+      },
+      {
+        "role": "editor",
+        "username": "editoruserid",
+        "password": "editorpassword"
       }
     ]
   }

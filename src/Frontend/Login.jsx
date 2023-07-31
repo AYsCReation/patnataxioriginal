@@ -6,7 +6,7 @@ import AdminDashboard from './AdminDashboard';
 const Login = ({loginStatus,setLoginStatus}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
- 
+  const [userRole, setUserRole] = useState('');
   
   const handleLogin = (event) => {
     event.preventDefault();
@@ -15,9 +15,10 @@ const Login = ({loginStatus,setLoginStatus}) => {
     const user = usersData.users.find(
       (u) => u.username === username && u.password === password
     );
- 
+
+    
     if (user) {
-     
+     setUserRole(user.role);
      setLoginStatus(true);
       
       // Perform the desired action after successful login, e.g., redirect to dashboard
@@ -70,7 +71,7 @@ const Login = ({loginStatus,setLoginStatus}) => {
       </div>
     </div>
 }
-    {loginStatus && <AdminDashboard/>}
+    {loginStatus && <AdminDashboard loginStatus={loginStatus} userRole={userRole} />}
     </>
   );
 };

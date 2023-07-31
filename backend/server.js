@@ -10,6 +10,8 @@ const port = 4000;
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const Post = require('./post');
+const Route = require('./routepage');
+const RoutePage = require('./routepage');
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -306,6 +308,29 @@ app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
     res.status(500).json({ error: 'An error occurred while updating the post.' });
   }
 });
+app.post('/api/routes', async (req, res) => {
+
+
+    try {
+      const { title, FromRoute, content, toRoute } = req.body;
+  
+      // Create a new blog post document
+      const newPost = new RoutePage({
+        title,
+        FromRoute,
+        content,
+        toRoute, 
+         
+      });
+  
+      // Save the new post to the database
+      await newPost.save();
+      
+      res.status(201).json({ message: 'Route post created successfully' });
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 app.post('/api/city', async (req, res) => {
   const {
     title,

@@ -2,14 +2,16 @@ import React, { useState, useEffect } from 'react';
 
 import {AiOutlineMenu,AiFillDelete} from 'react-icons/ai';
 import '../Frontend/Style/dashHeader.css';
-
-const AdminDashboard = () => {
-  const [activeTab, setActiveTab] = useState('local');
+import AllBlogs from './AllBlogs';
+import Create from './Create';
+import AddRoute from './AddRoute';
+const AdminDashboard = ({loginStatus,userRole}) => {
+  const [activeTab, setActiveTab] = useState('');
   const [data, setData] = useState({ local: [], carpack: [], round: [], oneway: [] });
   const [sliderVisible, setSliderVisible] = useState(true);
   const [darkMode, setDarkMode] = useState(localStorage.getItem('mode') === 'dark');
   const [sidebarClosed, setSidebarClosed] = useState(false);
-  
+ 
   useEffect(() => {
     fetchFormData();
   }, []);
@@ -50,7 +52,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const today = new Date().toLocaleDateString();
     const formattedToday = formatDate(today); 
-    console.log(formattedToday)
+    // console.log(formattedToday)
     const filteredLocalLeadsToday = data.local.filter((lead) => lead.currentdate === formattedToday);
     const filteredCarpackLeadsToday = data.carpack.filter((lead) => lead.currentdate === formattedToday);
     const filteredRoundLeadsToday = data.round.filter((lead) => lead.currentdate === formattedToday);
@@ -118,7 +120,7 @@ console.log(previousLeads , todaysLeads)
         </div>
         <div class="menu-items">
             <ul class="nav-links">
-                
+                { (userRole=='admin' || userRole=='lead') && ( <>
                 <li><a href="#">
                     <i class="uil uil-files-landscapes"></i>
                     <span class="link-name" onClick={() => handleTabClick('round')}>Round Trip</span>
@@ -134,23 +136,23 @@ console.log(previousLeads , todaysLeads)
                 <li><a href="#">
                     <i class="uil uil-comments"></i>
                     <span class="link-name"onClick={() => handleTabClick('carpack')}>Car Package</span>
+                </a></li> </>) }
+                { (userRole=='admin' || userRole=='editor') && ( <> <li><a href="#">
+                    <i class="uil uil-comments"></i>
+                    <span class="link-name"onClick={() => handleTabClick('AllBlogs')}>All Blogs</span>
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-comments"></i>
-                    <span class="link-name"onClick={() => handleTabClick('carpack')}>All Blogs</span>
+                    <span class="link-name"onClick={() => handleTabClick('CreateBlog')}>Add Blogs</span>
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-comments"></i>
-                    <span class="link-name"onClick={() => handleTabClick('carpack')}>Add Blogs</span>
-                </a></li>
-                <li><a href="#">
-                    <i class="uil uil-comments"></i>
-                    <span class="link-name"onClick={() => handleTabClick('carpack')}>Add Routes</span>
+                    <span class="link-name"onClick={() => handleTabClick('CreateRoute')}>Add Routes</span>
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-comments"></i>
                     <span class="link-name"onClick={() => handleTabClick('carpack')}>Add Cities</span>
-                </a></li>
+                </a></li> </>)}
               
             </ul>
             
@@ -183,7 +185,7 @@ console.log(previousLeads , todaysLeads)
             <div class="activity">
             <div class="box-wrap">
         <div class="table-wrap">
-          <h2>Today's Leads</h2>
+       { (activeTab === 'round' || activeTab==='oneway' || activeTab==='local' || activeTab==='carpack') && <h2>Today's Leads</h2> }
         <table className={`data-table ${activeTab !== 'local' ? 'hidden' : ''}`}>
           <thead>
             <tr>
@@ -288,7 +290,7 @@ console.log(previousLeads , todaysLeads)
             ))}
           </tbody>
         </table>
-        <h2>Previous Day's Leads</h2>
+        { (activeTab === 'round' || activeTab==='oneway' || activeTab==='local' || activeTab==='carpack')  && <h2>Previous Day's Leads</h2>}
         <table className={`data-table ${activeTab !== 'local' ? 'hidden' : ''}`}>
           <thead>
             <tr>
@@ -395,7 +397,14 @@ console.log(previousLeads , todaysLeads)
         </table>
         </div>
 
-      
+        {activeTab === 'AllBlogs' && <AllBlogs loginStatus={loginStatus} />} 
+              {activeTab === 'CreateBlog' && <Create />}
+              {activeTab === 'CreateRoute' && <AddRoute />}
+              {activeTab === '' && (<h2>
+              Welcome to the Admin Dashboard. Click on the tabs to know more!
+              </h2>)}
+
+
     </div> 
                 
             </div>

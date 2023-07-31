@@ -7,6 +7,7 @@ import AboutUsPage from './Frontend/AboutUsPage';
 import ContactUs from './Frontend/ContactUs';
 import OurServicesPage from './Frontend/OurServicesPage';
 import ScrollToTop from './Frontend/ScrollToTop';
+import { useState } from 'react';
 import { useState } from "react"
 import Blog from './Frontend/Blog'
 import Login from './Frontend/Login';
@@ -15,7 +16,7 @@ import AdminDashboard from './Frontend/AdminDashboard'; // Replace with the corr
 import Create from './Frontend/Create';
 import AllBlogs from './Frontend/AllBlogs';
 import PostPage from './Frontend/PostPage';
-
+import AddRoute from "./Frontend/AddRoute"
 import EditPostPage from './Frontend/EditPostPage';
 import CreateCity from './Frontend/CreateCity';
 import Citypage from './Frontend/Citypage';
@@ -32,13 +33,15 @@ function App() {
      <Route  path="/AboutUsPage" element = {<AboutUsPage/>}/>
      <Route  path="/Footer" element = {<Footer/>}/>
      <Route path='/ContactUs' element={<ContactUs message={message} setMessage={setMessage}/> }/>
-     <Route path='/AdminDashboard' element={<AdminDashboard/> }/>
+     {/* <Route path='/AdminDashboard' element={<AdminDashboard/> }/> */}
      <Route path='/OurServicesPage' element={ <OurServicesPage/> }/>
      <Route path='/AllBlogs' element={ <AllBlogs/> }/>
      <Route path='/Login' element={ <Login loginStatus={loginStatus} setLoginStatus={setLoginStatus} /> }/>
+     {/* <Route path='/Create' element={ <Create /> }/> */}
      <Route path='/Create' element={ <Create /> }/>
      <Route path='/CreateCity' element={ <CreateCity/> }/>
      <Route path='/edit/:id' element={ <EditPostPage /> }/>
+     {/* <Route path='/AddRoute' element={ <AddRoute /> }/> */}
      <Route path = '/post/:id' element={<PostPage loginStatus={loginStatus}   />}/>
      <Route path = '/city/:id' element={<Citypage loginStatus={loginStatus}   />}/>
     </Routes>

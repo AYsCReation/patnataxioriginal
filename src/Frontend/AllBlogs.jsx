@@ -4,7 +4,7 @@ import "../Frontend/Style/Blog.css"
 
 import Navbar from "../Frontend/Navbar"
 import Footer from "../Frontend/Footer"
-const AllBlogs = () => {
+const AllBlogs = ({loginStatus}) => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -18,17 +18,17 @@ const AllBlogs = () => {
       }, []);
   return (
    <>
-   <Navbar/>
+   { !loginStatus && <Navbar/>}
    <h1 className="blogHeading">Blogs, News, Events & Client Reviews</h1>
    <div className="DisplayBlog">
     
    {
     posts.length > 0 && posts.map(post=>(
-        <Blog {...post} />
+        <Blog {...post}  />
     ))     
    }
    </div>
-   <Footer/>
+ {!loginStatus &&  <Footer/> } 
    </>
   )
 }
