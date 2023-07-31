@@ -10,6 +10,8 @@ const port = 4000;
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const Post = require('./post');
+const Route = require('./routepage');
+const RoutePage = require('./routepage');
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -324,28 +326,29 @@ app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
     res.status(500).json({ error: 'An error occurred while updating the post.' });
   }
 });
-// app.put('/post', uploadMiddleware.single('file'), async (req, res)=>{
-//   let newPath = null; 
-//   if(req.file){
-//     const {originalname, path} = req.file;
-// const parts = originalname.split('.');
-// const ext = parts[parts.length-1];
-// const newPath = path + '.' + ext;
-// fs.renameSync(path, newPath);
-//   }
+app.post('/api/routes', async (req, res) => {
 
-//   const{id, title, summary, content, author}= req.body;
-//   const postDoc = await Post.findById(id);
-//   console.log(postDoc);
-//   console.log(id);
-//   await postDoc.update({
-//     title,
-//     summary,
-//     content,
-//     author,
-//     cover: newPath ? newPath : postDoc.cover,
-//   });
-// });
+
+    try {
+      const { title, FromRoute, content, toRoute } = req.body;
+  
+      // Create a new blog post document
+      const newPost = new RoutePage({
+        title,
+        FromRoute,
+        content,
+        toRoute, 
+         
+      });
+  
+      // Save the new post to the database
+      await newPost.save();
+      
+      res.status(201).json({ message: 'Route post created successfully' });
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 
 // Start the server
 app.listen(port, () => {
