@@ -18,6 +18,26 @@ const routeSchema = new mongoose.Schema({
   toRoute:{
     type: String,
     required: true,
+  },
+  faq1: {
+    que : String,
+    ans : String,
+  },
+  faq2: {
+    que : String,
+    ans : String,
+  },
+  faq3: {
+    que : String,
+    ans : String,
+  },
+  faq4: {
+    que : String,
+    ans : String,
+  },
+  faq5: {
+    que : String,
+    ans : String,
   }
 });
 

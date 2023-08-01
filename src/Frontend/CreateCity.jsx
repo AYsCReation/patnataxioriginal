@@ -6,30 +6,27 @@ import "react-quill/dist/quill.snow.css";
 import axios from 'axios';
 
 const modules = {
-  toolbar: [
-    [{ 'header': [1, 2, false] }],
-    ['bold', 'italic', 'underline','strike', 'blockquote'],
-    [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
-    ['link', 'image'],  // Add the 'table' option here to enable table creation
-    ['clean'], ['table'],
-   
-    
-  ],
-  
+    toolbar: [
+        [{ 'header': [1, 2, false] }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+        ['link', 'image'],
+        ['clean']
+    ],
 };
 
 const formats = [
-  'header',
-  'bold', 'italic', 'underline', 'strike', 'blockquote',
-  'list', 'bullet', 'indent',
-  'link', 'image','table',
+    'header',
+    'bold', 'italic', 'underline', 'strike', 'blockquote',
+    'list', 'bullet', 'indent',
+    'link', 'image'
 ];
-const AddRoute = () => {
+
+const CreateCity = () => {
     const [title, setTitle] = useState('');
-    const [FromRoute, setFormRoute] = useState('');
+    const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
-    const [toRoute, setToRoute] = useState(''); // Change 'files' to 'file
-    // const [author, setAuthor] = useState('');
+    const [footTitle, setfootTitle] = useState('');
     const [faq1Ques, setFaq1Ques] = useState('');
     const [faq1Ans, setFaq1Ans] = useState('');
 
@@ -44,81 +41,70 @@ const AddRoute = () => {
 
     const [faq5Ques, setFaq5Ques] = useState('');
     const [faq5Ans, setFaq5Ans] = useState('');
+
     const createNewPost = async (e) => {
-      e.preventDefault();
-  
-      try {
-          const formData ={
-          title,
-          FromRoute,
-          content,
-          toRoute,
-          faq1: { que: faq1Ques, ans: faq1Ans },
-          faq2: { que: faq2Ques, ans: faq2Ans },
-          faq3: { que: faq3Ques, ans: faq3Ans },
-          faq4: { que: faq4Ques, ans: faq4Ans },
-          faq5: { que: faq5Ques, ans: faq5Ans },
-          };
-        //   formData.append('author', author);
-    
-          await axios.post('http://localhost:4000/api/routes', formData, {
-            headers: { 'Content-Type': 'application/json' },
-        });
-    
-          // Optionally, you can handle success or navigate to a new page.
-          alert('Route post created successfully');
-          
-          window.location.reload();
+        e.preventDefault();
+
+        try {
+            const postData = {
+                title,
+                summary,
+                footTitle,
+                content,
+                faq1: { que: faq1Ques, ans: faq1Ans },
+                faq2: { que: faq2Ques, ans: faq2Ans },
+                faq3: { que: faq3Ques, ans: faq3Ans },
+                faq4: { que: faq4Ques, ans: faq4Ans },
+                faq5: { que: faq5Ques, ans: faq5Ans },
+            };
+
+            await axios.post('http://localhost:4000/api/city', postData, {
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            // Optionally, you can handle success or navigate to a new page.
+            alert('City page created successfully');
+            window.location.reload();
         } catch (error) {
-          // Handle errors if the request fails.
-          console.error('Error creating blog post:', error);
+            // Handle errors if the request fails.
+            console.error('Error creating blog post:', error);
         }
-  
-  
     };
-  return (
-<>
-<div className='createContainer'>
-      <form className='createForm' onSubmit={createNewPost}>
-        <input
-          type="title"
-          placeholder={'Title'}
-          className='createTitle'
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
 
-        <input
-          type="summary"
-          placeholder={'Input From Route'}
-          className='createSummary'
-          value={FromRoute}
-          onChange={(e) => setFormRoute(e.target.value)}
-        />
 
-        <input
-          type="summary"
-          className='inputFile'
-          placeholder={'Input To Route'}
-          value={toRoute}
-          onChange={(e) => setToRoute(e.target.value)} // Update 'files' to 'file'
-        />
-        {/* <input
-          type="summary"
-          placeholder={'Enter the name of Author'}
-          className='createSummary'
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        /> */}
+    return (
+        <div className='createContainer'>
+            <form className='createForm' onSubmit={createNewPost}>
+                <input
+                    type="title"
+                    placeholder={'Title'}
+                    className='createTitle'
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                />
+                <input
+                    type="summary"
+                    placeholder={'Enter the Footer Title'}
+                    className='createSummary'
+                    value={footTitle}
+                    onChange={(e) => setfootTitle(e.target.value)}
+                />
+                <input
+                    type="summary"
+                    placeholder={'Summary'}
+                    className='createSummary'
+                    value={summary}
+                    onChange={(e) => setSummary(e.target.value)}
+                />
 
-        <ReactQuill
-          value={content}
-          modules={modules}
-          formats={formats}
-          className='createTextarea'
-          onChange={(newValue) => setContent(newValue)}
-        />
-          <h1>FAQs</h1>
+                <ReactQuill
+                    value={content}
+                    modules={modules}
+                    formats={formats}
+                    className='createTextarea'
+                    onChange={(newValue) => setContent(newValue)}
+                />
+                <h1>FAQs</h1>
                 <input
                     type="summary"
                     className='createSummary'
@@ -194,10 +180,10 @@ const AddRoute = () => {
                     value={faq5Ans}
                     onChange={(e) => setFaq5Ans(e.target.value)}
                 />
-        <button className='createPostBtn'>Create Post</button>
-      </form>
-    </div>
-</>
-  )
-}
-export default AddRoute;
+                <button className='createPostBtn'>Create City Page</button>
+            </form>
+        </div>
+    );
+};
+
+export default CreateCity;

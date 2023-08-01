@@ -1,57 +1,78 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { instagram, facebookcircle, linkedin, whatsapp } from 'boxicons';
 import { Link } from 'react-router-dom';
 import "../Frontend/Style/Footer.css"
 import wicon from "../Frontend/Assets/whatsapp-icon.png"
 const Footer = () => {
     const [activeMenu, setActiveMenu] = useState('menu1');
+    const [citydata, setcitydata] = useState([]);
+    const [routedata, setroutedata] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:4000/citypage')
+            .then((response) => response.json())
+            .then((data) => {
 
-    const handleMenuClick = (menu) => {
-        setActiveMenu(menu);
-    };
+                setcitydata(data.data); // Assuming data is an object with a "data" property containing the posts array
+            })
+            .catch((error) => console.error(error));
+    }, []);
+    const uniqueFromRoutes = Array.from(new Set(routedata.map((route) => route.FromRoute)));
+    useEffect(() => {
+        fetch('http://localhost:4000/routepage')
+            .then((response) => response.json())
+            .then((data) => {
 
+                setroutedata(data.data); // Assuming data is an object with a "data" property containing the posts array
+            })
+            .catch((error) => console.error(error));
+    }, []);
+   
     const renderData = () => {
-        if (activeMenu === 'menu1') {
-            return <div className='menu-contents'>
-                <ul>
-                    <br />
-                    <li>Saharsa</li>
-                    <li>Patna</li>
-                    <li>Madhubani</li>
-                    <li>Muzaffarpur</li>
-                    <li>Sitamarhi</li>
-                    <li>Jaynagar</li>
-                </ul>
-            </div>;
-        } else if (activeMenu === 'menu2') {
-            return <div className='menu-contents'>
-                <ul>
-                    <br />
-                    <li>Hajipur</li>
-                    <li>Patna</li>
-                    <li>Madhubani</li>
-                    <li>Samastipur</li>
-                    <li>Chhapra</li>
-                    <li>Motihari</li>
-                </ul>
-            </div>;
+        const groupedRoutes = {};
+      
+        routedata.forEach((route) => {
+          const { FromRoute, toRoute } = route;
+          if (groupedRoutes[FromRoute]) {
+            groupedRoutes[FromRoute].push(toRoute);
+          } else {
+            groupedRoutes[FromRoute] = [toRoute];
+          }
+        });
+      
+        const activeRoutes = groupedRoutes[activeMenu];
+      
+        if (!activeRoutes) {
+          return null;
         }
-        else if (activeMenu === 'menu3') {
-            return <div className='menu-contents'>
-                <ul>
-                    <br />
-                    <li>Saharsa</li>
-                    <li>Khagaria</li>
-                    <li>Lakhisarai</li>
-                    <li>Muzaffarpur</li>
-                    <li>Nawada</li>
-                    <li>Jaynagar</li>
-                </ul>
-            </div>;
+      
+        return (
+          <div className='menu-contents'>
+            <ul>
+              <br />
+              {activeRoutes.map((route) => (
+                <li key={route}>{rendermain(activeMenu, route)}</li>
+              ))}
+            </ul>
+          </div>
+        );
+      };
+      
+      const rendermain = (fromRoute, toRoute) => {
+        const selectedRoute = routedata.find((route) => route.FromRoute === fromRoute && route.toRoute === toRoute);
+        if (selectedRoute) {
+          return (
+            <Link to={`/routes/${selectedRoute._id}`}>{toRoute}</Link>
+          );
         }
-        // Add more menu options and corresponding data here if needed
         return null;
-    };
+      };
+      
+      
+      const handleMenuClick = (menu) => {
+        setActiveMenu(menu);
+      };
+      
+      
 
     return (
         <>
@@ -108,32 +129,35 @@ const Footer = () => {
                     </div>
                     <div className='footer-col'>
 
-                        <h4>Popular Routes From</h4>
-                        <div className="footer-col-foot">
-                            <ul className="menu-foot">
-                                <li
-                                    className={`menu-item ${activeMenu === 'menu1' ? 'active' : ''}`}
-                                    onClick={() => handleMenuClick('menu1')}
-                                >
-                                    Darbhanga
-                                </li>
-                                <li
-                                    className={`menu-item ${activeMenu === 'menu2' ? 'active' : ''}`}
-                                    onClick={() => handleMenuClick('menu2')}
-                                >
-                                    Muzaffarpur
-                                </li>
-                                <li
-                                    className={`menu-item1 ${activeMenu === 'menu3' ? 'active' : ''}`}
-                                    onClick={() => handleMenuClick('menu3')}
-                                >
-                                    Patna
-                                </li>
-                                {/* Add more menu items here if needed */}
-                            </ul>
 
+                        <div className="footer-col-foot">
+                            <h4>Popular Routes From</h4>
+                            <ul className="menu-foot">
+                                {uniqueFromRoutes.map((fromRoute) => (
+                                    <li
+                                        key={fromRoute}
+                                        className={`menu-item ${activeMenu === fromRoute.FromRoute ? 'active' : ''}`}
+                                        onClick={() => handleMenuClick(fromRoute)}
+                                    >
+                                        {fromRoute}
+                                    </li>
+                                ))}
+                            </ul>
                         </div>
                         {renderData()}
+                        <div className="citydata">
+                            <h4>Popular Cities</h4>
+
+                            <div className='menu-contents'>
+                                <ul>
+
+                                    {citydata.map((i, index) => (
+                                        <li>  <Link to={`/city/${i._id}`}> {i.footTitle} </Link> </li>
+                                    ))}
+                                </ul>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
                 <a
