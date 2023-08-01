@@ -7,17 +7,20 @@ import Create from './Create';
 import AddRoute from './AddRoute';
 import CreateCity from './CreateCity';
 import Footer from './Footer';
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const AdminDashboard = ({loginStatus,userRole, setLoginStatus}) => {
   const [activeTab, setActiveTab] = useState('');
   const [data, setData] = useState({ local: [], carpack: [], round: [], oneway: [] });
   const [sliderVisible, setSliderVisible] = useState(true);
   const [darkMode, setDarkMode] = useState(localStorage.getItem('mode') === 'dark');
   const [sidebarClosed, setSidebarClosed] = useState(false);
- 
+  const navigate = useNavigate();
   useEffect(() => {
     fetchFormData();
   }, []);
-
+console.log(loginStatus);
+console.log(userRole);
   const fetchFormData = () => {
     fetch('http://localhost:4000/api/data', {
       method: 'GET',
@@ -110,9 +113,12 @@ const AdminDashboard = ({loginStatus,userRole, setLoginStatus}) => {
     return formattedDate;
   };
 
-console.log(previousLeads , todaysLeads)
+  const handleLogout = () => {
+    setLoginStatus(false);
+    navigate('/Login'); // Redirect to '/Login' route
+  };
   return (
-    <div className={`dashboard ${darkMode ? 'dark' : ''}`}>
+   <> {loginStatus && (<div className={`dashboard ${darkMode ? 'dark' : ''}`}>
       <nav className={`${sidebarClosed ? 'close' : ''}`}>
         <div className="logo-name">
           <div className="logo-image">
@@ -165,7 +171,7 @@ console.log(previousLeads , todaysLeads)
             <ul class="logout-mode">
                 <li><a href="#">
                     <i class="uil uil-signout"></i>
-                    <span class="link-name" onClick={() => {setLoginStatus(false); window.location.reload();}}>Logout</span>
+                    <span class="link-name" onClick={() => handleLogout()}>Logout</span>
                 </a></li>
                 <li class="mode">
                     <a href="#">
@@ -419,6 +425,8 @@ console.log(previousLeads , todaysLeads)
         </div>
       </section>
     </div>
+    )   }
+    </>
   );
 };
 

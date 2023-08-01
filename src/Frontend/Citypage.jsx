@@ -9,6 +9,7 @@ import ru from 'javascript-time-ago/locale/ru.json'
 import Navbar from "../Frontend/Navbar"
 import Footer from "../Frontend/Footer"
 import { useNavigate } from 'react-router-dom';
+import AdminDashboard from './AdminDashboard';
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
 const Citypage = ({loginStatus}) => {
@@ -74,6 +75,8 @@ const FaqItem = ({ title, content }) => {
     const ref = useRef(null);
     
     return (
+
+      <>
       <div className="accordion-item">
         <button
           className={`accordion-button ${expanded ? 'expanded' : ''}`}
@@ -91,12 +94,13 @@ const FaqItem = ({ title, content }) => {
           <p>{content}</p>
         </div>
       </div>
+      </>
     );
   };
   
   return (
    <>
-   <Navbar/>
+   <Navbar loginStatus={loginStatus} />
    <div className="post-page">
     <h1>{cityInfo.title}</h1>
     { 
@@ -104,7 +108,7 @@ const FaqItem = ({ title, content }) => {
         <>
        
 <Link to={`/editCity/${cityInfo.customUrl}`} class="button-40" role="button">Edit Post</Link>
-<button className='delete-opt' onClick={() => handleDeleteField(cityInfo._id)}> Delete</button>
+<button className='button-40' onClick={() => handleDeleteField(cityInfo._id)}> Delete</button>
 
 <br />
         </>
@@ -119,28 +123,27 @@ const FaqItem = ({ title, content }) => {
  <div className="container-faq">
       <h2>Frequently Asked Questions</h2>
       <div className="accordion">
-        <FaqItem
-          title={cityInfo.faq1.que}
-          content={cityInfo.faq1.ans}
-        />
-        <FaqItem
-          title={cityInfo.faq2.que}
-          content={cityInfo.faq2.ans}
-        />
-        <FaqItem
-           title={cityInfo.faq3.que}
-           content={cityInfo.faq3.ans}
-        />
-        <FaqItem
-        title={cityInfo.faq4.que}
-        content={cityInfo.faq4.ans}
-        />
-        <FaqItem
-         title={cityInfo.faq5.que}
-         content={cityInfo.faq5.ans}
-        />
+          {cityInfo.faq1.que && cityInfo.faq1.ans && (
+            <FaqItem title={cityInfo.faq1.que} content={cityInfo.faq1.ans} />
+          )}
+
+          {cityInfo.faq2.que && cityInfo.faq2.ans && (
+            <FaqItem title={cityInfo.faq2.que} content={cityInfo.faq2.ans} />
+          )}
+
+          {cityInfo.faq3.que && cityInfo.faq3.ans && (
+            <FaqItem title={cityInfo.faq3.que} content={cityInfo.faq3.ans} />
+          )}
+
+          {cityInfo.faq4.que && cityInfo.faq4.ans && (
+            <FaqItem title={cityInfo.faq4.que} content={cityInfo.faq4.ans} />
+          )}
+
+          {cityInfo.faq5.que && cityInfo.faq5.ans && (
+            <FaqItem title={cityInfo.faq5.que} content={cityInfo.faq5.ans} />
+          )}
+        </div>
       </div>
-    </div>
    
    <Footer/>
    </>

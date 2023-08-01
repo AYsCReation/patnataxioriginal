@@ -21,28 +21,31 @@ import CreateCity from './Frontend/CreateCity';
 import Citypage from './Frontend/Citypage';
 import Routepage from './Frontend/Routepage';
 import EditCity from './Frontend/EditCity';
+import EditRoute from './Frontend/EditRoute';
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false);
   const [message, setMessage] = useState('');
+  const [userRole, setUserRole] = useState('');
   return (
     <>
     <BrowserRouter>
     <Routes>
-     <Route path="/Navbar" element = {<Navbar/>}/>
+     <Route path="/Navbar" element = {<Navbar />}/>
      <Route  path="/" element = {<Home message={message} setMessage={setMessage}/>}/>
      <Route  path="/AboutUsPage" element = {<AboutUsPage/>}/>
      <Route  path="/Footer" element = {<Footer/>}/>
      <Route path='/ContactUs' element={<ContactUs message={message} setMessage={setMessage}/> }/>
-     {/* <Route path='/AdminDashboard' element={<AdminDashboard/> }/> */}
+     <Route path='/AdminDashboard' element={<AdminDashboard setLoginStatus={setLoginStatus} loginStatus={loginStatus} userRole={userRole} /> }/>
      <Route path='/OurServicesPage' element={ <OurServicesPage/> }/>
      <Route path='/AllBlogs' element={ <AllBlogs/> }/>
-     <Route path='/Login' element={ <Login loginStatus={loginStatus} setLoginStatus={setLoginStatus} /> }/>
+     <Route path='/Login' element={ <Login loginStatus={loginStatus} setLoginStatus={setLoginStatus} userRole={userRole} setUserRole={setUserRole} /> }/>
      {/* <Route path='/Create' element={ <Create /> }/> */}
      {/* <Route path='/Create' element={ <Create /> }/> */}
      {/* <Route path='/CreateCity' element={ <CreateCity/> }/> */}
-     <Route path='/edit/:customUrl' element={ <EditPostPage /> }/>
-     <Route path='/editCity/:customUrl' element={ <EditCity /> }/>
+     <Route path='/edit/:customUrl' element={ <EditPostPage loginStatus={loginStatus}  /> }/>
+     <Route path='/editCity/:customUrl' element={ <EditCity loginStatus={loginStatus} /> }/>
+     <Route path='/editRoute/:customUrl' element={ <EditRoute loginStatus={loginStatus} /> }/>
      {/* <Route path='/AddRoute' element={ <AddRoute /> }/> */}
      <Route path = '/post/:customUrl' element={<PostPage loginStatus={loginStatus}   />}/>
      <Route path = '/city/:customUrl' element={<Citypage loginStatus={loginStatus}   />}/>

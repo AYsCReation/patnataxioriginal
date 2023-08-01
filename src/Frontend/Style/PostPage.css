@@ -38,14 +38,16 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-    width: auto;
+    width: 200px;
+    
     margin: auto;
+    margin-top: 1rem;
     display: flex;
     justify-content: center;
   }
   
   .button-40:hover {
-    background-color: #374151;
+    background-color: #ff0000;
   }
   
   .button-40:focus {

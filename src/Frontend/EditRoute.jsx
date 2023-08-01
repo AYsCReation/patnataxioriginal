@@ -4,14 +4,15 @@ import "../Frontend/Style/Create.css";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Navigate, useParams } from 'react-router';
-import AdminDashboard from './AdminDashboard';
 
-const EditCity = ({loginStatus}) => {
-    const [title, setTitle] = useState('');
-    const [summary, setSummary] = useState('');
+const EditRoute = () => {
+        const [title, setTitle] = useState('');
+    const [FromRoute, setFormRoute] = useState('');
     const [content, setContent] = useState('');
-    const [footTitle, setfootTitle] = useState('');
-   
+    const [toRoute, setToRoute] = useState(''); // Change 'files' to 'file
+    // const [author, setAuthor] = useState('');
+
+    // const [customUrl , setCustomUrl] = useState('');
 
     const [faq1Ques, setFaq1Ques] = useState('');
     const [faq1Ans, setFaq1Ans] = useState('');
@@ -50,12 +51,12 @@ const EditCity = ({loginStatus}) => {
         'link', 'image', 'table',
       ];
     useEffect(()=>{
-        fetch('http://localhost:4000/city/'+customUrl).then(response=>{
+        fetch('http://localhost:4000/routes/'+customUrl).then(response=>{
             response.json().then(postInfo=>{
                 setTitle(postInfo.title);
+                setFormRoute(postInfo.FromRoute);
                 setContent(postInfo.content);
-                setSummary(postInfo.summary);
-                setfootTitle(postInfo.footTitle);
+                setToRoute(postInfo.toRoute);
                 setFaq1Ques(postInfo.faq1.que);
                 setFaq1Ans(postInfo.faq1.ans);
                 setFaq2Ques(postInfo.faq2.que);
@@ -71,7 +72,7 @@ const EditCity = ({loginStatus}) => {
         })
       },[]);
     if(redirect){
-        return <Navigate to={'/city/'+customUrl}/>
+        return <Navigate to={'/routes/'+customUrl}/>
     }
     
 
@@ -80,10 +81,9 @@ const EditCity = ({loginStatus}) => {
         
         const cityData = {
           title,
+          FromRoute,
           content,
-          summary,
-          footTitle,
-          customUrl,
+          toRoute,
           faq1Ques,
           faq1Ans,
           faq2Ques,
@@ -98,7 +98,7 @@ const EditCity = ({loginStatus}) => {
         };
       
         try {
-          const response = await fetch(`http://localhost:4000/city/${customUrl}`, {
+          const response = await fetch(`http://localhost:4000/routes/${customUrl}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',
@@ -115,43 +115,49 @@ const EditCity = ({loginStatus}) => {
           console.error('Error updating city data:', error);
         }
       };
-      
   return (
     <>
-    
-      <div className='createContainer'>
-            <form className='createForm' onSubmit={updatePost}>
-                <input
-                    type="title"
-                    placeholder={'Title'}
-                    className='createTitle'
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
-                />
-                <input
-                    type="summary"
-                    placeholder={'Enter the Footer Title'}
-                    className='createSummary'
-                    value={footTitle}
-                    onChange={(e) => setfootTitle(e.target.value)}
-                />
-                <input
-                    type="summary"
-                    placeholder={'Summary'}
-                    className='createSummary'
-                    value={summary}
-                    onChange={(e) => setSummary(e.target.value)}
-                />
-              
+    <div className='createContainer'>
+      <form className='createForm' onSubmit={updatePost}>
+        <input
+          type="title"
+          placeholder={'Title'}
+          className='createTitle'
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
 
-                <ReactQuill
-                    value={content}
-                    modules={modules}
-                    formats={formats}
-                    className='createTextarea'
-                    onChange={(newValue) => setContent(newValue)}
-                />
-                <h1>FAQs</h1>
+        <input
+          type="summary"
+          placeholder={'Input From Route'}
+          className='createSummary'
+          value={FromRoute}
+          onChange={(e) => setFormRoute(e.target.value)}
+        />
+
+        <input
+          type="summary"
+          className='inputFile'
+          placeholder={'Input To Route'}
+          value={toRoute}
+          onChange={(e) => setToRoute(e.target.value)} // Update 'files' to 'file'
+        />
+        {/* <input
+          type="summary"
+          placeholder={'Enter the custom Url'}
+          className='createSummary'
+          value={customUrl}
+          onChange={(e) => setCustomUrl(e.target.value)}
+        /> */}
+
+        <ReactQuill
+          value={content}
+          modules={modules}
+          formats={formats}
+          className='createTextarea'
+          onChange={(newValue) => setContent(newValue)}
+        />
+          <h1>FAQs</h1>
                 <input
                     type="summary"
                     className='createSummary'
@@ -227,11 +233,11 @@ const EditCity = ({loginStatus}) => {
                     value={faq5Ans}
                     onChange={(e) => setFaq5Ans(e.target.value)}
                 />
-                <button className='createPostBtn'>Create City Page</button>
-            </form>
-        </div>
+        <button className='createPostBtn'>Create Post</button>
+      </form>
+    </div>
     </>
   )
 }
 
-export default EditCity
+export default EditRoute

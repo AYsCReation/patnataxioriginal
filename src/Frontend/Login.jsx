@@ -3,10 +3,10 @@ import '../Frontend/Style/Login.css';
 import usersData from '../Frontend/LoginAccounts.json'; // Import the JSON data
 import {Link} from 'react-router-dom'
 import AdminDashboard from './AdminDashboard';
-const Login = ({loginStatus,setLoginStatus}) => {
+const Login = ({loginStatus,setLoginStatus,userRole,setUserRole}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [userRole, setUserRole] = useState('');
+  
   
   const handleLogin = (event) => {
     event.preventDefault();

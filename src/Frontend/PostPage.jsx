@@ -54,7 +54,7 @@ const PostPage = ({loginStatus}) => {
 console.log(loginStatus);
   return (
    <>
-   <Navbar/>
+   <Navbar loginStatus={loginStatus} />
    <div className="post-page">
     <h1>{postInfo.title}</h1>
     { 
@@ -62,7 +62,7 @@ console.log(loginStatus);
         <>
        
 <Link to={`/edit/${postInfo.customUrl}`} class="button-40" role="button">Edit Post</Link>
-<button className='delete-opt' onClick={() => handleDeleteField(postInfo._id)}> Delete</button>
+<button className='button-40' onClick={() => handleDeleteField(postInfo._id)}> Delete</button>
 <br />
         </>
        )
