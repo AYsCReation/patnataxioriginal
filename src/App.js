@@ -20,6 +20,7 @@ import EditPostPage from './Frontend/EditPostPage';
 import CreateCity from './Frontend/CreateCity';
 import Citypage from './Frontend/Citypage';
 import Routepage from './Frontend/Routepage';
+import EditCity from './Frontend/EditCity';
 
 function App() {
   const [loginStatus, setLoginStatus] = useState(false);
@@ -41,6 +42,7 @@ function App() {
      {/* <Route path='/Create' element={ <Create /> }/> */}
      {/* <Route path='/CreateCity' element={ <CreateCity/> }/> */}
      <Route path='/edit/:customUrl' element={ <EditPostPage /> }/>
+     <Route path='/editCity/:customUrl' element={ <EditCity /> }/>
      {/* <Route path='/AddRoute' element={ <AddRoute /> }/> */}
      <Route path = '/post/:customUrl' element={<PostPage loginStatus={loginStatus}   />}/>
      <Route path = '/city/:customUrl' element={<Citypage loginStatus={loginStatus}   />}/>

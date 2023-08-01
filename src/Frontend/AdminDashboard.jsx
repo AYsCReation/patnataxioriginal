@@ -6,6 +6,7 @@ import AllBlogs from './AllBlogs';
 import Create from './Create';
 import AddRoute from './AddRoute';
 import CreateCity from './CreateCity';
+import Footer from './Footer';
 const AdminDashboard = ({loginStatus,userRole, setLoginStatus}) => {
   const [activeTab, setActiveTab] = useState('');
   const [data, setData] = useState({ local: [], carpack: [], round: [], oneway: [] });
@@ -153,6 +154,10 @@ console.log(previousLeads , todaysLeads)
                 <li><a href="#">
                     <i class="uil uil-comments"></i>
                     <span class="link-name"onClick={() => handleTabClick('CreateCity')}>Add Cities</span>
+                </a></li>
+                <li><a href="#">
+                    <i class="uil uil-comments"></i>
+                    <span class="link-name"onClick={() => handleTabClick('EditCR')}>Edit Cities/Routes</span>
                 </a></li> </>)}
               
             </ul>
@@ -402,6 +407,7 @@ console.log(previousLeads , todaysLeads)
               {activeTab === 'CreateBlog' && <Create />}
               {activeTab === 'CreateRoute' && <AddRoute />}
               {activeTab === 'CreateCity' && <CreateCity />}
+              {activeTab === 'EditCR' && <Footer />}
               {activeTab === '' && (<h2>
               Welcome to the Admin Dashboard. Click on the tabs to know more!
               </h2>)}

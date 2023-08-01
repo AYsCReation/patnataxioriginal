@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, Navigate } from 'react-router-dom';
 import {useState, useEffect, useRef } from 'react';
 import '../Frontend/Style/PostPage.css'
 import ReactTimeAgo from 'react-time-ago'
@@ -8,13 +8,32 @@ import en from 'javascript-time-ago/locale/en.json'
 import ru from 'javascript-time-ago/locale/ru.json'
 import Navbar from "../Frontend/Navbar"
 import Footer from "../Frontend/Footer"
+import { useNavigate } from 'react-router-dom';
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
 const Citypage = ({loginStatus}) => {
     
     const [cityInfo, setCityInfo] = useState(null);
     const {customUrl} = useParams();
-    
+    const [redirect , setRedirect] = useState(false);
+    const handleDeleteField = (id) => {
+      // Make a DELETE request to the server to delete the field
+      fetch(`http://localhost:4000/city/${id}`, {
+        method: 'DELETE',
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setRedirect(true);
+          alert("Blog post deleted successfully!"); // Log the response message
+           // Fetch the updated data after successful deletion
+        })
+        .catch((error) => {
+          console.error('Error deleting field:', error);
+        });
+
+
+        
+    };
     useEffect(() => {
         fetch(`http://localhost:4000/city/${customUrl}`)
             .then(response => response.json())
@@ -25,6 +44,12 @@ const Citypage = ({loginStatus}) => {
                 // Handle error if necessary
             });
     }, [customUrl]);
+
+if(redirect){
+  return <Navigate to={'/Login'}/>;
+}
+
+
 
     if (!cityInfo) return '';
 console.log(loginStatus);
@@ -47,7 +72,7 @@ const FaqItem = ({ title, content }) => {
     }, [expanded]);
   
     const ref = useRef(null);
-  
+    
     return (
       <div className="accordion-item">
         <button
@@ -78,7 +103,8 @@ const FaqItem = ({ title, content }) => {
        loginStatus && (
         <>
        
-<Link to={`/edit/${cityInfo._id}`} class="button-40" role="button">Edit Post</Link>
+<Link to={`/editCity/${cityInfo.customUrl}`} class="button-40" role="button">Edit Post</Link>
+<button className='delete-opt' onClick={() => handleDeleteField(cityInfo._id)}> Delete</button>
 
 <br />
         </>

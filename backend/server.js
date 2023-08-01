@@ -239,6 +239,15 @@ app.delete('/post/:id', async (req, res) => {
     res.status(500).json({ error: 'Could not delete field' });
   }
 });
+app.delete('/city/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await CityData.findByIdAndDelete(id);
+    res.json({ message: 'Field deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Could not delete field' });
+  }
+});
 app.get('/api/data', async (req, res) => {
     try {
       const local = await FormData.find({activeMenu : 'menu2'});
@@ -301,6 +310,7 @@ app.get('/city/:customUrl', async (req, res)=>{
   const {customUrl} = req.params;
   const postDoc = await CityData.findOne({customUrl : customUrl});
   res.json(postDoc);
+  console.log(postDoc)
 });
 // app.get('/city/:id', async (req, res)=>{
 //   const {id} = req.params;
@@ -312,6 +322,63 @@ app.get('/routes/:customUrl', async (req, res)=>{
   const postDoc = await RoutePage.findOne({customUrl : customUrl});
   res.json(postDoc);
 });
+app.put('/city/:customUrl', async (req, res) => {
+  const { customUrl } = req.params;
+  const {
+    title,
+    summary,
+    content,
+    footTitle,
+    faq1Ques,
+    faq1Ans,
+    faq2Ques,
+    faq2Ans,
+    faq3Ques,
+    faq3Ans,
+    faq4Ques,
+    faq4Ans,
+    faq5Ques,
+    faq5Ans,
+  } = req.body;
+
+  try {
+    // Find the CityData document with the given custom URL
+    const cityData = await CityData.findOne({ customUrl });
+
+    if (!cityData) {
+      // If the city data with the given custom URL is not found, return a 404 status code
+      return res.status(404).json({ error: 'City data not found' });
+    }
+
+    // Update the document properties
+    cityData.title = title;
+    cityData.summary = summary;
+    cityData.content = content;
+    cityData.footTitle = footTitle;
+    cityData.faq1.que = faq1Ques;
+    cityData.faq1.ans = faq1Ans;
+    cityData.faq2.que = faq2Ques;
+    cityData.faq2.ans = faq2Ans;
+    cityData.faq3.que = faq3Ques;
+    cityData.faq3.ans = faq3Ans;
+    cityData.faq4.que = faq4Ques;
+    cityData.faq4.ans = faq4Ans;
+    cityData.faq5.que = faq5Ques;
+    cityData.faq5.ans = faq5Ans;
+
+    // Save the updated document
+    await cityData.save();
+
+    // Optionally, you can send a response back to the client indicating the successful update.
+    res.status(200).json({ message: 'City data updated successfully.' });
+  } catch (err) {
+    // Handle errors appropriately
+    console.error(err);
+    res.status(500).json({ error: 'An error occurred while updating the city data.' });
+  }
+});
+
+
 app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
   let newPath = null;
   if (req.file) {
