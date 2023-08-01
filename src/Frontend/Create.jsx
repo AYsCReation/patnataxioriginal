@@ -8,21 +8,21 @@ import axios from 'axios';
 const modules = {
   toolbar: [
     [{ 'header': [1, 2, false] }],
-    ['bold', 'italic', 'underline','strike', 'blockquote'],
-    [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
+    ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
     ['link', 'image'],  // Add the 'table' option here to enable table creation
     ['clean'], ['table'],
-   
-    
+
+
   ],
-  
+
 };
 
 const formats = [
   'header',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
   'list', 'bullet', 'indent',
-  'link', 'image','table',
+  'link', 'image', 'table',
 ];
 
 const Create = () => {
@@ -31,26 +31,28 @@ const Create = () => {
   const [content, setContent] = useState('');
   const [file, setFiles] = useState(null); // Change 'files' to 'file
   const [author, setAuthor] = useState('');
+  const [customUrl, setcustomUrl] = useState('');
   const createNewPost = async (e) => {
     e.preventDefault();
 
     try {
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('summary', summary);
-        formData.append('content', content);
-        formData.append('file', file);
-        formData.append('author', author);
-  
-        await axios.post('http://localhost:4000/api/posts', formData);
-  
-        // Optionally, you can handle success or navigate to a new page.
-        alert('Blog post created successfully');
-        window.location.reload();
-      } catch (error) {
-        // Handle errors if the request fails.
-        console.error('Error creating blog post:', error);
-      }
+      const formData = new FormData();
+      formData.append('title', title);
+      formData.append('summary', summary);
+      formData.append('content', content);
+      formData.append('file', file);
+      formData.append('author', author);
+      formData.append('customUrl', customUrl);
+
+      await axios.post('http://localhost:4000/api/posts', formData);
+
+      // Optionally, you can handle success or navigate to a new page.
+      alert('Blog post created successfully');
+      window.location.reload();
+    } catch (error) {
+      // Handle errors if the request fails.
+      console.error('Error creating blog post:', error);
+    }
 
 
   };
@@ -94,7 +96,13 @@ const Create = () => {
           className='createTextarea'
           onChange={(newValue) => setContent(newValue)}
         />
-
+        <input
+          type="summary"
+          placeholder={'Enter the name of Author'}
+          className='createSummary'
+          value={customUrl}
+          onChange={(e) => setcustomUrl(e.target.value)}
+        />
         <button className='createPostBtn'>Create Post</button>
       </form>
     </div>

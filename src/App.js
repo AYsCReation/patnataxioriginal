@@ -34,10 +34,10 @@ function App() {
      <Route path='/OurServicesPage' element={ <OurServicesPage/> }/>
      <Route path='/AllBlogs' element={ <AllBlogs/> }/>
      <Route path='/Login' element={ <Login loginStatus={loginStatus} setLoginStatus={setLoginStatus} /> }/>
-     {/* <Route path='/Create' element={ <Create /> }/> */}
+     <Route path='/Create' element={ <Create /> }/>
      <Route path='/edit/:id' element={ <EditPostPage /> }/>
      {/* <Route path='/AddRoute' element={ <AddRoute /> }/> */}
-     <Route path = '/post/:id' element={<PostPage loginStatus={loginStatus}   />}/>
+     <Route path = '/post/:customUrl' element={<PostPage loginStatus={loginStatus}   />}/>
     </Routes>
     </BrowserRouter>
     

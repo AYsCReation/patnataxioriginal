@@ -30,6 +30,9 @@ const postSchema = new mongoose.Schema({
   cover:{
     type: String,
     
+  },
+  customUrl :{
+    type: String,
   }
 });
 

@@ -264,7 +264,7 @@ fs.renameSync(path, newPath);
 
 
   try {
-    const { title, summary, content, author } = req.body;
+    const { title, summary, content, author ,customUrl } = req.body;
     const file = req.file;
 
     // Create a new blog post document
@@ -273,6 +273,7 @@ fs.renameSync(path, newPath);
       summary,
       content,
       author,
+      customUrl,
       cover : newPath,
       file: file ? file.path : '', // Store the file path in the database if it exists.
        
@@ -287,11 +288,17 @@ fs.renameSync(path, newPath);
   }
 });
 
-app.get('/post/:id', async (req, res)=>{
-  const {id} = req.params;
-  const postDoc = await Post.findById(id);
+app.get('/post/:customUrl', async (req, res) => {
+  const { customUrl } = req.params;
+  const postDoc = await Post.findOne({ customUrl : customUrl });
+  
+  if (!postDoc) {
+    // If the blog post with the given custom URL is not found, return a 404 status code
+    return res.status(404).json({ error: 'Blog post not found' });
+  }
+
   res.json(postDoc);
-})
+});
 app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
   let newPath = null;
   if (req.file) {

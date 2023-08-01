@@ -13,9 +13,10 @@ TimeAgo.addLocale(ru)
 const PostPage = ({loginStatus}) => {
     
     const [postInfo, setPostInfo] = useState(null);
-    const {id} = useParams();
+    const {customUrl} = useParams();
+    console.log(customUrl);
     useEffect(() => {
-        fetch(`http://localhost:4000/post/${id}`)
+        fetch(`http://localhost:4000/post/${customUrl}`)
             .then(response => response.json())
             .then(data => {
                 setPostInfo(data);
@@ -23,7 +24,7 @@ const PostPage = ({loginStatus}) => {
             .catch(error => {
                 // Handle error if necessary
             });
-    }, [id]);
+    }, [customUrl]);
 
     if (!postInfo) return '';
 console.log(loginStatus);
@@ -42,7 +43,7 @@ console.log(loginStatus);
         </>
        )
     }
-    <time>{<ReactTimeAgo date={postInfo.createdAt} />}</time>
+    {/* <time>{<ReactTimeAgo date={postInfo.createdAt} />}</time> */}
     <a href="" className="author"> by {postInfo.author} </a>
     <div className="image-post">
         <img src={`http://localhost:4000/${postInfo.cover}`} alt="" />

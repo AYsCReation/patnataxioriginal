@@ -8,20 +8,20 @@ import ru from 'javascript-time-ago/locale/ru.json'
 
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
-const Blog = ({ _id ,title, summary, cover, content, createdAt, author}) => {
+const Blog = ({ _id ,title, summary, cover, content, createdAt, author, customUrl}) => {
     
     return (
         <>
             <div className="blogContainer">
                 <div className="post">
                     <div className="Blog-image">
-                        <Link to={`/post/${_id}`}>
+                        <Link to={`/post/${customUrl}`}>
                            
                         <img src={ 'http://localhost:4000/'+ cover} alt="" />
                         </Link>
                     </div>
                     <div className="texts">
-                       <Link to={`/post/${_id}`}><h2>{title}</h2></Link> 
+                       <Link to={`/post/${customUrl}`}><h2>{title}</h2></Link> 
                         <p className="info">
                             <a href="" className="author">{author} </a>
                             <time>{<ReactTimeAgo date={createdAt} />}</time>
