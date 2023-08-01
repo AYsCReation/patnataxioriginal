@@ -296,7 +296,7 @@ app.get('/city/:customUrl', async (req, res)=>{
 });
 // app.get('/city/:id', async (req, res)=>{
 //   const {id} = req.params;
-//   const postDoc = await CityData.findById(id);
+//   const postDoc = await CityData.findById(id); 
 //   res.json(postDoc);
 // })
 app.get('/routes/:customUrl', async (req, res)=>{

@@ -13,21 +13,23 @@ const EditPostPage = () => {
     const [content, setContent] = useState('');
     const [file, setFile] = useState(null); 
     const [author, setAuthor] = useState('');
+    const [id, setid] = useState('');
     const [redirect, setRedirect] = useState(false);
     
-    const {id} = useParams();
+    const {customUrl} = useParams();
     useEffect(()=>{
-        fetch('http://localhost:4000/post/'+id).then(response=>{
+        fetch('http://localhost:4000/post/'+customUrl).then(response=>{
             response.json().then(postInfo=>{
                 setTitle(postInfo.title);
                 setContent(postInfo.content);
                 setSummary(postInfo.summary);
                 setAuthor(postInfo.author);
+                setid(postInfo._id);
             })
         })
       },[]);
     if(redirect){
-        return <Navigate to={'/post/'+id}/>
+        return <Navigate to={'/post/'+customUrl}/>
     }
     
 
@@ -37,6 +39,7 @@ const EditPostPage = () => {
         formData.append('title', title);
         formData.append('summary', summary);
         formData.append('content', content);
+        formData.append('customUrl', customUrl);
         formData.append('id', id);
         if(file?.[0]){
             formData.append('file', file?.[0]);

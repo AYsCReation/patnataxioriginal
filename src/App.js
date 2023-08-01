@@ -40,7 +40,7 @@ function App() {
      {/* <Route path='/Create' element={ <Create /> }/> */}
      {/* <Route path='/Create' element={ <Create /> }/> */}
      {/* <Route path='/CreateCity' element={ <CreateCity/> }/> */}
-     <Route path='/edit/:id' element={ <EditPostPage /> }/>
+     <Route path='/edit/:customUrl' element={ <EditPostPage /> }/>
      {/* <Route path='/AddRoute' element={ <AddRoute /> }/> */}
      <Route path = '/post/:customUrl' element={<PostPage loginStatus={loginStatus}   />}/>
      <Route path = '/city/:customUrl' element={<Citypage loginStatus={loginStatus}   />}/>

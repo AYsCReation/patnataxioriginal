@@ -37,7 +37,7 @@ console.log(loginStatus);
        loginStatus && (
         <>
        
-<Link to={`/edit/${postInfo._id}`} class="button-40" role="button">Edit Post</Link>
+<Link to={`/edit/${postInfo.customUrl}`} class="button-40" role="button">Edit Post</Link>
 
 <br />
         </>
