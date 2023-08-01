@@ -61,7 +61,7 @@ const Footer = () => {
         const selectedRoute = routedata.find((route) => route.FromRoute === fromRoute && route.toRoute === toRoute);
         if (selectedRoute) {
           return (
-            <Link to={`/routes/${selectedRoute._id}`}>{toRoute}</Link>
+            <Link to={`/routes/${selectedRoute.customUrl}`}>{toRoute}</Link>
           );
         }
         return null;
@@ -152,7 +152,7 @@ const Footer = () => {
                                 <ul>
 
                                     {citydata.map((i, index) => (
-                                        <li>  <Link to={`/city/${i._id}`}> {i.footTitle} </Link> </li>
+                                        <li>  <Link to={`/city/${i.customUrl}`}> {i.footTitle} </Link> </li>
                                     ))}
                                 </ul>
                             </div>

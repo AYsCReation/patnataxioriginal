@@ -19,6 +19,9 @@ const routeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  customUrl :{
+    type: String,
+  },
   faq1: {
     que : String,
     ans : String,

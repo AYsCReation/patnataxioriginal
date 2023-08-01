@@ -13,9 +13,10 @@ TimeAgo.addLocale(ru)
 const Citypage = ({loginStatus}) => {
     
     const [cityInfo, setCityInfo] = useState(null);
-    const {id} = useParams();
+    const {customUrl} = useParams();
+    
     useEffect(() => {
-        fetch(`http://localhost:4000/city/${id}`)
+        fetch(`http://localhost:4000/city/${customUrl}`)
             .then(response => response.json())
             .then(data => {
                 setCityInfo(data);
@@ -23,7 +24,7 @@ const Citypage = ({loginStatus}) => {
             .catch(error => {
                 // Handle error if necessary
             });
-    }, [id]);
+    }, [customUrl]);
 
     if (!cityInfo) return '';
 console.log(loginStatus);

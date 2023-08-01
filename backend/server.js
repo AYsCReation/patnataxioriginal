@@ -155,6 +155,9 @@ const citySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  customUrl :{
+    type: String,
+  },
   faq1: {
     que : String,
     ans : String,
@@ -286,21 +289,21 @@ app.get('/post/:customUrl', async (req, res) => {
   res.json(postDoc);
 });
 
-app.get('/city/:id', async (req, res)=>{
-  const {id} = req.params;
-  const postDoc = await CityData.findById(id);
+app.get('/city/:customUrl', async (req, res)=>{
+  const {customUrl} = req.params;
+  const postDoc = await CityData.findOne({customUrl : customUrl});
   res.json(postDoc);
 });
-app.get('/city/:id', async (req, res)=>{
-  const {id} = req.params;
-  const postDoc = await CityData.findById(id);
+// app.get('/city/:id', async (req, res)=>{
+//   const {id} = req.params;
+//   const postDoc = await CityData.findById(id);
+//   res.json(postDoc);
+// })
+app.get('/routes/:customUrl', async (req, res)=>{
+  const {customUrl} = req.params;
+  const postDoc = await RoutePage.findOne({customUrl : customUrl});
   res.json(postDoc);
-})
-app.get('/routes/:id', async (req, res)=>{
-  const {id} = req.params;
-  const postDoc = await RoutePage.findById(id);
-  res.json(postDoc);
-})
+});
 app.put('/post', uploadMiddleware.single('file'), async (req, res) => {
   let newPath = null;
   if (req.file) {
@@ -339,7 +342,11 @@ app.post('/api/routes', async (req, res) => {
 
 
     try {
-      const { title, FromRoute, content, toRoute, faq1,
+      const { title, FromRoute, content, toRoute,
+        
+        customUrl,
+        
+        faq1,
         faq2,
         faq3,
         faq4,
@@ -351,6 +358,7 @@ app.post('/api/routes', async (req, res) => {
         FromRoute,
         content,
         toRoute,
+        customUrl,
         faq1,
         faq2,
         faq3,
@@ -373,6 +381,7 @@ app.post('/api/city', async (req, res) => {
     footTitle,
     summary,
     content,
+    customUrl,
     faq1,
     faq2,
     faq3,
@@ -387,6 +396,7 @@ app.post('/api/city', async (req, res) => {
       footTitle,
       summary,
       content,
+      customUrl,
       faq1,
       faq2,
       faq3,
@@ -394,6 +404,7 @@ app.post('/api/city', async (req, res) => {
       faq5,
     });
 
+    
     // Save the new CityData document to the database
     await cityData.save(); 
 

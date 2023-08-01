@@ -30,6 +30,9 @@ const AddRoute = () => {
     const [content, setContent] = useState('');
     const [toRoute, setToRoute] = useState(''); // Change 'files' to 'file
     // const [author, setAuthor] = useState('');
+
+    const [customUrl , setCustomUrl] = useState('');
+
     const [faq1Ques, setFaq1Ques] = useState('');
     const [faq1Ans, setFaq1Ans] = useState('');
 
@@ -53,6 +56,7 @@ const AddRoute = () => {
           FromRoute,
           content,
           toRoute,
+          customUrl,
           faq1: { que: faq1Ques, ans: faq1Ans },
           faq2: { que: faq2Ques, ans: faq2Ans },
           faq3: { que: faq3Ques, ans: faq3Ans },
@@ -103,13 +107,13 @@ const AddRoute = () => {
           value={toRoute}
           onChange={(e) => setToRoute(e.target.value)} // Update 'files' to 'file'
         />
-        {/* <input
+        <input
           type="summary"
-          placeholder={'Enter the name of Author'}
+          placeholder={'Enter the custom Url'}
           className='createSummary'
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
-        /> */}
+          value={customUrl}
+          onChange={(e) => setCustomUrl(e.target.value)}
+        />
 
         <ReactQuill
           value={content}

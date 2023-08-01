@@ -13,9 +13,9 @@ TimeAgo.addLocale(ru)
 const Routepage = ({loginStatus}) => {
     
     const [routeInfo, setrouteInfo] = useState(null);
-    const {id} = useParams();
+    const {customUrl} = useParams();
     useEffect(() => {
-        fetch(`http://localhost:4000/routes/${id}`)
+        fetch(`http://localhost:4000/routes/${customUrl}`)
             .then(response => response.json())
             .then(data => {
                 setrouteInfo(data);
@@ -23,7 +23,7 @@ const Routepage = ({loginStatus}) => {
             .catch(error => {
                 // Handle error if necessary
             });
-    }, [id]);
+    }, [customUrl]);
 
     if (!routeInfo) return '';
 console.log(loginStatus);

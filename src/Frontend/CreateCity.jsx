@@ -27,6 +27,8 @@ const CreateCity = () => {
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
     const [footTitle, setfootTitle] = useState('');
+    const [customUrl, setCustomUrl] = useState('');
+
     const [faq1Ques, setFaq1Ques] = useState('');
     const [faq1Ans, setFaq1Ans] = useState('');
 
@@ -41,7 +43,7 @@ const CreateCity = () => {
 
     const [faq5Ques, setFaq5Ques] = useState('');
     const [faq5Ans, setFaq5Ans] = useState('');
-
+   
     const createNewPost = async (e) => {
         e.preventDefault();
 
@@ -51,13 +53,14 @@ const CreateCity = () => {
                 summary,
                 footTitle,
                 content,
+                customUrl,
                 faq1: { que: faq1Ques, ans: faq1Ans },
                 faq2: { que: faq2Ques, ans: faq2Ans },
                 faq3: { que: faq3Ques, ans: faq3Ans },
                 faq4: { que: faq4Ques, ans: faq4Ans },
                 faq5: { que: faq5Ques, ans: faq5Ans },
             };
-
+            
             await axios.post('http://localhost:4000/api/city', postData, {
                 headers: { 'Content-Type': 'application/json' },
             });
@@ -95,6 +98,13 @@ const CreateCity = () => {
                     className='createSummary'
                     value={summary}
                     onChange={(e) => setSummary(e.target.value)}
+                />
+                <input
+                    type="summary"
+                    placeholder={'Enter the Custom Url'}
+                    className='createSummary'
+                    value={customUrl}
+                    onChange={(e) => setCustomUrl(e.target.value)}
                 />
 
                 <ReactQuill
