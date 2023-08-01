@@ -71,7 +71,7 @@ const Login = ({loginStatus,setLoginStatus}) => {
       </div>
     </div>
 }
-    {loginStatus && <AdminDashboard loginStatus={loginStatus} userRole={userRole} />}
+    {loginStatus && <AdminDashboard loginStatus={loginStatus} setLoginStatus={setLoginStatus} userRole={userRole} />}
     </>
   );
 };

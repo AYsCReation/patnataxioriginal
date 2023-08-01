@@ -32,6 +32,16 @@ const Create = () => {
   const [file, setFiles] = useState(null); // Change 'files' to 'file
   const [author, setAuthor] = useState('');
   const [customUrl, setcustomUrl] = useState('');
+  const reset = () =>{
+    setTitle('');
+    setSummary('');
+    setContent('');
+    setFiles('');
+    setAuthor('');
+    setcustomUrl('');
+
+
+   }
   const createNewPost = async (e) => {
     e.preventDefault();
 
@@ -48,7 +58,7 @@ const Create = () => {
 
       // Optionally, you can handle success or navigate to a new page.
       alert('Blog post created successfully');
-      window.location.reload();
+      reset();
     } catch (error) {
       // Handle errors if the request fails.
       console.error('Error creating blog post:', error);
@@ -88,7 +98,13 @@ const Create = () => {
           value={author}
           onChange={(e) => setAuthor(e.target.value)}
         />
-
+        <input
+          type="summary"
+          placeholder={'Enter the customzed URL'}
+          className='createSummary'
+          value={customUrl}
+          onChange={(e) => setcustomUrl(e.target.value)}
+        />
         <ReactQuill
           value={content}
           modules={modules}
@@ -96,13 +112,7 @@ const Create = () => {
           className='createTextarea'
           onChange={(newValue) => setContent(newValue)}
         />
-        <input
-          type="summary"
-          placeholder={'Enter the name of Author'}
-          className='createSummary'
-          value={customUrl}
-          onChange={(e) => setcustomUrl(e.target.value)}
-        />
+        
         <button className='createPostBtn'>Create Post</button>
       </form>
     </div>

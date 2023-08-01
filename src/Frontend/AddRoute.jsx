@@ -47,6 +47,24 @@ const AddRoute = () => {
 
     const [faq5Ques, setFaq5Ques] = useState('');
     const [faq5Ans, setFaq5Ans] = useState('');
+    const reset = () =>{
+        setTitle('');
+        setFormRoute('');
+        setContent('');
+        setToRoute('');
+        setCustomUrl('');
+        setFaq1Ques('');
+        setFaq1Ans('');
+        setFaq2Ques('');
+        setFaq2Ans('');
+        setFaq3Ques('');
+        setFaq3Ans('');
+        setFaq4Ques('');
+        setFaq4Ans('');
+        setFaq5Ques('');
+        setFaq5Ans('');
+    
+       }
     const createNewPost = async (e) => {
       e.preventDefault();
   
@@ -72,7 +90,7 @@ const AddRoute = () => {
           // Optionally, you can handle success or navigate to a new page.
           alert('Route post created successfully');
           
-          window.location.reload();
+          reset();
         } catch (error) {
           // Handle errors if the request fails.
           console.error('Error creating blog post:', error);

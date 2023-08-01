@@ -5,7 +5,8 @@ import '../Frontend/Style/dashHeader.css';
 import AllBlogs from './AllBlogs';
 import Create from './Create';
 import AddRoute from './AddRoute';
-const AdminDashboard = ({loginStatus,userRole}) => {
+import CreateCity from './CreateCity';
+const AdminDashboard = ({loginStatus,userRole, setLoginStatus}) => {
   const [activeTab, setActiveTab] = useState('');
   const [data, setData] = useState({ local: [], carpack: [], round: [], oneway: [] });
   const [sliderVisible, setSliderVisible] = useState(true);
@@ -151,7 +152,7 @@ console.log(previousLeads , todaysLeads)
                 </a></li>
                 <li><a href="#">
                     <i class="uil uil-comments"></i>
-                    <span class="link-name"onClick={() => handleTabClick('carpack')}>Add Cities</span>
+                    <span class="link-name"onClick={() => handleTabClick('CreateCity')}>Add Cities</span>
                 </a></li> </>)}
               
             </ul>
@@ -159,7 +160,7 @@ console.log(previousLeads , todaysLeads)
             <ul class="logout-mode">
                 <li><a href="#">
                     <i class="uil uil-signout"></i>
-                    <span class="link-name">Logout</span>
+                    <span class="link-name" onClick={() => {setLoginStatus(false); window.location.reload();}}>Logout</span>
                 </a></li>
                 <li class="mode">
                     <a href="#">
@@ -400,6 +401,7 @@ console.log(previousLeads , todaysLeads)
         {activeTab === 'AllBlogs' && <AllBlogs loginStatus={loginStatus} />} 
               {activeTab === 'CreateBlog' && <Create />}
               {activeTab === 'CreateRoute' && <AddRoute />}
+              {activeTab === 'CreateCity' && <CreateCity />}
               {activeTab === '' && (<h2>
               Welcome to the Admin Dashboard. Click on the tabs to know more!
               </h2>)}
