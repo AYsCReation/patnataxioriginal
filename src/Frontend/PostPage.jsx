@@ -1,5 +1,5 @@
 import React from 'react'
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link , Navigate } from 'react-router-dom';
 import {useState, useEffect} from 'react';
 import '../Frontend/Style/PostPage.css'
 import ReactTimeAgo from 'react-time-ago'
@@ -14,7 +14,7 @@ const PostPage = ({loginStatus}) => {
     
     const [postInfo, setPostInfo] = useState(null);
     const {customUrl} = useParams();
-    console.log(customUrl);
+    const [redirect , setRedirect] = useState(false);
     useEffect(() => {
         fetch(`http://localhost:4000/post/${customUrl}`)
             .then(response => response.json())
@@ -25,6 +25,30 @@ const PostPage = ({loginStatus}) => {
                 // Handle error if necessary
             });
     }, [customUrl]);
+
+    const handleDeleteField = (id) => {
+        // Make a DELETE request to the server to delete the field
+        fetch(`http://localhost:4000/post/${id}`, {
+          method: 'DELETE',
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            setRedirect(true);
+            alert("Blog post deleted successfully!"); // Log the response message
+             // Fetch the updated data after successful deletion
+          })
+          .catch((error) => {
+            console.error('Error deleting field:', error);
+          });
+
+
+          
+      };
+      if (redirect){
+        return <Navigate to={'/AllBlogs'}/>
+    }
+    console.log(customUrl);
+  
 
     if (!postInfo) return '';
 console.log(loginStatus);
@@ -38,7 +62,7 @@ console.log(loginStatus);
         <>
        
 <Link to={`/edit/${postInfo.customUrl}`} class="button-40" role="button">Edit Post</Link>
-
+<button className='delete-opt' onClick={() => handleDeleteField(postInfo._id)}> Delete</button>
 <br />
         </>
        )

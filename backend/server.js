@@ -230,7 +230,15 @@ app.delete('/formdata/:id', async (req, res) => {
     res.status(500).json({ error: 'Could not delete field' });
   }
 });
-
+app.delete('/post/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Post.findByIdAndDelete(id);
+    res.json({ message: 'Field deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: 'Could not delete field' });
+  }
+});
 app.get('/api/data', async (req, res) => {
     try {
       const local = await FormData.find({activeMenu : 'menu2'});
