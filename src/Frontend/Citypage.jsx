@@ -19,7 +19,7 @@ const Citypage = ({loginStatus}) => {
     const [redirect , setRedirect] = useState(false);
     const handleDeleteField = (id) => {
       // Make a DELETE request to the server to delete the field
-      fetch(`http://localhost:4000/city/${id}`, {
+      fetch(`https://backend-taxi.onrender.com/city/${id}`, {
         method: 'DELETE',
       })
         .then((res) => res.json())
@@ -36,7 +36,7 @@ const Citypage = ({loginStatus}) => {
         
     };
     useEffect(() => {
-        fetch(`http://localhost:4000/city/${customUrl}`)
+        fetch(`https://backend-taxi.onrender.com/city/${customUrl}`)
             .then(response => response.json())
             .then(data => {
                 setCityInfo(data);

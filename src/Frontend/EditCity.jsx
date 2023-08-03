@@ -50,7 +50,7 @@ const EditCity = ({loginStatus}) => {
         'link', 'image', 'table',
       ];
     useEffect(()=>{
-        fetch('http://localhost:4000/city/'+customUrl).then(response=>{
+        fetch('https://backend-taxi.onrender.com/city/'+customUrl).then(response=>{
             response.json().then(postInfo=>{
                 setTitle(postInfo.title);
                 setContent(postInfo.content);
@@ -98,7 +98,7 @@ const EditCity = ({loginStatus}) => {
         };
       
         try {
-          const response = await fetch(`http://localhost:4000/city/${customUrl}`, {
+          const response = await fetch(`https://backend-taxi.onrender.com/city/${customUrl}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

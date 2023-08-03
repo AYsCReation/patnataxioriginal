@@ -51,7 +51,7 @@ const EditRoute = () => {
         'link', 'image', 'table',
       ];
     useEffect(()=>{
-        fetch('http://localhost:4000/routes/'+customUrl).then(response=>{
+        fetch('https://backend-taxi.onrender.com/routes/'+customUrl).then(response=>{
             response.json().then(postInfo=>{
                 setTitle(postInfo.title);
                 setFormRoute(postInfo.FromRoute);
@@ -98,7 +98,7 @@ const EditRoute = () => {
         };
       
         try {
-          const response = await fetch(`http://localhost:4000/routes/${customUrl}`, {
+          const response = await fetch(`https://backend-taxi.onrender.com/routes/${customUrl}`, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json',

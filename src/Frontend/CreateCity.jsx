@@ -78,7 +78,7 @@ const CreateCity = () => {
                 faq5: { que: faq5Ques, ans: faq5Ans },
             };
             
-            await axios.post('http://localhost:4000/api/city', postData, {
+            await axios.post('https://backend-taxi.onrender.com/api/city', postData, {
                 headers: { 'Content-Type': 'application/json' },
             });
 

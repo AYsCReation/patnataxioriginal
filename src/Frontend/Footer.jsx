@@ -8,7 +8,7 @@ const Footer = () => {
     const [citydata, setcitydata] = useState([]);
     const [routedata, setroutedata] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:4000/citypage')
+        fetch('https://backend-taxi.onrender.com/citypage')
             .then((response) => response.json())
             .then((data) => {
 
@@ -18,7 +18,7 @@ const Footer = () => {
     }, []);
     const uniqueFromRoutes = Array.from(new Set(routedata.map((route) => route.FromRoute)));
     useEffect(() => {
-        fetch('http://localhost:4000/routepage')
+        fetch('https://backend-taxi.onrender.com/routepage')
             .then((response) => response.json())
             .then((data) => {
 

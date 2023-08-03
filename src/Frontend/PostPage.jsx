@@ -16,7 +16,7 @@ const PostPage = ({loginStatus}) => {
     const {customUrl} = useParams();
     const [redirect , setRedirect] = useState(false);
     useEffect(() => {
-        fetch(`http://localhost:4000/post/${customUrl}`)
+        fetch(`https://backend-taxi.onrender.com/post/${customUrl}`)
             .then(response => response.json())
             .then(data => {
                 setPostInfo(data);
@@ -28,7 +28,7 @@ const PostPage = ({loginStatus}) => {
 
     const handleDeleteField = (id) => {
         // Make a DELETE request to the server to delete the field
-        fetch(`http://localhost:4000/post/${id}`, {
+        fetch(`https://backend-taxi.onrender.com/post/${id}`, {
           method: 'DELETE',
         })
           .then((res) => res.json())
@@ -70,7 +70,7 @@ console.log(loginStatus);
     {/* <time>{<ReactTimeAgo date={postInfo.createdAt} />}</time> */}
     <a href="" className="author"> by {postInfo.author} </a>
     <div className="image-post">
-        <img src={`http://localhost:4000/${postInfo.cover}`} alt="" />
+        <img src={`https://backend-taxi.onrender.com/${postInfo.cover}`} alt="" />
     </div>
    <div dangerouslySetInnerHTML={{__html:postInfo.content}}/>  
    </div>

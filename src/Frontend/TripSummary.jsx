@@ -13,7 +13,7 @@ const TripSummary = ({ setIsSubmitted, isSubmitted , setShowSummary, showSummary
             const currentDate = new Date().toLocaleDateString(); // Format: "28/7/2023"
             const formattedCurrentDate = formatDate(currentDate);
             // Send POST request to backend API
-            Axios.post('http://localhost:4000/formdata', {
+            Axios.post('https://backend-taxi.onrender.com/formdata', {
                 activeMenu,
                 fromLocation,
                 toLocation,

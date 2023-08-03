@@ -17,7 +17,7 @@ const Routepage = ({loginStatus}) => {
     const [redirect , setRedirect] = useState(false);
     const handleDeleteField = (id) => {
       // Make a DELETE request to the server to delete the field
-      fetch(`http://localhost:4000/post/${id}`, {
+      fetch(`https://backend-taxi.onrender.com/post/${id}`, {
         method: 'DELETE',
       })
         .then((res) => res.json())
@@ -34,7 +34,7 @@ const Routepage = ({loginStatus}) => {
         
     };
     useEffect(() => {
-        fetch(`http://localhost:4000/routes/${customUrl}`)
+        fetch(`https://backend-taxi.onrender.com/routes/${customUrl}`)
             .then(response => response.json())
             .then(data => {
                 setrouteInfo(data);
@@ -67,7 +67,7 @@ const FaqItem = ({ title, content }) => {
     const ref = useRef(null);
     const handleDeleteField = (id) => {
       // Make a DELETE request to the server to delete the field
-      fetch(`http://localhost:4000/post/${id}`, {
+      fetch(`https://backend-taxi.onrender.com/post/${id}`, {
         method: 'DELETE',
       })
         .then((res) => res.json())

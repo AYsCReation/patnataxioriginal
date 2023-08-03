@@ -54,7 +54,7 @@ const Create = () => {
       formData.append('author', author);
       formData.append('customUrl', customUrl);
 
-      await axios.post('http://localhost:4000/api/posts', formData);
+      await axios.post('https://backend-taxi.onrender.com/api/posts', formData);
 
       // Optionally, you can handle success or navigate to a new page.
       alert('Blog post created successfully');

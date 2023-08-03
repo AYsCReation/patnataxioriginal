@@ -17,7 +17,7 @@ const Blog = ({ _id ,title, summary, cover, content, createdAt, author, customUr
                     <div className="Blog-image">
                         <Link to={`/post/${customUrl}`}>
                            
-                        <img src={ 'http://localhost:4000/'+ cover} alt="" />
+                        <img src={ 'https://backend-taxi.onrender.com/'+ cover} alt="" />
                         </Link>
                     </div>
                     <div className="texts">

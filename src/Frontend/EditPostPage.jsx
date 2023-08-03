@@ -18,7 +18,7 @@ const EditPostPage = () => {
     
     const {customUrl} = useParams();
     useEffect(()=>{
-        fetch('http://localhost:4000/post/'+customUrl).then(response=>{
+        fetch('https://backend-taxi.onrender.com/post/'+customUrl).then(response=>{
             response.json().then(postInfo=>{
                 setTitle(postInfo.title);
                 setContent(postInfo.content);
@@ -46,7 +46,7 @@ const EditPostPage = () => {
         }
         formData.append('author', author);
 
-     const response =  await fetch ('http://localhost:4000/post' , {
+     const response =  await fetch ('https://backend-taxi.onrender.com/post' , {
             method: 'PUT',
             body: formData,
         });
