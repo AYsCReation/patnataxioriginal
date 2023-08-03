@@ -8,7 +8,7 @@ const AllBlogs = ({loginStatus}) => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch('https://backend-taxi.onrender.com//post')
+        fetch('https://backend-taxi.onrender.com/post')
           .then((response) => response.json())
           .then((data) => {
            
