@@ -4,6 +4,7 @@ import "../Frontend/Style/Blog.css"
 
 import Navbar from "../Frontend/Navbar"
 import Footer from "../Frontend/Footer"
+import ScrollToTop from './ScrollToTop'
 const AllBlogs = ({loginStatus}) => {
     const [posts, setPosts] = useState([]);
 
@@ -18,6 +19,7 @@ const AllBlogs = ({loginStatus}) => {
       }, []);
   return (
    <>
+   <ScrollToTop />
    { !loginStatus && <Navbar/>}
    <h1 className="blogHeading">Blogs, News, Events & Client Reviews</h1>
    <div className="DisplayBlog">

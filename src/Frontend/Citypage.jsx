@@ -10,6 +10,7 @@ import Navbar from "../Frontend/Navbar"
 import Footer from "../Frontend/Footer"
 import { useNavigate } from 'react-router-dom';
 import AdminDashboard from './AdminDashboard';
+import ScrollToTop from './ScrollToTop';
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
 const Citypage = ({loginStatus}) => {
@@ -100,6 +101,7 @@ const FaqItem = ({ title, content }) => {
   
   return (
    <>
+   <ScrollToTop />
    <Navbar loginStatus={loginStatus} />
    <div className="post-page">
     <h1>{cityInfo.title}</h1>

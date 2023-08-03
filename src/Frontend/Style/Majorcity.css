@@ -53,4 +53,7 @@
     .majorcitymain{
         flex-direction: column;
     }
+    .majorcitycard {
+      max-width: 90%;
+    }
   }

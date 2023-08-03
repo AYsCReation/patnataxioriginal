@@ -8,6 +8,7 @@ import en from 'javascript-time-ago/locale/en.json'
 import ru from 'javascript-time-ago/locale/ru.json'
 import Navbar from "../Frontend/Navbar"
 import Footer from "../Frontend/Footer"
+import ScrollToTop from './ScrollToTop';
 TimeAgo.addDefaultLocale(en)
 TimeAgo.addLocale(ru)
 const Routepage = ({loginStatus}) => {
@@ -109,6 +110,7 @@ const FaqItem = ({ title, content }) => {
   
   return (
    <>
+   <ScrollToTop />
    <Navbar loginStatus={loginStatus} />
    <div className="post-page">
     <h1>{routeInfo.title}</h1>
