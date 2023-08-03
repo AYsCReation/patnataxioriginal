@@ -22,7 +22,7 @@ const AdminDashboard = ({loginStatus,userRole, setLoginStatus}) => {
 console.log(loginStatus);
 console.log(userRole);
   const fetchFormData = () => {
-    fetch('https://backend-taxi.onrender.com//api/data', {
+    fetch('https://backend-taxi.onrender.com/api/data', {
       method: 'GET',
     })
       .then((res) => res.json())
@@ -36,7 +36,7 @@ console.log(userRole);
 
   const handleDeleteField = (id) => {
     // Make a DELETE request to the server to delete the field
-    fetch(`https://backend-taxi.onrender.com//formdata/${id}`, {
+    fetch(`https://backend-taxi.onrender.com/formdata/${id}`, {
       method: 'DELETE',
     })
       .then((res) => res.json())
