@@ -5,8 +5,9 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { Navigate, useParams } from 'react-router';
 import AdminDashboard from './AdminDashboard';
+import Navbar from './Navbar';
 
-const EditCity = ({loginStatus}) => {
+const EditCity = ({loginStatus, userRole}) => {
     const [title, setTitle] = useState('');
     const [summary, setSummary] = useState('');
     const [content, setContent] = useState('');
@@ -118,7 +119,7 @@ const EditCity = ({loginStatus}) => {
       
   return (
     <>
-    
+    <Navbar loginStatus={loginStatus}/>
       <div className='createContainer'>
             <form className='createForm' onSubmit={updatePost}>
                 <input

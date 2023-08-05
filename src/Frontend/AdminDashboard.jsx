@@ -413,7 +413,7 @@ console.log(userRole);
               {activeTab === 'CreateBlog' && <Create />}
               {activeTab === 'CreateRoute' && <AddRoute />}
               {activeTab === 'CreateCity' && <CreateCity />}
-              {activeTab === 'EditCR' && <Footer />}
+              {activeTab === 'EditCR' && <Footer loginStatus={loginStatus} />}
               {activeTab === '' && (<h2>
               Welcome to the Admin Dashboard. Click on the tabs to know more!
               </h2>)}

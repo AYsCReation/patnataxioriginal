@@ -44,7 +44,7 @@ function App() {
      {/* <Route path='/Create' element={ <Create /> }/> */}
      {/* <Route path='/CreateCity' element={ <CreateCity/> }/> */}
      <Route path='/edit/:customUrl' element={ <EditPostPage loginStatus={loginStatus}  /> }/>
-     <Route path='/editCity/:customUrl' element={ <EditCity loginStatus={loginStatus} /> }/>
+     <Route path='/editCity/:customUrl' element={ <EditCity loginStatus={loginStatus} userRole={userRole} /> }/>
      <Route path='/editRoute/:customUrl' element={ <EditRoute loginStatus={loginStatus} /> }/>
      {/* <Route path='/AddRoute' element={ <AddRoute /> }/> */}
      <Route path = '/post/:customUrl' element={<PostPage loginStatus={loginStatus}   />}/>
